@@ -32,13 +32,7 @@ jobs:
           mkdir -p /tmp/w && cd /tmp/w && echo "hello from file" > note.txt
           for m in $list; do
             timeout 150 opencode run --format json --auto -m "$m" "Read note.txt with your tools and reply with exactly its contents, then create done.txt containing OK." > run.json 2> run.err || true
-            { echo "model=$m"; echo "done.txt exists: $([ -f done.txt ] && cat done.txt || echo no)"; echo "event types: $(python3 -c "
-import json,sys
-t=[]
-for l in open('run.json'):
-    try: t.append(json.loads(l).get('type'))
-    except Exception: pass
-print(t[:40])")"; echo "-- first events:"; head -c 1500 run.json; echo; echo "-- stderr:"; tail -c 500 run.err; } > run.sum
-            /home/runner/work/*/*/scripts/ci/annotate.sh "try $m" run.sum
+            { echo "model=$m"; echo "done.txt exists: $([ -f done.txt ] && cat done.txt || echo no)"; echo "event types: $(python3 "$GITHUB_WORKSPACE/scripts/ci/event_types.py" run.json)"; echo "-- first events:"; head -c 1500 run.json; echo; echo "-- stderr:"; tail -c 500 run.err; } > run.sum
+            "$GITHUB_WORKSPACE/scripts/ci/annotate.sh" "try $m" run.sum
             rm -f done.txt
           done

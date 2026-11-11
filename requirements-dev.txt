@@ -1,5 +1,6 @@
 # OpenMontage - Development Dependencies
 -r requirements.txt
+-r requirements-orchestrator.txt
 pytest>=8.0
 pytest-asyncio>=0.23
 httpx>=0.24
