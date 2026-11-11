@@ -1,0 +1,44 @@
+name: OpenCode Live Probe
+# Verifies REAL OpenCode + a REAL model on a GitHub runner. Results are published as annotations.
+on:
+  workflow_dispatch:
+    inputs:
+      model: { description: "provider/model to test (blank = try the keyless 'opencode' provider models)", required: false, type: string }
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install -g opencode-ai@1.19.5 && opencode --version
+      - name: Models
+        run: |
+          opencode models > models.txt 2>&1 || true
+          { echo "total: $(wc -l < models.txt)"; grep -E '^opencode/' models.txt | head -20; echo "-- providers:"; cut -d/ -f1 models.txt | sort | uniq -c | sort -rn | head -12; } > models.sum
+          scripts/ci/annotate.sh "models" models.sum
+      - name: Try models
+        run: |
+          if [ -n "${{ inputs.model }}" ]; then list="${{ inputs.model }}"; else list=$(grep -E '^opencode/' models.txt | head -4 | tr '\n' ' '); fi
+          mkdir -p /tmp/w && cd /tmp/w && echo "hello from file" > note.txt
+          for m in $list; do
+            timeout 150 opencode run --format json --auto -m "$m" "Read note.txt with your tools and reply with exactly its contents, then create done.txt containing OK." > run.json 2> run.err || true
+            { echo "model=$m"; echo "done.txt exists: $([ -f done.txt ] && cat done.txt || echo no)"; echo "event types: $(python3 -c "
+import json,sys
+t=[]
+for l in open('run.json'):
+    try: t.append(json.loads(l).get('type'))
+    except Exception: pass
+print(t[:40])")"; echo "-- first events:"; head -c 1500 run.json; echo; echo "-- stderr:"; tail -c 500 run.err; } > run.sum
+            /home/runner/work/*/*/scripts/ci/annotate.sh "try $m" run.sum
+            rm -f done.txt
+          done
