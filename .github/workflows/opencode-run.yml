@@ -1,0 +1,81 @@
+name: OpenCode Run
+run-name: "job ${{ inputs.job_id }}"
+
+# Dispatched by the persistent backend (one run per chat message). No secret is ever passed via inputs.
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:      { description: "Backend job id", required: true, type: string }
+      project_id:  { description: "Backend project id", required: true, type: string }
+      backend_url: { description: "Public URL of the backend", required: true, type: string }
+
+permissions:
+  contents: read
+
+# One production run per project at a time; others queue instead of being cancelled.
+concurrency:
+  group: om-project-${{ inputs.project_id }}
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340   # GitHub-hosted hard limit is 360; leaves time to checkpoint
+    env:
+      JOB_ID: ${{ inputs.job_id }}
+      BACKEND_URL: ${{ inputs.backend_url }}
+      ORCH_RUNNER_SECRET: ${{ secrets.ORCH_RUNNER_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required configuration
+        run: |
+          [ -n "$ORCH_RUNNER_SECRET" ] || { echo "::error::Repository secret ORCH_RUNNER_SECRET is not set"; exit 1; }
+          echo "::add-mask::$BACKEND_URL"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build runner image (layer cache in GitHub Actions cache)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.runner
+          load: true
+          tags: om-runner:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Cache Remotion node_modules
+        uses: actions/cache@v4
+        with:
+          path: remotion-composer/node_modules
+          key: remotion-${{ runner.os }}-${{ hashFiles('remotion-composer/package-lock.json') }}
+
+      - name: Install Remotion dependencies if not cached
+        run: |
+          [ -d remotion-composer/node_modules ] || scripts/ci/run_in_container.sh sh -c 'cd remotion-composer && npm ci --no-audit --no-fund'
+
+      - name: Execute job in container (OpenCode + OpenMontage)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          RUNWAY_API_KEY: ${{ secrets.RUNWAY_API_KEY }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        run: scripts/ci/run_in_container.sh python -m runner.run_job
+
+      # If the runner process died before reporting, make the failure visible in Backlot.
+      # Terminal job states are final server-side, so this is a no-op when the runner already reported.
+      - name: Report failure to backend
+        if: failure() || cancelled()
+        run: |
+          scripts/ci/call_backend.sh "$JOB_ID" POST "/api/runner/jobs/$JOB_ID/status" \
+            "{\"status\":\"failed\",\"error\":\"Workflow ended unexpectedly: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"}" || true

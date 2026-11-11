@@ -1,0 +1,9 @@
+.git
+projects
+.orchestrator
+.backlot
+**/node_modules
+**/__pycache__
+.env
+.env.*
+!.env.example

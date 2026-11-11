@@ -1,0 +1,31 @@
+name: Maintenance
+# Cleans temporary GitHub-side data only. Project data lives in the backend's database and object storage and is never touched here.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 3 * * 0"
+permissions:
+  actions: write
+  contents: read
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Delete build caches not used for 7 days
+        run: |
+          cutoff=$(date -u -d '7 days ago' +%s)
+          gh api --paginate "repos/$REPO/actions/caches?per_page=100" --jq '.actions_caches[] | "\(.id) \(.last_accessed_at)"' |
+          while read -r id ts; do
+            if [ "$(date -u -d "$ts" +%s)" -lt "$cutoff" ]; then gh api -X DELETE "repos/$REPO/actions/caches/$id" >/dev/null && echo "deleted cache $id"; fi
+          done
+      - name: Delete OpenCode Run workflow runs older than 30 days (logs)
+        run: |
+          cutoff=$(date -u -d '30 days ago' +%s)
+          gh api --paginate "repos/$REPO/actions/workflows/opencode-run.yml/runs?per_page=100&status=completed" --jq '.workflow_runs[] | "\(.id) \(.created_at)"' |
+          while read -r id ts; do
+            if [ "$(date -u -d "$ts" +%s)" -lt "$cutoff" ]; then gh api -X DELETE "repos/$REPO/actions/runs/$id" >/dev/null && echo "deleted run $id"; fi
+          done

@@ -1,0 +1,24 @@
+name: Recovery
+# Marks jobs whose runner went silent as failed and re-dispatches them on a new runner (max 3 attempts).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+permissions:
+  contents: read
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BACKEND_URL: ${{ vars.ORCH_BACKEND_URL }}
+      ORCH_RUNNER_SECRET: ${{ secrets.ORCH_RUNNER_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip if backend not configured
+        id: cfg
+        run: |
+          if [ -z "$BACKEND_URL" ] || [ -z "$ORCH_RUNNER_SECRET" ]; then echo "configured=false" >> "$GITHUB_OUTPUT"; echo "ORCH_BACKEND_URL variable / ORCH_RUNNER_SECRET secret not set; nothing to do"; else echo "configured=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Recover stale jobs
+        if: steps.cfg.outputs.configured == 'true'
+        run: scripts/ci/call_backend.sh recover POST "/api/runner/recover?stale_seconds=300"
