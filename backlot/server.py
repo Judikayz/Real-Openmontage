@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import time
 from contextlib import asynccontextmanager, suppress
 from pathlib import Path
@@ -313,9 +314,17 @@ def create_app() -> FastAPI:
             response.headers["Cache-Control"] = "no-cache"
         return response
 
+    # Optional persistent orchestration backend (auth, chat, jobs, uploads, GitHub dispatch).
+    # Off by default so the local read-only board behaves exactly as upstream.
+    allowed_hosts = ["127.0.0.1", "localhost"]
+    if os.environ.get("ORCH_ENABLE") == "1":
+        from orchestrator.app import attach
+        attach(app)
+        allowed_hosts = app.state.cfg.allowed_hosts
+
     # Loopback binding alone does not prevent browser DNS-rebinding requests.
     app.add_middleware(
-        TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost"], www_redirect=False,
+        TrustedHostMiddleware, allowed_hosts=allowed_hosts, www_redirect=False,
     )
     return app
 
