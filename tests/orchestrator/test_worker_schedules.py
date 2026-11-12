@@ -13,11 +13,19 @@ def free_port():
     s = socket.socket(); s.bind(("127.0.0.1", 0)); p = s.getsockname()[1]; s.close(); return p
 
 
+def wrangler(args, check=True):
+    """Run wrangler and include its stderr/stdout in the failure message (so CI failures are diagnosable)."""
+    r = subprocess.run(["npx", "wrangler", *args], cwd=WDIR, capture_output=True, text=True, timeout=240)
+    if check and r.returncode != 0:
+        raise RuntimeError(f"wrangler {' '.join(args[:3])} failed (rc={r.returncode}):\nSTDOUT: {r.stdout[-1500:]}\nSTDERR: {r.stderr[-1500:]}")
+    return r
+
+
 @pytest.fixture(scope="module")
 def w(tmp_path_factory):
     tmp = tmp_path_factory.mktemp("sched"); persist = str(tmp / "st"); port = free_port()
     (WDIR / ".dev.vars").write_text("ORCH_ADMIN_TOKEN=sched-admin\nORCH_RUNNER_SECRET=r\nSESSION_SECRET=s\nDISPATCH_MODE=none\n")
-    subprocess.run(["npx", "wrangler", "d1", "migrations", "apply", "DB", "--local", "--persist-to", persist], cwd=WDIR, check=True, capture_output=True)
+    wrangler(["d1", "migrations", "apply", "DB", "--local", "--persist-to", persist])
     p = subprocess.Popen(["npx", "wrangler", "dev", "--local", "--test-scheduled", "--port", str(port), "--persist-to", persist], cwd=WDIR,
                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
     base = f"http://127.0.0.1:{port}"
@@ -28,7 +36,7 @@ def w(tmp_path_factory):
         time.sleep(0.5)
     else: p.kill(); pytest.fail("worker did not start")
     c = httpx.Client(base_url=base, headers=H, timeout=60)
-    def sql(q): subprocess.run(["npx", "wrangler", "d1", "execute", "DB", "--local", "--persist-to", persist, "--command", q], cwd=WDIR, check=True, capture_output=True)
+    def sql(q): wrangler(["d1", "execute", "DB", "--local", "--persist-to", persist, "--command", q])
     def tick(): r = httpx.get(f"{base}/__scheduled?cron={MIN_CRON}", timeout=60); assert r.status_code == 200, r.text; time.sleep(1.5)
     yield c, sql, tick
     try: os.killpg(os.getpgid(p.pid), signal.SIGTERM)
