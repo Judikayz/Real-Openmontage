@@ -1,0 +1,1 @@
+{"name":"backlot-worker","private":true,"type":"module","version":"1.0.0","scripts":{"dev":"wrangler dev --local","deploy":"wrangler deploy"},"dependencies":{"aws4fetch":"^1.0.20","libsodium-wrappers":"^0.8.4"},"devDependencies":{"wrangler":"^4.0.0"}}

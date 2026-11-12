@@ -230,7 +230,10 @@ class Run:
         try:
             ctx = be.ctx(); pid = ctx["project"]["id"]; sid = ctx["conversation"]["opencode_session_id"]
             if ctx["job"]["cancel_requested"] or ctx["job"]["status"] in ("cancelled", "completed", "failed"):
-                be.event("runner_exit", {"reason": "job was cancelled or finished before the runner started"}); return 0
+                be.event("runner_exit", {"reason": "job was cancelled or finished before the runner started"})
+                if ctx["job"]["status"] not in ("cancelled", "completed", "failed"):
+                    be.status("cancelled", stage="cancelled before start")  # never leave a cancelled job 'running'
+                return 0
             if ctx["state_url"]:
                 tmp = Path(tempfile.mkdtemp()) / "state.tar.gz"; be.download(ctx["state_url"], tmp)
                 with tarfile.open(tmp) as tf: tf.extractall(REPO, filter="data")

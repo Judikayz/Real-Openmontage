@@ -1,0 +1,69 @@
+name: Deploy Backlot Worker
+# Deploys the control plane (Cloudflare Worker + D1 + R2) from GitHub. You never need a terminal or wrangler.
+# One-time setup (GitHub -> Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN   token with: Workers Scripts:Edit, D1:Edit, Workers R2 Storage:Edit, Account Settings:Read
+#   CLOUDFLARE_ACCOUNT_ID
+#   ORCH_ADMIN_TOKEN       your Backlot login token (long random string)
+#   ORCH_RUNNER_SECRET     shared with runners (long random string)  <- must also be a repo secret under this exact name (it is)
+#   GH_DISPATCH_TOKEN      fine-grained PAT, this repo only, Actions: read+write  (+ Secrets: read+write for the Settings page)
+#   R2_S3_ACCESS_KEY_ID / R2_S3_SECRET_ACCESS_KEY   optional but needed for videos over 100 MB (R2 API token, S3 credentials)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-worker
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults: { run: { working-directory: worker } }
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", cache: npm, cache-dependency-path: worker/package-lock.json }
+      - name: Check required secrets
+        env:
+          A: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          B: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          C: ${{ secrets.ORCH_ADMIN_TOKEN }}
+          D: ${{ secrets.ORCH_RUNNER_SECRET }}
+          E: ${{ secrets.GH_DISPATCH_TOKEN }}
+        run: |
+          for pair in "CLOUDFLARE_API_TOKEN:$A" "CLOUDFLARE_ACCOUNT_ID:$B" "ORCH_ADMIN_TOKEN:$C" "ORCH_RUNNER_SECRET:$D" "GH_DISPATCH_TOKEN:$E"; do
+            [ -n "${pair#*:}" ] || { echo "::error::Missing repository secret ${pair%%:*}"; exit 1; }
+          done
+      - run: npm ci --no-audit --no-fund
+      - run: scripts/prepare-assets.sh
+      - name: Ensure R2 bucket exists
+        run: npx wrangler r2 bucket create backlot-storage 2>&1 | tee /tmp/r2.out || grep -qi "already exists" /tmp/r2.out
+      - name: Ensure D1 database exists and wire its id into the config
+        run: |
+          id() { npx wrangler d1 list --json | jq -r '.[] | select(.name=="backlot") | .uuid' | head -1; }
+          ID=$(id)
+          if [ -z "$ID" ]; then npx wrangler d1 create backlot; ID=$(id); fi
+          [ -n "$ID" ] || { echo "::error::could not determine D1 database id"; exit 1; }
+          jq --arg id "$ID" '.d1_databases[0].database_id = $id' wrangler.jsonc > /tmp/w.json && mv /tmp/w.json wrangler.jsonc
+      - run: npx wrangler d1 migrations apply DB --remote
+      - name: Deploy Worker with secrets
+        env:
+          ORCH_ADMIN_TOKEN: ${{ secrets.ORCH_ADMIN_TOKEN }}
+          ORCH_RUNNER_SECRET: ${{ secrets.ORCH_RUNNER_SECRET }}
+          GH_DISPATCH_TOKEN: ${{ secrets.GH_DISPATCH_TOKEN }}
+          S3_KEY: ${{ secrets.R2_S3_ACCESS_KEY_ID }}
+          S3_SECRET: ${{ secrets.R2_S3_SECRET_ACCESS_KEY }}
+        run: |
+          jq -n --arg a "$ORCH_ADMIN_TOKEN" --arg r "$ORCH_RUNNER_SECRET" --arg g "$GH_DISPATCH_TOKEN" --arg k "$S3_KEY" --arg s "$S3_SECRET" --arg acct "$CLOUDFLARE_ACCOUNT_ID" \
+            '{ORCH_ADMIN_TOKEN:$a, ORCH_RUNNER_SECRET:$r, GITHUB_DISPATCH_TOKEN:$g, SESSION_SECRET:($a+":session"), R2_ACCOUNT_ID:$acct}
+             + (if $k != "" and $s != "" then {S3_ACCESS_KEY_ID:$k, S3_SECRET_ACCESS_KEY:$s} else {} end)' > /tmp/secrets.json
+          npx wrangler deploy --secrets-file /tmp/secrets.json | tee /tmp/deploy.out
+          rm -f /tmp/secrets.json
+          URL=$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' /tmp/deploy.out | head -1)
+          echo "### Backlot is live: ${URL:-see deploy log}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Open ${URL}/app and sign in with ORCH_ADMIN_TOKEN. Set repo variable ORCH_BACKEND_URL to ${URL}." >> "$GITHUB_STEP_SUMMARY"
+      - name: Allow browser uploads to R2 (CORS)
+        run: npx wrangler r2 bucket cors set backlot-storage --file r2-cors.json --force || npx wrangler r2 bucket cors set backlot-storage --file r2-cors.json

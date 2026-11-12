@@ -39,7 +39,8 @@ def wait_job(c, jid, timeout=90, until=("completed", "failed", "cancelled")):
         j = c.get(f"/api/v1/jobs/{jid}").json()
         if j["status"] in until: return j
         time.sleep(0.5)
-    pytest.fail(f"job {jid} stuck in {j['status']}")
+    ev = c.get(f"/api/v1/jobs/{jid}/events.json").json()[-8:]
+    pytest.fail(f"job {jid} stuck in {j['status']} (cancel_requested={j.get('cancel_requested')}); last events: {[(e['type'], e['data']) for e in ev]}")
 
 
 def say(c, cid, text, assets=()):
