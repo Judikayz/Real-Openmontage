@@ -8,3 +8,4 @@ pyyaml>=6.0
 watchfiles>=0.21
 pillow
 pytest>=8
+jsonschema>=4.20

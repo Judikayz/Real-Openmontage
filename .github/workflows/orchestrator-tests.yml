@@ -2,9 +2,9 @@ name: Orchestrator Tests
 on:
   push:
     branches: [main]
-    paths: ["orchestrator/**", "runner/**", "tests/orchestrator/**", "backlot/**", ".github/workflows/**"]
+    paths: ["orchestrator/**", "director/**", "runner/**", "requirements-*.txt", "tests/orchestrator/**", "tests/director/**", "backlot/**", ".github/workflows/**"]
   pull_request:
-    paths: ["orchestrator/**", "runner/**", "tests/orchestrator/**", "backlot/**"]
+    paths: ["orchestrator/**", "director/**", "runner/**", "requirements-*.txt", "tests/orchestrator/**", "tests/director/**", "backlot/**"]
 permissions:
   contents: read
 jobs:
@@ -17,4 +17,4 @@ jobs:
         with: { python-version: "3.11", cache: pip, cache-dependency-path: "requirements-orchestrator.txt" }
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install -r requirements-orchestrator.txt
-      - run: python -m pytest tests/orchestrator -q
+      - run: python -m pytest tests/orchestrator tests/director -q
