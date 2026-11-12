@@ -1,0 +1,42 @@
+name: OpenCode Session Probe
+# Verifies on a REAL runner that a real OpenCode session can be exported, wiped, imported on a "fresh runner", and resumed.
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install -g opencode-ai@1.19.5
+      - name: Export, wipe, import, resume
+        run: |
+          M=opencode/big-pickle; mkdir -p /tmp/w && cd /tmp/w
+          timeout 120 opencode run --format json -m $M "Remember this secret word: PINEAPPLE42. Reply with just: stored." > r1.json 2>&1 || true
+          SID=$(python3 -c "
+          import json
+          for l in open('r1.json'):
+              try: print(json.loads(l)['sessionID']); break
+              except Exception: pass")
+          echo "first session id: $SID" > out.txt
+          opencode export $SID > sess.json 2> exp.err; echo "export rc=$? bytes=$(wc -c < sess.json)" >> out.txt
+          rm -rf ~/.local/share/opencode ~/.local/state/opencode ~/.config/opencode
+          opencode import sess.json > imp.out 2>&1; echo "import rc=$? out=$(head -c 300 imp.out)" >> out.txt
+          timeout 120 opencode run --format json -m $M --session $SID "What was the secret word I told you? Answer with just the word." > r2.json 2> r2.err; echo "resume rc=$?" >> out.txt
+          python3 -c "
+          import json
+          t=''
+          for l in open('r2.json'):
+              try:
+                  e=json.loads(l)
+                  if e.get('type')=='text': t+=e['part']['text']
+              except Exception: pass
+          print('resume answer:', t.strip()[:200])
+          " >> out.txt
+          echo "resume session id matches: $(grep -c "$SID" r2.json)" >> out.txt
+          echo "stderr: $(tail -c 300 r2.err)" >> out.txt
+          cat out.txt
+          "$GITHUB_WORKSPACE/scripts/ci/annotate.sh" "session-probe" out.txt
