@@ -102,8 +102,8 @@ const currentTab = () => document.querySelector('#tabs .on').dataset.t;
 document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => tab(b.dataset.t));
 function tab(t) {
   document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
-  ['chat', 'plan', 'out', 'jobs', 'set'].forEach(k => $('#t-' + k).hidden = k !== t);
-  ({ plan: loadPlan, out: loadOutputs, jobs: loadJobs, set: loadSettings })[t]?.();
+  ['chat', 'plan', 'out', 'sch', 'jobs', 'set'].forEach(k => $('#t-' + k).hidden = k !== t);
+  ({ plan: loadPlan, out: loadOutputs, sch: loadSchedules, jobs: loadJobs, set: loadSettings })[t]?.();
 }
 function card(...kids) { const c = document.createElement('div'); c.className = 'card'; kids.forEach(k => c.append(k)); return c; }
 function el(tag, text, cls) { const e = document.createElement(tag); e.textContent = text; if (cls) e.className = cls; return e; }
@@ -127,6 +127,44 @@ async function loadOutputs() {
     const v = document.createElement('video'); v.controls = true; v.preload = 'metadata'; v.playsInline = true; v.src = url;
     const dl = Object.assign(document.createElement('a'), { href: url, download: a.name, textContent: 'Download' });
     box.append(card(el('h4', a.name), v, el('small', `${m.width || '?'}×${m.height || '?'} · ${(m.duration || 0).toFixed(1)}s · ${bytes(a.size)} · QC ${m.qc_ok ? '✓' : '✗ ' + (m.qc_errors || []).join('; ')}${(m.qc_warnings || []).length ? ' · ' + m.qc_warnings.join('; ') : ''}`), dl)); }
+}
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+async function loadSchedules() {
+  const box = $('#t-sch'); box.className = 'set'; box.replaceChildren(); if (!S.project) return box.append(el('p', 'Open a project first.'));
+  const f = document.createElement('form'); f.className = 'card'; f.append(el('h4', 'New schedule'), el('small', 'Runs in the cloud on a schedule — your phone can be off. Times are Africa/Lagos unless you change the timezone.'));
+  const field = (label, node) => { f.append(el('label', label), node); return node; };
+  const name = field('Name', Object.assign(document.createElement('input'), { placeholder: 'e.g. Daily tips video' }));
+  const prompt = field('What should the AI do each time?', Object.assign(document.createElement('textarea'), { rows: 3, placeholder: 'Describe the video exactly as you would in Chat' }));
+  const kind = field('Repeat', document.createElement('select')); ['once', 'daily', 'weekly', 'monthly'].forEach(k => kind.append(Object.assign(document.createElement('option'), { value: k, textContent: k })));
+  kind.value = 'daily';
+  const time = field('Time (24h)', Object.assign(document.createElement('input'), { type: 'time', value: '09:00' }));
+  const wdBox = document.createElement('div'); wdBox.className = 'row'; const wds = DAYS.map((d, i) => { const l = document.createElement('label'); l.className = 'chk'; const c = Object.assign(document.createElement('input'), { type: 'checkbox', value: i }); l.append(c, ' ' + d); wdBox.append(l); return c; });
+  const wdLabel = el('label', 'Days of week'); f.append(wdLabel, wdBox);
+  const dom = field('Day of month (31 = last day of short months)', Object.assign(document.createElement('input'), { type: 'number', min: 1, max: 31, value: 1 }));
+  const runAt = field('Date and time', Object.assign(document.createElement('input'), { type: 'datetime-local' }));
+  const tz = field('Timezone', Object.assign(document.createElement('input'), { value: 'Africa/Lagos' }));
+  const sync = () => { const k = kind.value; wdLabel.hidden = wdBox.hidden = k !== 'weekly'; dom.previousSibling.hidden = dom.hidden = k !== 'monthly'; runAt.previousSibling.hidden = runAt.hidden = k !== 'once'; time.previousSibling.hidden = time.hidden = k === 'once'; };
+  kind.onchange = sync; sync(); f.append(el('button', 'Create schedule'));
+  f.onsubmit = async e => { e.preventDefault(); const b = { name: name.value, prompt: prompt.value, kind: kind.value, tz: tz.value };
+    if (b.kind === 'once') b.run_at = runAt.value; else b.time = time.value;
+    if (b.kind === 'weekly') b.weekdays = wds.filter(c => c.checked).map(c => +c.value);
+    if (b.kind === 'monthly') b.day_of_month = parseInt(dom.value, 10);
+    try { await api(`/api/v1/projects/${S.project.id}/schedules`, { method: 'POST', body: JSON.stringify(b) }); toast('Schedule created'); loadSchedules(); } catch (x) { toast(x.message); } };
+  box.append(f);
+  const list = await api(`/api/v1/projects/${S.project.id}/schedules`); if (!list.length) box.append(el('p', 'No schedules yet.'));
+  list.forEach(s => {
+    const next = s.next_run_at ? new Date(s.next_run_at * 1000).toLocaleString([], { timeZone: s.spec.tz, dateStyle: 'medium', timeStyle: 'short' }) + ' ' + s.spec.tz : '—';
+    const c = card(el('h4', `${s.status === 'active' ? '▶' : s.status === 'paused' ? '⏸' : '✓'} ${s.name}`), el('small', `${s.summary} · ${s.status}`), el('div', `Next run: ${next}`), el('i', s.prompt.slice(0, 160)));
+    const row = document.createElement('div'); row.className = 'row';
+    const btn = (label, fn, ghost) => { const b = el('button', label, ghost ? 'ghost' : ''); b.type = 'button'; b.onclick = async () => { try { await fn(); } catch (x) { toast(x.message); } }; row.append(b); };
+    if (s.status !== 'completed') btn(s.status === 'active' ? 'Pause' : 'Resume', async () => { await api('/api/v1/schedules/' + s.id, { method: 'PATCH', body: JSON.stringify({ status: s.status === 'active' ? 'paused' : 'active' }) }); loadSchedules(); }, true);
+    btn('Run now', async () => { const r = await api(`/api/v1/schedules/${s.id}/run-now`, { method: 'POST' }); toast('Started'); S.conv = s.conversation_id; trackJob(r.job); loadSchedules(); });
+    btn('Edit', async () => { const t = prompt('New time HH:MM (blank = keep)', s.spec.time || ''); const p = prompt('Prompt (blank = keep)', s.prompt); const b = {}; if (t && s.spec.kind !== 'once') b.time = t; if (p) b.prompt = p; await api('/api/v1/schedules/' + s.id, { method: 'PATCH', body: JSON.stringify(b) }); loadSchedules(); }, true);
+    btn('History', async () => { const hbox = c.querySelector('.hist') || c.appendChild(Object.assign(document.createElement('pre'), { className: 'hist' })); const runs = await api(`/api/v1/schedules/${s.id}/runs`);
+      hbox.textContent = runs.length ? runs.map(r => `${new Date(r.started_at * 1000).toLocaleString([], { timeZone: s.spec.tz })}  ${r.status}${r.note ? ' — ' + r.note : ''}`).join('\n') : 'No runs yet.'; }, true);
+    btn('Delete', async () => { if (confirm('Delete this schedule and its history?')) { await api('/api/v1/schedules/' + s.id, { method: 'DELETE' }); loadSchedules(); } }, true);
+    c.append(row); box.append(c);
+  });
 }
 async function loadJobs() {
   const box = $('#t-jobs'); box.replaceChildren(); const js = await api('/api/v1/jobs' + (S.project ? '?project_id=' + S.project.id : ''));

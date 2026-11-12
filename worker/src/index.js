@@ -1,6 +1,7 @@
 // Backlot control plane on Cloudflare Workers: D1 (state) + R2 (files) + GitHub Actions dispatch.
 // Heavy work (Docker, OpenCode, OpenMontage) never runs here; it runs on GitHub runners.
 import { AwsClient } from "aws4fetch";
+import { nextRun, normalise, countOccurrences, describe, DEFAULT_TZ } from "./schedule.js";
 
 const enc = new TextEncoder();
 const TERMINAL = ["completed", "failed", "cancelled"];
@@ -81,6 +82,12 @@ const head = async (env, key) => { const o = await env.BUCKET.head(key); return 
 
 // ---------- GitHub dispatch ----------
 const ghHeaders = env => ({ Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "backlot-worker" });
+async function rememberOrigin(env, req) {
+  const o = new URL(req.url).origin; if (/^https?:\/\/(127\.0\.0\.1|localhost)/.test(o) && !env.PUBLIC_URL) { /* local dev: still remember it for cron tests */ }
+  const cur = await one(env, "SELECT value FROM settings WHERE key='public_url'");
+  if (!cur || cur.value !== o) await run(env, "INSERT INTO settings(key,value) VALUES('public_url',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", o);
+}
+async function resolveUrl(env) { if (env.PUBLIC_URL) return env.PUBLIC_URL.replace(/\/$/, ""); const r = await one(env, "SELECT value FROM settings WHERE key='public_url'"); return r ? r.value : ""; }
 const backendUrl = (env, req) => (env.PUBLIC_URL || (req ? new URL(req.url).origin : "")).replace(/\/$/, "");
 async function dispatch(env, job, url) {
   const mode = env.DISPATCH_MODE || "github";
@@ -122,7 +129,7 @@ async function drainQueue(env, url) {
     return started;
   }
   let active = (await one(env, "SELECT COUNT(*) c FROM jobs WHERE status IN ('starting','running')")).c;
-  const queued = await q(env, "SELECT * FROM jobs WHERE status='queued' AND cancel_requested=0 AND id NOT IN (SELECT job_id FROM job_events WHERE type='dispatched') ORDER BY created_at LIMIT 10");
+  const queued = await q(env, "SELECT * FROM jobs WHERE status='queued' AND cancel_requested=0 AND id NOT IN (SELECT job_id FROM job_events WHERE type='dispatched') ORDER BY created_at LIMIT 6");
   for (const j of queued) {
     if (active >= max) { if (!await one(env, "SELECT 1 x FROM job_events WHERE job_id=? AND type='deferred'", j.id)) await addEvent(env, j.id, "deferred", { reason: `${active} job(s) already running (limit ${max}); will start automatically` }); continue; }
     await dispatch(env, j, url); started.push(j.id);
@@ -171,11 +178,12 @@ const parseJson = s => { try { return JSON.parse(s || "{}"); } catch { return {}
 on("POST", "/api/v1/auth/login", async ({ req, env }) => {
   const b = await body(req);
   if (!env.ORCH_ADMIN_TOKEN || !await safeEq(b.token || "", env.ORCH_ADMIN_TOKEN)) throw new HttpError(401, "invalid token");
+  await rememberOrigin(env, req);
   const secure = new URL(req.url).protocol === "https:" ? "; Secure" : "";
   return json({ ok: true }, 200, { "set-cookie": `${COOKIE}=${await makeSession(env)}; Max-Age=${TTL}; Path=/; HttpOnly; SameSite=Strict${secure}` });
 }, "none");
 on("POST", "/api/v1/auth/logout", async () => json({ ok: true }, 200, { "set-cookie": `${COOKIE}=; Max-Age=0; Path=/` }), "none");
-on("GET", "/api/v1/me", async () => json({ user: "owner" }));
+on("GET", "/api/v1/me", async ({ req, env }) => { await rememberOrigin(env, req); return json({ user: "owner" }); });
 
 // projects / conversations / messages
 on("GET", "/api/v1/projects", async ({ env, url }) => json(await q(env, "SELECT * FROM projects WHERE archived=? ORDER BY updated_at DESC", url.searchParams.get("archived") === "true" ? 1 : 0)));
@@ -396,6 +404,71 @@ R("POST", "/api/runner/jobs/:jid/outputs/:aid/complete", async ({ env, p }) => {
   await addEvent(env, p.jid, "output_ready", { asset_id: p.aid, name: a.name, kind: a.kind, size: h.size, meta: parseJson(a.meta) }); return json({ ok: true, size: h.size });
 });
 
+// ---------- schedules (cron-driven; Africa/Lagos by default) ----------
+const specOf = r => ({ ...JSON.parse(r.spec) });
+const schedOut = r => ({ id: r.id, project_id: r.project_id, conversation_id: r.conversation_id, name: r.name, prompt: r.prompt, status: r.status, spec: JSON.parse(r.spec),
+  summary: describe(JSON.parse(r.spec)), next_run_at: r.next_run_at, last_run_at: r.last_run_at, created_at: r.created_at });
+async function logRun(env, sid, due, jobId, status, note) {
+  await run(env, "INSERT INTO schedule_runs(id,schedule_id,due_at,started_at,job_id,status,note) VALUES(?,?,?,?,?,?,?)", newId("srn"), sid, due, now(), jobId, status, note || null);
+}
+/** Start one run of a schedule: posts the prompt into the schedule's own conversation and queues a job. */
+async function fireSchedule(env, sch, due, url, status = "started", note = null) {
+  const active = await one(env, `SELECT id FROM jobs WHERE conversation_id=? AND status IN (${ACTIVE.map(() => "?").join(",")})`, sch.conversation_id, ...ACTIVE);
+  if (active) { await logRun(env, sch.id, due, active.id, "skipped", "previous run still active"); return null; }
+  const mid = newId("msg"); await run(env, "INSERT INTO messages(id,conversation_id,role,content,attachments,created_at) VALUES(?,?,?,?,?,?)", mid, sch.conversation_id, "user", sch.prompt, "[]", now());
+  const job = await createJob(env, sch.project_id, sch.conversation_id, mid); await run(env, "UPDATE messages SET job_id=? WHERE id=?", job.id, mid);
+  await run(env, "UPDATE projects SET updated_at=? WHERE id=?", now(), sch.project_id);
+  await logRun(env, sch.id, due, job.id, status, note); return job;
+}
+async function runDueSchedules(env, nowMs = Date.now(), maxPerTick = 4) {
+  const url = await resolveUrl(env), t = nowMs / 1000, out = [];
+  const due = await q(env, "SELECT * FROM schedules WHERE status='active' AND next_run_at IS NOT NULL AND next_run_at<=? ORDER BY next_run_at LIMIT ?", t, maxPerTick);
+  for (const sch of due) {
+    const spec = specOf(sch), dueMs = sch.next_run_at * 1000, lateS = Math.floor(t - sch.next_run_at);
+    const skipped = Math.max(0, countOccurrences(spec, dueMs, nowMs) ); // later occurrences also missed (coalesced into this single run)
+    const late = lateS > 120; const note = late ? `ran ${lateS}s late${skipped ? `; ${skipped} later occurrence(s) also missed and coalesced into this run` : ""}` : null;
+    const job = await fireSchedule(env, sch, sch.next_run_at, url, late ? "missed_catchup" : "started", note);
+    const nx = spec.kind === "once" ? null : nextRun(spec, nowMs);  // a one-time schedule always completes once it has fired
+    await run(env, "UPDATE schedules SET last_run_at=?, next_run_at=?, status=?, updated_at=? WHERE id=?", t, nx === null ? null : nx / 1000, nx === null ? "completed" : "active", t, sch.id);
+    out.push({ schedule: sch.id, job: job && job.id, late: lateS });
+  }
+  if (out.length) await drainQueue(env, url);
+  return out;
+}
+const needSched = async (env, sid) => need(await one(env, "SELECT * FROM schedules WHERE id=?", sid), "schedule not found");
+function cleanName(v) { const n = String(v || "").trim(); if (!n || n.length > 120) throw new HttpError(422, "name required (max 120 chars)"); return n; }
+function cleanPrompt(v) { const n = String(v || "").trim(); if (!n || n.length > 20000) throw new HttpError(422, "prompt required (max 20000 chars)"); return n; }
+function specFrom(input) { try { return normalise(input, Date.now()); } catch (e) { throw new HttpError(422, e.message); } }
+
+on("GET", "/api/v1/projects/:pid/schedules", async ({ env, p }) => json((await q(env, "SELECT * FROM schedules WHERE project_id=? ORDER BY created_at DESC", p.pid)).map(schedOut)));
+on("POST", "/api/v1/projects/:pid/schedules", async ({ req, env, p }) => {
+  need(await one(env, "SELECT 1 x FROM projects WHERE id=?", p.pid), "project not found"); const b = await body(req);
+  const name = cleanName(b.name), prompt = cleanPrompt(b.prompt), spec = specFrom(b), id = newId("sch"), cid = newId("cnv"), t = now();
+  await run(env, "INSERT INTO conversations(id,project_id,title,created_at) VALUES(?,?,?,?)", cid, p.pid, `⏱ ${name}`.slice(0, 120), t);
+  await run(env, "INSERT INTO schedules(id,project_id,conversation_id,name,prompt,spec,status,next_run_at,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?)", id, p.pid, cid, name, prompt, JSON.stringify(spec), "active", nextRun(spec, Date.now()) / 1000, t, t);
+  await rememberOrigin(env, req); return json(schedOut(await needSched(env, id)));
+});
+on("PATCH", "/api/v1/schedules/:sid", async ({ req, env, p }) => {
+  const cur = await needSched(env, p.sid), b = await body(req); let spec = specOf(cur), status = cur.status, next = cur.next_run_at;
+  const specKeys = ["kind", "time", "weekdays", "day_of_month", "run_at", "tz"], touched = specKeys.some(k => k in b);
+  if (touched) { spec = specFrom({ ...spec, ...b }); const n = nextRun(spec, Date.now()); next = n === null ? null : n / 1000; if (status === "completed") status = "active"; }
+  if (b.status != null) {
+    if (!["active", "paused"].includes(b.status)) throw new HttpError(422, "status must be active or paused");
+    if (b.status === "active" && status !== "active") { const n = nextRun(spec, Date.now()); next = n === null ? null : n / 1000; if (next === null) throw new HttpError(409, "one-time schedule is in the past; edit run_at first"); }  // resume: no catch-up for the paused period
+    status = b.status;
+  }
+  const name = b.name != null ? cleanName(b.name) : cur.name, prompt = b.prompt != null ? cleanPrompt(b.prompt) : cur.prompt;
+  await run(env, "UPDATE schedules SET name=?,prompt=?,spec=?,status=?,next_run_at=?,updated_at=? WHERE id=?", name, prompt, JSON.stringify(spec), status, status === "active" ? next : (status === "paused" ? null : next), now(), p.sid);
+  return json(schedOut(await needSched(env, p.sid)));
+});
+on("DELETE", "/api/v1/schedules/:sid", async ({ env, p }) => { await needSched(env, p.sid); await run(env, "DELETE FROM schedule_runs WHERE schedule_id=?", p.sid); await run(env, "DELETE FROM schedules WHERE id=?", p.sid); return json({ ok: true }); });
+on("POST", "/api/v1/schedules/:sid/run-now", async ({ req, env, p }) => {
+  const sch = await needSched(env, p.sid); const url = backendUrl(env, req) || await resolveUrl(env);
+  const job = await fireSchedule(env, sch, now(), url, "manual", "run now"); if (!job) throw new HttpError(409, "previous run is still active");
+  await drainQueue(env, url); return json({ job: await one(env, "SELECT * FROM jobs WHERE id=?", job.id) });
+});
+on("GET", "/api/v1/schedules/:sid/runs", async ({ env, p }) => { await needSched(env, p.sid); return json(await q(env, "SELECT * FROM schedule_runs WHERE schedule_id=? ORDER BY started_at DESC LIMIT 50", p.sid)); });
+
 // ---------- entry ----------
 export default {
   async fetch(req, env, ctx) {
@@ -413,5 +486,11 @@ export default {
       console.error(e); return json({ detail: "internal error" }, 500);
     }
   },
-  async scheduled(event, env, ctx) { ctx.waitUntil(recoverStale(env, backendUrl(env))); },
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil((async () => {
+      const url = await resolveUrl(env);
+      if (event.cron === "*/5 * * * *") { await recoverStale(env, url); return; }
+      await runDueSchedules(env, event.scheduledTime || Date.now()); await drainQueue(env, url);
+    })());
+  },
 };

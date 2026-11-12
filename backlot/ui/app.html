@@ -8,7 +8,7 @@
 <div id="app" hidden>
   <header><button id="menuBtn" aria-label="Projects">☰</button><div id="title">Backlot</div><button id="logout" class="ghost">Sign out</button></header>
   <aside id="side"><div class="row"><b>Projects</b><button id="newProj">+ New</button></div><ul id="projects"></ul><label class="chk"><input type="checkbox" id="showArch"> show archived</label></aside>
-  <nav id="tabs"><button data-t="chat" class="on">Chat</button><button data-t="plan">Storyboard</button><button data-t="out">Videos</button><button data-t="jobs">Jobs</button><button data-t="set">Settings</button></nav>
+  <nav id="tabs"><button data-t="chat" class="on">Chat</button><button data-t="plan">Storyboard</button><button data-t="out">Videos</button><button data-t="sch">Schedules</button><button data-t="jobs">Jobs</button><button data-t="set">Settings</button></nav>
   <main>
     <section id="t-chat">
       <div class="row"><select id="convs"></select><button id="newConv">New chat</button></div>
@@ -19,7 +19,7 @@
       <div id="chips"></div>
       <form id="composer"><label class="attach">📎<input id="file" type="file" multiple hidden accept="video/*,audio/*,image/*,.pdf,.txt,.md,.json,.csv,.srt,.vtt,.docx"></label><textarea id="text" rows="1" placeholder="Describe the video you want…"></textarea><button id="send">Send</button></form>
     </section>
-    <section id="t-plan" hidden></section><section id="t-out" hidden></section><section id="t-jobs" hidden></section><section id="t-set" hidden></section>
+    <section id="t-plan" hidden></section><section id="t-out" hidden></section><section id="t-sch" hidden></section><section id="t-jobs" hidden></section><section id="t-set" hidden></section>
   </main>
 </div>
 <div id="toast"></div>

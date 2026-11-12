@@ -6,9 +6,9 @@
   "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
   "d1_databases": [{ "binding": "DB", "database_name": "backlot", "database_id": "REPLACE_WITH_D1_ID_FROM_DEPLOY_WORKFLOW", "migrations_dir": "migrations" }],
   "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "backlot-storage" }],
-  "triggers": { "crons": ["*/5 * * * *"] },
+  "triggers": { "crons": ["* * * * *", "*/5 * * * *"] },
   "vars": {
     "GITHUB_REPO": "Judikayz/Real-Openmontage", "GITHUB_REF": "main", "GITHUB_WORKFLOW": "opencode-run.yml",
-    "DISPATCH_MODE": "github", "R2_BUCKET_NAME": "backlot-storage", "MAX_CONCURRENT_JOBS": "2", "MAX_UPLOAD_BYTES": "2147483648"
+    "DISPATCH_MODE": "github", "R2_BUCKET_NAME": "backlot-storage", "MAX_CONCURRENT_JOBS": "20", "MAX_UPLOAD_BYTES": "2147483648"
   }
 }
