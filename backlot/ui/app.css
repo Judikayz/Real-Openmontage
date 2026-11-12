@@ -1,0 +1,24 @@
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:15px/1.4 system-ui,sans-serif}
+button,select,textarea,input{font:inherit;color:inherit;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;min-height:44px}
+button{cursor:pointer;background:var(--amber);color:#111;border:0;font-weight:600}button.ghost{background:transparent;color:var(--text-2);border:1px solid var(--border)}
+#login{display:flex;align-items:center;justify-content:center;height:100%}#login form{display:flex;flex-direction:column;gap:12px;width:min(320px,90vw)}.err{color:var(--red);min-height:1em}
+#app{display:grid;grid-template-rows:auto auto 1fr;height:100%;padding-top:env(safe-area-inset-top)}
+header{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border)}header #title{flex:1;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#side{position:fixed;inset:0 30% 0 0;max-width:340px;background:var(--surface);border-right:1px solid var(--border);padding:12px;z-index:5;transform:translateX(-102%);transition:.2s;overflow:auto}#side.open{transform:none}
+#side ul{list-style:none;padding:0}#side li{display:flex;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-soft)}#side li span{flex:1;overflow:hidden;text-overflow:ellipsis}#side li.sel span{color:var(--amber);font-weight:700}
+#side li button{padding:4px 8px;min-height:32px;background:transparent;color:var(--text-2);border:1px solid var(--border)}
+.row{display:flex;gap:8px;align-items:center;margin:6px 0}.row select{flex:1}.chk{font-size:13px;color:var(--text-2)}.chk input{min-height:auto}
+#tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border)}#tabs button{flex:1;background:transparent;color:var(--text-2);border-radius:0;white-space:nowrap}#tabs .on{color:var(--amber);border-bottom:2px solid var(--amber)}
+main{overflow:hidden;position:relative}main>section{height:100%;overflow:auto;padding:8px 12px}#t-chat{display:flex;flex-direction:column}
+#msgs{flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:4px 0}
+.m{max-width:92%;padding:8px 12px;border-radius:12px;white-space:pre-wrap;word-break:break-word}.m.user{align-self:flex-end;background:var(--amber-dim);border:1px solid var(--amber)}.m.assistant{align-self:flex-start;background:var(--surface-2);border:1px solid var(--border)}
+.m small{display:block;color:var(--text-3);margin-top:4px}
+#jobbar{display:flex;gap:8px;align-items:center;padding:6px 0}#jobstat{flex:1;font-size:13px;color:var(--text-2)}#needs{background:var(--amber-dim);border:1px solid var(--amber);border-radius:8px;padding:8px}
+#log{max-height:30vh;overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12px;white-space:pre-wrap}
+#chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:var(--surface-3);border:1px solid var(--border);border-radius:16px;padding:4px 10px;font-size:12px}.chip.bad{border-color:var(--red);color:var(--red)}
+#composer{display:flex;gap:8px;align-items:flex-end;padding:8px 0 calc(8px + env(safe-area-inset-bottom))}#composer textarea{flex:1;resize:none;max-height:30vh}.attach{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px}
+.card{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0}.card h4{margin:0 0 4px}.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:var(--surface-3);color:var(--text-2);margin-right:4px}
+.ok{color:var(--green)}.warn{color:var(--amber)}video{width:100%;border-radius:8px;background:#000}
+#toast{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom));background:var(--surface-3);border:1px solid var(--border);border-radius:8px;padding:10px;display:none;z-index:9}
+.set label{display:block;margin:8px 0 2px;color:var(--text-2);font-size:13px}.set input,.set select{width:100%}
+@media(min-width:900px){#side{position:static;transform:none;inset:auto;grid-row:1/4;max-width:none}#app{grid-template-columns:260px 1fr;grid-template-rows:auto auto 1fr}#app>header,#app>#tabs,#app>main{grid-column:2}#menuBtn{display:none}}

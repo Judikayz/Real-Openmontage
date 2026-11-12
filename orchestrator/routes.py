@@ -43,6 +43,14 @@ def _need(row, what="not found"):
     return row
 
 
+@router.get("/app")
+def app_page():
+    """Backlot chat app (served when the orchestrator is mounted in Backlot)."""
+    from fastapi.responses import HTMLResponse
+    ui = Path(__file__).resolve().parent.parent / "backlot" / "ui"
+    return HTMLResponse((ui / "app.html").read_text(encoding="utf-8"))
+
+
 # ---------------- auth ----------------
 class Login(BaseModel):
     token: str
