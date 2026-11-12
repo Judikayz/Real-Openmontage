@@ -20,3 +20,9 @@
 - Telegram notifications live (request shape unit-tested only).
 - Backlot UI: chat panel, uploads, jobs, settings (API exists; UI not built).
 - Storyboard/timeline director skill, remote board state for Backlot, GPU path (CPU image only).
+
+## Update: director + queue (tested locally, 46/46)
+- `director/` storyboard format + validator (upstream scene_plan derivation, anti-fabricated-demo, avatar/voice consistency); `python -m director validate|scene-plan projects/<id>`.
+- Runner validates/uploads `artifacts/storyboard.json`, one auto-fix pass if invalid; `needs_input.json` surfaces a question; `/api/v1/projects/{id}/storyboard`.
+- Concurrency limit (`ORCH_MAX_CONCURRENT_JOBS`, default 2) with automatic queue draining; Telegram start/complete/fail/render notifications (request shape tested only).
+- NOT built: Backlot chat/settings UI, public deploy, R2/D1 real tests, real-LLM OpenCode run (opencode-live.yml probe never executed).

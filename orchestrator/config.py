@@ -33,6 +33,7 @@ class Config:
     gh_token: str = field(default_factory=lambda: _env("GITHUB_DISPATCH_TOKEN"))
     # "github" (normal) | "local" (dev/tests only: spawn the runner as a local subprocess) | "none"
     dispatch_mode: str = field(default_factory=lambda: _env("ORCH_DISPATCH_MODE", "github"))
+    max_concurrent_jobs: int = field(default_factory=lambda: int(_env("ORCH_MAX_CONCURRENT_JOBS", "2")))
     max_upload_bytes: int = field(default_factory=lambda: int(_env("ORCH_MAX_UPLOAD_BYTES", str(2 * 1024**3))))
     telegram_bot_token: str = field(default_factory=lambda: _env("TELEGRAM_BOT_TOKEN"))
     telegram_chat_id: str = field(default_factory=lambda: _env("TELEGRAM_CHAT_ID"))

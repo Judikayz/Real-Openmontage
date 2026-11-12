@@ -167,3 +167,64 @@ def test_7_failed_qc_triggers_one_fix_pass_then_succeeds(srv):
     outs = c.get(f"/api/v1/projects/{p['id']}/assets?source=generated").json()
     assert [o["meta"]["qc_ok"] for o in outs][0] is True  # re-render passed QC
     assert any(o["meta"]["qc_ok"] is False for o in outs)  # and the failed one is flagged, not hidden
+
+
+def _project_with_video(c, tmp, name):
+    p = c.post("/api/v1/projects", json={"name": name}).json()
+    conv = c.post(f"/api/v1/projects/{p['id']}/conversations", json={}).json()
+    src = tmp / f"{name}.mp4"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "testsrc=size=320x240:rate=24:duration=1", "-pix_fmt", "yuv420p", str(src)], check=True)
+    up = c.post(f"/api/v1/projects/{p['id']}/uploads", json={"name": "avatar.mp4", "size": src.stat().st_size, "mime": "video/mp4"}).json()
+    httpx.put(up["put_url"], content=src.read_bytes()); c.post(f"/api/v1/assets/{up['asset_id']}/complete")
+    return p, conv, up["asset_id"]
+
+
+def test_8_storyboard_is_validated_persisted_and_served(srv):
+    c, tmp = srv
+    p, conv, aid = _project_with_video(c, tmp, "plan")
+    j = wait_job(c, say(c, conv["id"], "plan a storyboard", [aid])["id"])
+    assert j["status"] == "completed", j
+    sb = c.get(f"/api/v1/projects/{p['id']}/storyboard").json()
+    assert sb["validation"]["ok"] and sb["validation"]["scenes"] == 2 and sb["storyboard"]["scenes"][1]["type"] == "screen_recording"
+    msgs = c.get(f"/api/v1/conversations/{conv['id']}/messages").json()
+    assert "Storyboard: 2 scenes" in msgs[-1]["content"]
+
+
+def test_9_fabricated_demo_is_caught_and_fixed_by_a_second_pass(srv):
+    c, tmp = srv
+    p, conv, aid = _project_with_video(c, tmp, "fab")
+    j = wait_job(c, say(c, conv["id"], "storyboard badplan", [aid])["id"])
+    assert j["status"] == "completed", j
+    ev = c.get(f"/api/v1/jobs/{j['id']}/events.json").json()
+    sbev = [e for e in ev if e["type"] == "storyboard"]
+    assert sbev[0]["data"]["ok"] is False and any("generated" in x or "never generate" in x for x in sbev[0]["data"]["errors"])
+    assert any(e["type"] == "plan_fix_attempt" for e in ev) and sbev[-1]["data"]["ok"] is True
+    assert c.get(f"/api/v1/projects/{p['id']}/storyboard").json()["validation"]["ok"] is True
+
+
+def test_10_needs_input_is_surfaced(srv):
+    c, tmp = srv
+    p = c.post("/api/v1/projects", json={"name": "ask"}).json()
+    conv = c.post(f"/api/v1/projects/{p['id']}/conversations", json={}).json()
+    j = wait_job(c, say(c, conv["id"], "askuser please")["id"])
+    assert j["status"] == "completed"
+    assert any(e["type"] == "needs_input" and "brand color" in e["data"]["question"] for e in c.get(f"/api/v1/jobs/{j['id']}/events.json").json())
+    assert "I need your input: Which brand color?" in c.get(f"/api/v1/conversations/{conv['id']}/messages").json()[-1]["content"]
+
+
+def test_11_concurrency_limit_defers_and_auto_starts(srv):
+    c, tmp = srv
+    t = time.time()
+    while c.get("/api/v1/jobs?status=running").json() or c.get("/api/v1/jobs?status=starting").json():
+        assert time.time() - t < 60, "earlier jobs still running"; time.sleep(0.5)
+    p = c.post("/api/v1/projects", json={"name": "conc"}).json()
+    convs = [c.post(f"/api/v1/projects/{p['id']}/conversations", json={}).json() for _ in range(3)]
+    jobs = [say(c, cv["id"], "sleep") for cv in convs]
+    time.sleep(1.5)
+    st = [c.get(f"/api/v1/jobs/{j['id']}").json()["status"] for j in jobs]
+    assert st[2] == "queued" and st[0] in ("starting", "running") and st[1] in ("starting", "running"), st  # limit = 2
+    assert any(e["type"] == "deferred" for e in c.get(f"/api/v1/jobs/{jobs[2]['id']}/events.json").json())
+    c.post(f"/api/v1/jobs/{jobs[0]['id']}/cancel")
+    wait_job(c, jobs[2]["id"], timeout=40, until=("starting", "running"))  # freed slot -> queued job starts on its own
+    for j in jobs: c.post(f"/api/v1/jobs/{j['id']}/cancel")
+    for j in jobs: wait_job(c, j["id"], timeout=40)

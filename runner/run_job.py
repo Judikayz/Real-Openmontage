@@ -18,6 +18,7 @@ from pathlib import Path
 
 import httpx
 
+from director.storyboard import validate_file
 from runner.qc import probe, qc_video
 
 REPO = Path(os.environ.get("OM_REPO_ROOT", Path(__file__).resolve().parent.parent))
@@ -197,6 +198,26 @@ class Run:
             results.append({"file": f, "qc": qc})
         return results
 
+    def collect_plan(self, pid: str) -> dict | None:
+        """Validate and persist the AI-written storyboard so Backlot can show it and the next runner can resume from it."""
+        pdir = REPO / "projects" / pid; f = pdir / "artifacts" / "storyboard.json"
+        if not f.is_file() or f.stat().st_mtime < self.started: return None
+        v = validate_file(f, pdir)
+        self.be.event("storyboard", {"ok": v["ok"], "errors": v["errors"], "warnings": v["warnings"], "scenes": v["scenes"], "duration": v["duration"]})
+        r = self.be.post("/outputs", {"name": "storyboard.json", "mime": "application/json", "kind": "plan", "meta": v})
+        self.be.upload(r["put_url"], f, "application/json")
+        self.be.c.post(self.be._p(f"/outputs/{r['asset_id']}/complete")).raise_for_status()
+        return v
+
+    def needs_input(self, pid: str) -> str | None:
+        f = REPO / "projects" / pid / "artifacts" / "needs_input.json"
+        if not f.is_file() or f.stat().st_mtime < self.started: return None
+        try: q = json.loads(f.read_text())
+        except Exception: return None
+        text = str(q.get("question", "")).strip()
+        if text and q.get("options"): text += "\nOptions: " + ", ".join(map(str, q["options"]))
+        return text or None
+
     def main(self) -> int:
         for s in (signal.SIGTERM, signal.SIGINT): signal.signal(s, self.on_signal)
         be = self.be
@@ -208,6 +229,8 @@ class Run:
         pid, sid = None, None
         try:
             ctx = be.ctx(); pid = ctx["project"]["id"]; sid = ctx["conversation"]["opencode_session_id"]
+            if ctx["job"]["cancel_requested"] or ctx["job"]["status"] in ("cancelled", "completed", "failed"):
+                be.event("runner_exit", {"reason": "job was cancelled or finished before the runner started"}); return 0
             if ctx["state_url"]:
                 tmp = Path(tempfile.mkdtemp()) / "state.tar.gz"; be.download(ctx["state_url"], tmp)
                 with tarfile.open(tmp) as tf: tf.extractall(REPO, filter="data")
@@ -237,6 +260,14 @@ class Run:
                 be.status("cancelled", stage="cancelled"); self.snapshot(pid, sid); return 0
             if res["rc"] != 0 and not res["text"]:
                 raise RuntimeError(f"OpenCode exited {res['rc']}: {(res['errors'] or [res['stderr']])[0][:600]}")
+            be.status("running", stage="checking storyboard")
+            plan = self.collect_plan(pid)
+            if plan and not plan["ok"] and not self.cancel.is_set():
+                be.event("plan_fix_attempt", {"errors": plan["errors"][:10]})
+                fixp = (f"Project id: {pid}  (project dir: projects/{pid})\nUser request:\nThe storyboard failed validation (python -m director validate projects/{pid}):\n"
+                        + "\n".join(plan["errors"][:20]) + "\nFix artifacts/storyboard.json. Do not fabricate screen recordings; use real uploaded/captured recordings.")
+                res["text"] += "\n\n" + self.run_opencode(fixp, sid, ctx)["text"]
+                plan = self.collect_plan(pid)
             be.status("running", stage="quality control")
             outs = self.collect_outputs(pid, ctx["general"])
             bad = [o for o in outs if not o["qc"]["ok"]]
@@ -246,6 +277,10 @@ class Run:
                 res2 = self.run_opencode(fix, sid, ctx); res["text"] += "\n\n" + res2["text"]
                 outs = self.collect_outputs(pid, ctx["general"])
             final = res["text"] or "(OpenCode returned no text.)"
+            if plan: final += f"\n\nStoryboard: {plan['scenes']} scenes, {plan['duration']}s" + ("" if plan["ok"] else " (STILL INVALID: " + "; ".join(plan["errors"][:3]) + ")")
+            ask = self.needs_input(pid)
+            if ask:
+                final += f"\n\nI need your input: {ask}"; be.event("needs_input", {"question": ask})
             if outs:
                 final += "\n\nRendered: " + ", ".join(o["file"].name + ("" if o["qc"]["ok"] else " (QC FAILED)") for o in outs)
             be.post("/messages", {"content": final})

@@ -163,8 +163,32 @@ def send_message(cid: str, body: MessageIn, request: Request, user=Depends(requi
     job = _create_job(db, conv["project_id"], cid, mid)
     db.x("UPDATE messages SET job_id=? WHERE id=?", (job["id"], mid))
     db.x("UPDATE projects SET updated_at=? WHERE id=?", (time.time(), conv["project_id"]))
-    dsp.dispatch(_cfg(request), db, job, _backend_url(request))
+    drain_queue(db, _cfg(request), _backend_url(request))
     return {"message_id": mid, "job": db.one("SELECT * FROM jobs WHERE id=?", (job["id"],))}
+
+
+def drain_queue(db, cfg, backend_url: str) -> list[str]:
+    """Dispatch queued jobs oldest-first while fewer than max_concurrent_jobs are starting/running.
+    Respects GitHub/provider limits instead of dispatching everything at once."""
+    started = []
+    if cfg.dispatch_mode == "none":
+        for j in db.q("SELECT id FROM jobs WHERE status='queued'"):
+            if not db.one("SELECT 1 FROM job_events WHERE job_id=? AND type='dispatch_skipped'", (j["id"],)):
+                db.add_event(j["id"], "dispatch_skipped", {"reason": "ORCH_DISPATCH_MODE=none; job stays queued"})
+        return started
+    active = db.one("SELECT COUNT(*) c FROM jobs WHERE status IN ('starting','running')")["c"]
+    queued = db.q("""SELECT * FROM jobs WHERE status='queued' AND cancel_requested=0 AND id NOT IN
+                     (SELECT job_id FROM job_events WHERE type='dispatched') ORDER BY created_at, rowid""")
+    for j in queued:
+        if active >= cfg.max_concurrent_jobs:
+            if not db.one("SELECT 1 FROM job_events WHERE job_id=? AND type='deferred'", (j["id"],)):
+                db.add_event(j["id"], "deferred", {"reason": f"{active} job(s) already running (limit {cfg.max_concurrent_jobs}); will start automatically"})
+            continue
+        dsp.dispatch(cfg, db, j, backend_url)
+        started.append(j["id"])
+        if db.one("SELECT status FROM jobs WHERE id=?", (j["id"],))["status"] in ("starting", "running"):
+            active += 1
+    return started
 
 
 # ---------------- jobs ----------------
@@ -200,7 +224,7 @@ def retry_job(jid: str, request: Request, user=Depends(require_user)):
     if job["status"] not in ("failed", "cancelled"):
         raise HTTPException(409, "only failed or cancelled jobs can be retried")
     nj = _create_job(db, job["project_id"], job["conversation_id"], job["message_id"], parent=jid, attempt=job["attempt"] + 1)
-    dsp.dispatch(_cfg(request), db, nj, _backend_url(request))
+    drain_queue(db, _cfg(request), _backend_url(request))
     return db.one("SELECT * FROM jobs WHERE id=?", (nj["id"],))
 
 
@@ -321,6 +345,17 @@ def local_get(key: str, exp: int, sig: str, request: Request):
     return FileResponse(p)
 
 
+@router.get("/api/v1/projects/{pid}/storyboard")
+def get_storyboard(pid: str, request: Request, user=Depends(require_user)):
+    """Latest AI-generated storyboard/timeline for the project, with its validation report."""
+    db = _d(request)
+    a = db.one("SELECT * FROM assets WHERE project_id=? AND kind='plan' AND status='uploaded' ORDER BY created_at DESC LIMIT 1", (pid,))
+    if not a:
+        raise HTTPException(404, "no storyboard yet; ask the AI to plan the video")
+    plan = json.loads(_st(request).read_bytes(a["storage_key"]))
+    return {"asset_id": a["id"], "created_at": a["created_at"], "validation": json.loads(a["meta"] or "{}"), "storyboard": plan}
+
+
 # ---------------- settings ----------------
 @router.get("/api/v1/settings/status")
 def settings_status(request: Request, user=Depends(require_user)):
@@ -334,7 +369,7 @@ def settings_status(request: Request, user=Depends(require_user)):
         "auth": {"admin_token_set": bool(cfg.admin_token), "runner_secret_set": bool(cfg.runner_secret)},
         "notifications": {"telegram_configured": bool(cfg.telegram_bot_token and cfg.telegram_chat_id)},
         "runner_health": json.loads(health["value"]) if health else None,
-        "general": _general(db),
+        "general": _general(db), "limits": {"max_concurrent_jobs": cfg.max_concurrent_jobs},
     }
 
 
@@ -398,9 +433,9 @@ def recover_stale(db, cfg, backend_url: str, stale_seconds: int = 300, max_attem
         item = {"failed": j["id"], "retry": None}
         if j["attempt"] < max_attempts and not j["cancel_requested"]:
             nj = _create_job(db, j["project_id"], j["conversation_id"], j["message_id"], parent=j["id"], attempt=j["attempt"] + 1)
-            dsp.dispatch(cfg, db, nj, backend_url)
             item["retry"] = nj["id"]
         out.append(item)
+    drain_queue(db, cfg, backend_url)
     return out
 
 
@@ -475,9 +510,13 @@ def runner_status(jid: str, body: StatusIn, request: Request):
         raise HTTPException(400, "invalid status")
     db, cfg = _d(request), _cfg(request)
     _need(db.one("SELECT 1 FROM jobs WHERE id=?", (jid,)))
+    first_run = body.status == "running" and not db.one("SELECT started_at FROM jobs WHERE id=?", (jid,))["started_at"]
     changed = db.set_job_status(jid, body.status, body.error, body.stage)
-    if changed and body.status in ("completed", "failed", "waiting_for_input"):
-        notify(cfg, f"Job {jid}: {body.status}" + (f" — {body.error}" if body.error else ""))
+    if changed and (first_run or body.status in ("completed", "failed", "cancelled", "waiting_for_input")):
+        label = {"running": "started"}.get(body.status, body.status)
+        notify(cfg, f"Backlot job {jid} {label}" + (f": {body.error}" if body.error else ""))
+    if changed and body.status in TERMINAL:
+        drain_queue(db, cfg, _backend_url(request))
     return {"changed": changed}
 
 
@@ -560,4 +599,6 @@ def output_complete(jid: str, aid: str, request: Request):
         raise HTTPException(409, "output object missing in storage")
     db.x("UPDATE assets SET status='uploaded', size=? WHERE id=?", (head["size"], aid))
     db.add_event(jid, "output_ready", {"asset_id": aid, "name": a["name"], "kind": a["kind"], "size": head["size"], "meta": json.loads(a["meta"] or "{}")})
+    if a["kind"] == "video":
+        notify(_cfg(request), f"Backlot job {jid}: render ready ({a['name']}, {head['size'] // 1024} KB)")
     return {"ok": True, "size": head["size"]}

@@ -38,6 +38,7 @@ def dispatch(cfg, db, job: dict, backend_url: str, transport: httpx.BaseTranspor
                "OM_REPO_ROOT": ws, "PYTHONPATH": str(REPO_ROOT)}
         p = subprocess.Popen([sys.executable, "-m", "runner.run_job"], cwd=REPO_ROOT, env=env,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        db.set_job_status(jid, "starting", stage="waiting for runner")
         db.add_event(jid, "dispatched", {"mode": "local-subprocess (development only)", "pid": p.pid, "workspace": ws})
         return
     if not cfg.github_configured():

@@ -56,6 +56,7 @@ class LocalStorage:
         return n
 
     def open_path(self, key): return self._path(key)
+    def read_bytes(self, key): return self._path(key).read_bytes()
     def delete(self, key):
         p = self._path(key)
         if p.is_file(): p.unlink()
@@ -88,6 +89,7 @@ class S3Storage:
         except Exception:
             return None
 
+    def read_bytes(self, key): return self.client.get_object(Bucket=self.bucket, Key=key)["Body"].read()
     def delete(self, key): self.client.delete_object(Bucket=self.bucket, Key=key)
 
     def status(self):

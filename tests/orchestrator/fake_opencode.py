@@ -46,6 +46,21 @@ if "render" in request or "Automated QC failed" in prompt:
     else:
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "testsrc=size=640x360:rate=24:duration=3",
                         "-f", "lavfi", "-i", "sine=frequency=440:duration=3", "-shortest", "-pix_fmt", "yuv420p", str(out)], check=True)
+if "storyboard" in request or "failed validation" in prompt:
+    ups = sorted((pdir / "inputs" / "uploads").glob("*.mp4")) if (pdir / "inputs" / "uploads").exists() else []
+    av = str(ups[0].relative_to(pdir)) if ups else "inputs/uploads/missing.mp4"
+    scenes = [{"id": "s1", "title": "Hook", "start_seconds": 0, "end_seconds": 5, "type": "talking_head", "layout": "fullscreen", "narration": "Hello",
+               "visual_description": "Presenter close-up", "asset_refs": [{"role": "avatar_video", "source": "uploaded", "path": av}]},
+              {"id": "s2", "title": "Demo", "start_seconds": 5, "end_seconds": 15, "type": "screen_recording", "layout": "fullscreen", "narration": "Watch",
+               "visual_description": "Dashboard demo", "asset_refs": [{"role": "screen_recording", "source": "uploaded", "path": av}]}]
+    if "badplan" in request and "failed validation" not in prompt:
+        scenes[1]["asset_refs"] = [{"role": "screen_recording", "source": "generated", "prompt": "fake dashboard"}]  # fabricated demo
+    (pdir / "artifacts").mkdir(parents=True, exist_ok=True)
+    (pdir / "artifacts" / "storyboard.json").write_text(json.dumps({"version": "1.0", "title": "T", "avatar_asset": av,
+        "format": {"resolution": "1920x1080", "aspect_ratio": "16:9", "fps": 30}, "scenes": scenes}))
+if "askuser" in request:
+    (pdir / "artifacts").mkdir(parents=True, exist_ok=True)
+    (pdir / "artifacts" / "needs_input.json").write_text(json.dumps({"question": "Which brand color?", "options": ["red", "blue"]}))
 ev(type="text", part={"type": "text", "text": "Done."})
 sess = HOME / f"{sid}.json"
 msgs = json.loads(sess.read_text())["messages"] if sess.exists() else []
