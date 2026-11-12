@@ -17,7 +17,7 @@ jobs:
         with: { python-version: "3.11", cache: pip, cache-dependency-path: "requirements-orchestrator.txt" }
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install -r requirements-orchestrator.txt
-      - run: python -m pytest tests/orchestrator tests/director -q
+      - run: python -m pytest tests/orchestrator tests/director -q --ignore=tests/orchestrator/test_worker_schedules.py
   worker-e2e:
     # Same end-to-end suite, but against the Cloudflare Worker running on workerd with local D1 + R2.
     runs-on: ubuntu-latest
@@ -33,4 +33,10 @@ jobs:
       - run: cd worker && npm ci --no-audit --no-fund && scripts/prepare-assets.sh
       - run: cd worker && node --test test/schedule.test.mjs
       - run: E2E_BACKEND=worker python -m pytest tests/orchestrator/test_e2e.py -q
-      - run: python -m pytest tests/orchestrator/test_worker_schedules.py -q
+      - name: Scheduling tests (Worker + cron)
+        run: |
+          set -o pipefail
+          python -m pytest tests/orchestrator/test_worker_schedules.py -q --tb=short -rf 2>&1 | tee /tmp/sched.log
+      - name: Publish failure summary
+        if: failure()
+        run: tail -c 5500 /tmp/sched.log > /tmp/sched.tail && scripts/ci/annotate.sh "schedule-tests-tail" /tmp/sched.tail
