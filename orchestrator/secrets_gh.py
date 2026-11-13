@@ -7,11 +7,9 @@ import httpx
 
 from .dispatch import GH_API, gh_headers
 
-ALLOWED_SECRET_NAMES = {
-    "ORCH_RUNNER_SECRET", "OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY",
-    "OPENROUTER_API_KEY", "GROQ_API_KEY", "ELEVENLABS_API_KEY", "FAL_KEY", "PEXELS_API_KEY",
-    "PIXABAY_API_KEY", "HEYGEN_API_KEY", "RUNWAY_API_KEY", "OPENCODE_API_KEY", "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID",
-}
+from pathlib import Path as _P
+_LIST = _P(__file__).resolve().parent.parent / "config" / "runner_secrets.txt"
+ALLOWED_SECRET_NAMES = {"ORCH_RUNNER_SECRET", *[l.strip() for l in _LIST.read_text().splitlines() if l.strip()]}
 
 
 def seal(public_key_b64: str, value: str) -> str:

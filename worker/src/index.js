@@ -1,6 +1,7 @@
 // Backlot control plane on Cloudflare Workers: D1 (state) + R2 (files) + GitHub Actions dispatch.
 // Heavy work (Docker, OpenCode, OpenMontage) never runs here; it runs on GitHub runners.
 import { AwsClient } from "aws4fetch";
+import RUNNER_SECRETS from "./runner_secrets.json";
 import { nextRun, normalise, countOccurrences, describe, DEFAULT_TZ } from "./schedule.js";
 
 const enc = new TextEncoder();
@@ -11,7 +12,7 @@ const UPLOAD_TYPES = {
   image: [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"], document: [".pdf", ".txt", ".md", ".json", ".csv", ".srt", ".vtt", ".docx"],
 };
 const GENERAL_KEYS = { resolution: "string", aspect_ratio: "string", fps: "number", output_format: "string", opencode_model: "string", opencode_agent: "string", production_preferences: "string" };
-const SECRET_NAMES = ["ORCH_RUNNER_SECRET", "OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY", "OPENROUTER_API_KEY", "GROQ_API_KEY", "ELEVENLABS_API_KEY", "FAL_KEY", "PEXELS_API_KEY", "PIXABAY_API_KEY", "HEYGEN_API_KEY", "RUNWAY_API_KEY", "OPENCODE_API_KEY"];
+const SECRET_NAMES = ["ORCH_RUNNER_SECRET", ...RUNNER_SECRETS];  // shared allowlist: config/runner_secrets.txt
 
 class HttpError extends Error { constructor(status, msg) { super(msg); this.status = status; } }
 const now = () => Date.now() / 1000;
