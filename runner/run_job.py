@@ -115,6 +115,8 @@ class Run:
         self.cancel = threading.Event()
         self.stop_hb = threading.Event()
         self.started = time.time()
+        self.oc_deadline: float | None = None
+        self.timed_out = False
 
     def heartbeat(self):
         while not self.stop_hb.wait(float(os.environ.get("HEARTBEAT_SECONDS", "20"))):
@@ -122,6 +124,8 @@ class Run:
                 self.cancel.set()
             if self.cancel.is_set() and self.proc and self.proc.poll() is None:
                 self.proc.terminate()
+            if self.oc_deadline and time.time() > self.oc_deadline and self.proc and self.proc.poll() is None:
+                self.timed_out = True; self.proc.terminate()
 
     def on_signal(self, *_):
         self.cancel.set()
@@ -135,6 +139,7 @@ class Run:
         if g.get("opencode_model"): cmd += ["-m", g["opencode_model"]]
         if g.get("opencode_agent"): cmd += ["--agent", g["opencode_agent"]]
         cmd.append(prompt)
+        self.oc_deadline = time.time() + float(os.environ.get("OPENCODE_TIMEOUT_SECONDS", "10800"))
         self.proc = subprocess.Popen(cmd, cwd=REPO, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
         err_buf: list[str] = []
         threading.Thread(target=lambda: err_buf.extend(self.proc.stderr), daemon=True).start()
@@ -152,7 +157,9 @@ class Run:
                 errors.append(json.dumps(ev.get("error"))[:500]); self.be.event("opencode_error", {"error": ev.get("error")})
             else:
                 self.be.event("opencode", {"kind": ev.get("type"), "summary": json.dumps(ev)[:400]})
-        rc = self.proc.wait()
+        rc = self.proc.wait(); self.oc_deadline = None
+        if self.timed_out:
+            raise RuntimeError(f"OpenCode timed out after {os.environ.get('OPENCODE_TIMEOUT_SECONDS', '10800')}s and was stopped")
         return {"rc": rc, "session_id": sid, "text": "".join(texts).strip(), "errors": errors, "stderr": "".join(err_buf)[-1500:]}
 
     def snapshot(self, pid: str, sid: str | None):

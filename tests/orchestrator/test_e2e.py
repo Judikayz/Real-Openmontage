@@ -19,7 +19,7 @@ def srv(tmp_path_factory):
     env = {**os.environ, "ORCH_DB_PATH": str(tmp / "db.sqlite"), "ORCH_ADMIN_TOKEN": TOKEN, "ORCH_RUNNER_SECRET": "e2e-runner",
            "ORCH_LOCAL_STORAGE_DIR": str(tmp / "obj"), "ORCH_PUBLIC_URL": f"http://127.0.0.1:{port}", "ORCH_DISPATCH_MODE": "local",
            "OPENCODE_BIN": f"{sys.executable} {ROOT}/tests/orchestrator/fake_opencode.py", "FAKE_OC_HOME": str(tmp / "ochome"),
-           "FAKE_OC_LOG": str(tmp / "oc.log"), "HEARTBEAT_SECONDS": "1", "PYTHONPATH": str(ROOT)}
+           "FAKE_OC_LOG": str(tmp / "oc.log"), "HEARTBEAT_SECONDS": "1", "OPENCODE_TIMEOUT_SECONDS": "25", "PYTHONPATH": str(ROOT)}
     p = subprocess.Popen([sys.executable, "-m", "uvicorn", "orchestrator.app:create_app", "--factory", "--port", str(port), "--log-level", "warning"],
                          cwd=ROOT, env=env)
     base = f"http://127.0.0.1:{port}"
@@ -229,3 +229,11 @@ def test_11_concurrency_limit_defers_and_auto_starts(srv):
     wait_job(c, jobs[2]["id"], timeout=40, until=("starting", "running"))  # freed slot -> queued job starts on its own
     for j in jobs: c.post(f"/api/v1/jobs/{j['id']}/cancel")
     for j in jobs: wait_job(c, j["id"], timeout=40)
+
+
+def test_12_hung_opencode_is_stopped_and_reported(srv):
+    c, tmp = srv
+    p = c.post("/api/v1/projects", json={"name": "hang"}).json()
+    conv = c.post(f"/api/v1/projects/{p['id']}/conversations", json={}).json()
+    j = wait_job(c, say(c, conv["id"], "sleep forever")["id"], timeout=80)
+    assert j["status"] == "failed" and "timed out" in j["error"], j
