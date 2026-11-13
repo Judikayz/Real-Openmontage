@@ -23,7 +23,7 @@ def _start_python(tmp, port):
            "ORCH_LOCAL_STORAGE_DIR": str(tmp / "obj"), "ORCH_PUBLIC_URL": f"http://127.0.0.1:{port}", "ORCH_DISPATCH_MODE": "local",
            "OPENCODE_BIN": f"{sys.executable} {ROOT}/tests/orchestrator/fake_opencode.py", "FAKE_OC_HOME": str(tmp / "ochome"),
            "FAKE_OC_LOG": str(tmp / "oc.log"), "PYTHONPATH": str(ROOT), **RUNNER_ENV}
-    p = subprocess.Popen([sys.executable, "-m", "uvicorn", "orchestrator.app:create_app", "--factory", "--port", str(port), "--log-level", "warning"], cwd=ROOT, env=env)
+    p = subprocess.Popen([sys.executable, "-m", "uvicorn", "orchestrator.app:create_app", "--factory", "--port", str(port), "--log-level", "warning"], cwd=ROOT, env=env, start_new_session=True)  # own session: teardown kills only the server, never pytest
     def db_exec(sql):
         d = sqlite3.connect(tmp / "db.sqlite"); d.execute(sql); d.commit(); d.close()
     return p, db_exec
