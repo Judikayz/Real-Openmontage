@@ -1,7 +1,7 @@
 """End-to-end: real HTTP server + real runner subprocesses (fresh empty workspace per job).
 OpenCode is the stand-in in fake_opencode.py (no LLM). Everything else is real: HTTP, SQLite, signed
 uploads/downloads, tar state snapshots, ffmpeg/ffprobe QC, session export/import, recovery."""
-import json, os, shutil, signal, socket, subprocess, sys, time
+import json, os, shutil, signal, socket, sqlite3, subprocess, sys, tempfile, time
 from pathlib import Path
 import httpx, pytest
 
@@ -13,24 +13,69 @@ def free_port():
     s = socket.socket(); s.bind(("127.0.0.1", 0)); p = s.getsockname()[1]; s.close(); return p
 
 
-@pytest.fixture(scope="module")
-def srv(tmp_path_factory):
-    tmp = tmp_path_factory.mktemp("e2e"); port = free_port()
+DB_EXEC = None  # set by the srv fixture: runs a SQL statement against whichever backend is under test
+BACKEND = os.environ.get("E2E_BACKEND", "python")
+RUNNER_ENV = {"HEARTBEAT_SECONDS": "1", "OPENCODE_TIMEOUT_SECONDS": "25"}
+
+
+def _start_python(tmp, port):
     env = {**os.environ, "ORCH_DB_PATH": str(tmp / "db.sqlite"), "ORCH_ADMIN_TOKEN": TOKEN, "ORCH_RUNNER_SECRET": "e2e-runner",
            "ORCH_LOCAL_STORAGE_DIR": str(tmp / "obj"), "ORCH_PUBLIC_URL": f"http://127.0.0.1:{port}", "ORCH_DISPATCH_MODE": "local",
            "OPENCODE_BIN": f"{sys.executable} {ROOT}/tests/orchestrator/fake_opencode.py", "FAKE_OC_HOME": str(tmp / "ochome"),
-           "FAKE_OC_LOG": str(tmp / "oc.log"), "HEARTBEAT_SECONDS": "1", "OPENCODE_TIMEOUT_SECONDS": "25", "PYTHONPATH": str(ROOT)}
-    p = subprocess.Popen([sys.executable, "-m", "uvicorn", "orchestrator.app:create_app", "--factory", "--port", str(port), "--log-level", "warning"],
-                         cwd=ROOT, env=env)
+           "FAKE_OC_LOG": str(tmp / "oc.log"), "PYTHONPATH": str(ROOT), **RUNNER_ENV}
+    p = subprocess.Popen([sys.executable, "-m", "uvicorn", "orchestrator.app:create_app", "--factory", "--port", str(port), "--log-level", "warning"], cwd=ROOT, env=env)
+    def db_exec(sql):
+        d = sqlite3.connect(tmp / "db.sqlite"); d.execute(sql); d.commit(); d.close()
+    return p, db_exec
+
+
+def _start_worker(tmp, port):
+    """Real Cloudflare runtime (workerd) with local D1 + R2. GitHub dispatch is replaced by a webhook that launches real runner subprocesses."""
+    import http.server, threading
+    wdir = ROOT / "worker"; persist = str(tmp / "wstate")
+    class H(http.server.BaseHTTPRequestHandler):
+        def log_message(self, *a): pass
+        def do_POST(self):
+            d = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            ws = tempfile.mkdtemp(prefix="om-runner-")
+            env = {**os.environ, "JOB_ID": d["job_id"], "BACKEND_URL": d["backend_url"], "ORCH_RUNNER_SECRET": "e2e-runner", "OM_REPO_ROOT": ws, "PYTHONPATH": str(ROOT),
+                   "OPENCODE_BIN": f"{sys.executable} {ROOT}/tests/orchestrator/fake_opencode.py", "FAKE_OC_HOME": str(tmp / "ochome"), "FAKE_OC_LOG": str(tmp / "oc.log"), **RUNNER_ENV}
+            pr = subprocess.Popen([sys.executable, "-m", "runner.run_job"], cwd=ROOT, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+            body = json.dumps({"pid": pr.pid, "workspace": ws}).encode()
+            self.send_response(200); self.send_header("content-type", "application/json"); self.send_header("content-length", str(len(body))); self.end_headers(); self.wfile.write(body)
+    hs = http.server.ThreadingHTTPServer(("127.0.0.1", 0), H); threading.Thread(target=hs.serve_forever, daemon=True).start()
+    (wdir / ".dev.vars").write_text(f"ORCH_ADMIN_TOKEN={TOKEN}\nORCH_RUNNER_SECRET=e2e-runner\nSESSION_SECRET=e2e-session\nDISPATCH_MODE=webhook\nDISPATCH_WEBHOOK_URL=http://127.0.0.1:{hs.server_address[1]}/launch\n")
+    subprocess.run(["npx", "wrangler", "d1", "migrations", "apply", "DB", "--local", "--persist-to", persist], cwd=wdir, check=True, capture_output=True)
+    p = subprocess.Popen(["npx", "wrangler", "dev", "--local", "--port", str(port), "--persist-to", persist, "--var", "MAX_CONCURRENT_JOBS:2"], cwd=wdir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)  # test uses a small limit to exercise queueing
+    def db_exec(sql):
+        subprocess.run(["npx", "wrangler", "d1", "execute", "DB", "--local", "--persist-to", persist, "--command", sql], cwd=wdir, check=True, capture_output=True)
+    return p, db_exec
+
+
+@pytest.fixture(scope="module")
+def srv(tmp_path_factory):
+    global DB_EXEC
+    tmp = tmp_path_factory.mktemp("e2e"); port = free_port()
+    p, DB_EXEC = (_start_worker if BACKEND == "worker" else _start_python)(tmp, port)
     base = f"http://127.0.0.1:{port}"
-    for _ in range(60):
+    for _ in range(90):
         try:
             if httpx.get(base + "/api/v1/me", headers={"Authorization": f"Bearer {TOKEN}"}).status_code == 200: break
-        except httpx.HTTPError: time.sleep(0.3)
+        except httpx.HTTPError: pass
+        time.sleep(0.5)
     else: p.kill(); pytest.fail("server did not start")
     c = httpx.Client(base_url=base, headers={"Authorization": f"Bearer {TOKEN}"}, timeout=60)
     yield c, tmp
-    p.terminate(); p.wait(10)
+    try: os.killpg(os.getpgid(p.pid), signal.SIGTERM)
+    except Exception: p.terminate()
+    p.wait(15)
+
+
+def test_0_the_backend_under_test_is_the_one_requested(srv):
+    """Guard: a mis-wired fixture must never again silently test the wrong backend."""
+    c, tmp = srv
+    engine = c.get("/api/v1/settings/status").json()["database"]["engine"]
+    assert engine == ("cloudflare-d1" if BACKEND == "worker" else "sqlite"), f"E2E_BACKEND={BACKEND} but the server reports {engine}"
 
 
 def wait_job(c, jid, timeout=90, until=("completed", "failed", "cancelled")):
@@ -107,9 +152,8 @@ def test_3a_session_restored_from_storage_after_local_opencode_data_wiped(world)
 
 
 def test_3b_missing_session_checkpoint_falls_back_to_message_history(world):
-    import sqlite3
     c, tmp, p, conv = world
-    db = sqlite3.connect(tmp / "db.sqlite"); db.execute("DELETE FROM checkpoints WHERE kind='opencode_session'"); db.commit(); db.close()
+    DB_EXEC("DELETE FROM checkpoints WHERE kind='opencode_session'")
     shutil.rmtree(tmp / "ochome", ignore_errors=True)
     before = len(oclog(tmp))
     j = wait_job(c, say(c, conv["id"], "tighten the ending")["id"])
