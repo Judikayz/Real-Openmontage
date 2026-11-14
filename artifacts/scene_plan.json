@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "scenes": [
+    {
+      "id": "scene_title",
+      "type": "text_card",
+      "description": "Branded title card: the supplied Backlot logo fills the background under a dark scrim, with the product name 'Backlot' and the line 'Your AI video studio, in your pocket' springing in.",
+      "start_seconds": 0.0,
+      "end_seconds": 2.5,
+      "narrative_role": "establish_context",
+      "transition_out": "fade",
+      "overlay_notes": "Backlot \u2014 your AI video studio.; Title: Backlot; Subtitle: Your AI video studio, in your pocket",
+      "required_assets": [
+        {
+          "type": "logo",
+          "description": "inputs/uploads/4b3f4dca_logo.png",
+          "source": "provided"
+        },
+        {
+          "type": "voice",
+          "description": "inputs/uploads/bb6a4b64_narration.wav",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "scene_avatar",
+      "type": "talking_head",
+      "description": "The uploaded avatar intro clip plays full-frame, upscaled from 640x360 to the 16:9 frame, introducing the presenter.",
+      "start_seconds": 2.5,
+      "end_seconds": 6.5,
+      "narrative_role": "introduce_subject",
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "overlay_notes": "Direct your studio from your phone.; Presenter framing: full frame; No generated avatar or lip-sync",
+      "required_assets": [
+        {
+          "type": "avatar_video",
+          "description": "inputs/uploads/2c2b47e3_avatar_intro.mp4",
+          "source": "provided"
+        },
+        {
+          "type": "voice",
+          "description": "inputs/uploads/bb6a4b64_narration.wav",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "scene_demo",
+      "type": "screen_recording",
+      "description": "The uploaded 1280x720 screen recording plays full-frame as the product demo, showing the user's own captured footage.",
+      "start_seconds": 6.5,
+      "end_seconds": 12.5,
+      "narrative_role": "evidence",
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "overlay_notes": "Shoot, edit, and publish anywhere.; Demo source: uploaded screen recording; No screen recording was fabricated or re-captured",
+      "required_assets": [
+        {
+          "type": "screen_recording",
+          "description": "inputs/uploads/c187428e_screen_recording.mp4",
+          "source": "provided"
+        },
+        {
+          "type": "voice",
+          "description": "inputs/uploads/bb6a4b64_narration.wav",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "scene_end",
+      "type": "text_card",
+      "description": "Closing brand card: supplied logo background under a dark scrim with 'Backlot' and the call to action 'Create anywhere.'",
+      "start_seconds": 12.5,
+      "end_seconds": 15.0,
+      "narrative_role": "call_to_action",
+      "transition_in": "fade",
+      "overlay_notes": "Backlot. Create anywhere.; Title: Backlot; CTA: Create anywhere.",
+      "required_assets": [
+        {
+          "type": "logo",
+          "description": "inputs/uploads/4b3f4dca_logo.png",
+          "source": "provided"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "Backlot \u2014 Your AI Video Studio, In Your Pocket",
+    "derived_from": "storyboard.json"
+  }
+}

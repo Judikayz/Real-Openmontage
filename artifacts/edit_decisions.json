@@ -1,0 +1,295 @@
+{
+  "version": "1.0",
+  "render_runtime": "remotion",
+  "renderer_family": "screen-demo",
+  "composition_mode": "templated",
+  "cuts": [
+    {
+      "id": "cut_title",
+      "source": "",
+      "type": "hero_title",
+      "in_seconds": 0.0,
+      "out_seconds": 2.5,
+      "text": "Backlot",
+      "heroSubtitle": "Your AI video studio, in your pocket",
+      "backgroundImage": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/4b3f4dca_logo.png",
+      "backgroundOverlay": 0.65,
+      "accentColor": "#7CC4FF",
+      "color": "#FFFFFF",
+      "transition_out": "fade",
+      "transition_duration": 0.25,
+      "narrative_role": "establish_context",
+      "shot_intent": "Open with the product name and promise so the viewer knows what Backlot is before the demo.",
+      "information_role": "Introduces the product name and core promise.",
+      "reason": "Title card requested by the user."
+    },
+    {
+      "id": "cut_avatar",
+      "source": "avatar_intro",
+      "type": "talking_head",
+      "in_seconds": 2.5,
+      "out_seconds": 6.5,
+      "source_in_seconds": 0.0,
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "transition_duration": 0.3,
+      "narrative_role": "introduce_subject",
+      "shot_intent": "Put the presenter on screen early to make the product feel human and direct.",
+      "information_role": "Shows the presenter who is speaking for Backlot.",
+      "reason": "User supplied this avatar clip for the intro."
+    },
+    {
+      "id": "cut_demo",
+      "source": "screen_recording",
+      "type": "screen_recording",
+      "in_seconds": 6.5,
+      "out_seconds": 12.5,
+      "source_in_seconds": 0.0,
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "transition_duration": 0.3,
+      "narrative_role": "evidence",
+      "shot_intent": "Show the actual captured product footage instead of describing the demo.",
+      "information_role": "Provides visual proof of the product workflow.",
+      "reason": "User supplied this screen recording for the demo section."
+    },
+    {
+      "id": "cut_end",
+      "source": "",
+      "type": "hero_title",
+      "in_seconds": 12.5,
+      "out_seconds": 15.0,
+      "text": "Backlot",
+      "heroSubtitle": "Create anywhere.",
+      "backgroundImage": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/4b3f4dca_logo.png",
+      "backgroundOverlay": 0.72,
+      "accentColor": "#7CC4FF",
+      "color": "#FFFFFF",
+      "transition_in": "fade",
+      "transition_duration": 0.3,
+      "narrative_role": "call_to_action",
+      "shot_intent": "Land the product name and a simple call to action after the demo.",
+      "information_role": "Leaves the viewer with the brand and next step.",
+      "reason": "Closing card requested by the user."
+    }
+  ],
+  "captions": [
+    {
+      "word": "Backlot",
+      "startMs": 400,
+      "endMs": 912
+    },
+    {
+      "word": "\u2014",
+      "startMs": 912,
+      "endMs": 985
+    },
+    {
+      "word": "your",
+      "startMs": 985,
+      "endMs": 1277
+    },
+    {
+      "word": "AI",
+      "startMs": 1277,
+      "endMs": 1423
+    },
+    {
+      "word": "video",
+      "startMs": 1423,
+      "endMs": 1788
+    },
+    {
+      "word": "studio.",
+      "startMs": 1788,
+      "endMs": 2300,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Direct",
+      "startMs": 2700,
+      "endMs": 3040
+    },
+    {
+      "word": "your",
+      "startMs": 3040,
+      "endMs": 3267
+    },
+    {
+      "word": "studio",
+      "startMs": 3267,
+      "endMs": 3607
+    },
+    {
+      "word": "from",
+      "startMs": 3607,
+      "endMs": 3833
+    },
+    {
+      "word": "your",
+      "startMs": 3833,
+      "endMs": 4060
+    },
+    {
+      "word": "phone.",
+      "startMs": 4060,
+      "endMs": 4400,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Shoot,",
+      "startMs": 4600,
+      "endMs": 4940
+    },
+    {
+      "word": "edit,",
+      "startMs": 4940,
+      "endMs": 5223
+    },
+    {
+      "word": "and",
+      "startMs": 5223,
+      "endMs": 5393
+    },
+    {
+      "word": "publish",
+      "startMs": 5393,
+      "endMs": 5790
+    },
+    {
+      "word": "anywhere.",
+      "startMs": 5790,
+      "endMs": 6300,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Your",
+      "startMs": 6800,
+      "endMs": 7048
+    },
+    {
+      "word": "whole",
+      "startMs": 7048,
+      "endMs": 7359
+    },
+    {
+      "word": "studio,",
+      "startMs": 7359,
+      "endMs": 7793
+    },
+    {
+      "word": "in",
+      "startMs": 7793,
+      "endMs": 7917
+    },
+    {
+      "word": "your",
+      "startMs": 7917,
+      "endMs": 8166
+    },
+    {
+      "word": "pocket.",
+      "startMs": 8166,
+      "endMs": 8600,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Create",
+      "startMs": 8800,
+      "endMs": 9291
+    },
+    {
+      "word": "with",
+      "startMs": 9291,
+      "endMs": 9618
+    },
+    {
+      "word": "AI",
+      "startMs": 9618,
+      "endMs": 9782
+    },
+    {
+      "word": "in",
+      "startMs": 9782,
+      "endMs": 9945
+    },
+    {
+      "word": "seconds.",
+      "startMs": 9945,
+      "endMs": 10600,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Start",
+      "startMs": 10800,
+      "endMs": 11271
+    },
+    {
+      "word": "making",
+      "startMs": 11271,
+      "endMs": 11835
+    },
+    {
+      "word": "today.",
+      "startMs": 11835,
+      "endMs": 12400,
+      "pageBreakAfter": true
+    },
+    {
+      "word": "Backlot.",
+      "startMs": 12700,
+      "endMs": 13361
+    },
+    {
+      "word": "Create",
+      "startMs": 13361,
+      "endMs": 13857
+    },
+    {
+      "word": "anywhere.",
+      "startMs": 13857,
+      "endMs": 14600,
+      "pageBreakAfter": true
+    }
+  ],
+  "captionStyle": {
+    "wordsPerPage": 5,
+    "fontSize": 40,
+    "bottomOffset": 70
+  },
+  "subtitles": {
+    "enabled": true,
+    "style": "sentence",
+    "source": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/assets/subtitles/backlot_promo.srt",
+    "caption_props": {
+      "wordsPerPage": 5,
+      "fontSize": 40,
+      "bottomOffset": 70,
+      "backgroundColor": "rgba(8, 15, 30, 0.78)",
+      "highlightColor": "#7CC4FF",
+      "color": "#FFFFFF"
+    }
+  },
+  "audio": {
+    "narration": {
+      "src": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav",
+      "volume": 0.7
+    }
+  },
+  "tailPaddingSeconds": 0,
+  "total_duration_seconds": 15.0,
+  "metadata": {
+    "project_id": "prj_405eabefb9754545",
+    "target_duration_seconds": 15.0,
+    "compose_target": {
+      "width": 1280,
+      "height": 720,
+      "fit": "pad"
+    },
+    "playbook": "clean-professional",
+    "proposal_render_runtime": "remotion",
+    "narration_note": "The uploaded narration.wav is a steady 220 Hz tone. Local faster-whisper transcription returned no speech segments. The file is used as supplied as the audio bed; captions are scripted marketing copy, not a transcript.",
+    "screen_recording_provenance": "c187428e_screen_recording.mp4 is the user's uploaded file; it was not fabricated, re-captured, or generated.",
+    "avatar_provenance": "2c2b47e3_avatar_intro.mp4 is the user's uploaded file; no synthetic avatar or lip-sync was generated."
+  }
+}

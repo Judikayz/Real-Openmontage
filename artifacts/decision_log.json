@@ -1,0 +1,73 @@
+{
+  "version": "1.0",
+  "decisions": [
+    {
+      "category": "pipeline_selection",
+      "subject": "Production pipeline",
+      "choice": "hybrid",
+      "options_considered": [
+        "hybrid",
+        "screen-demo",
+        "avatar-spokesperson"
+      ],
+      "reason": "The brief combines an uploaded avatar, an uploaded screen recording, title cards, and narration, which is exactly a source-footage-plus-support hybrid."
+    },
+    {
+      "category": "render_runtime_selection",
+      "subject": "Composition runtime",
+      "choice": "remotion",
+      "options_considered": [
+        "remotion",
+        "ffmpeg",
+        "hyperframes"
+      ],
+      "reason": "The user explicitly constrained the run to free local FFmpeg/Remotion. Remotion renders the title cards, mixed video cuts, and captions in one pass; FFmpeg would need a separate title-card stage. HyperFrames was excluded by the user's FFmpeg/Remotion constraint.",
+      "rejected_because": "HyperFrames excluded by the user's explicit free-local FFmpeg/Remotion constraint; FFmpeg rejected for caption/title-card composition complexity."
+    },
+    {
+      "category": "composition_mode",
+      "subject": "Composition authoring mode",
+      "choice": "templated",
+      "options_considered": [
+        "templated",
+        "atelier"
+      ],
+      "reason": "User asked to keep it simple and reuse existing local tooling; stock Explainer scene types cover title cards, video cuts, and captions.",
+      "rejected_because": "Atelier would add bespoke authoring time for a 15-second simple promo."
+    },
+    {
+      "category": "narration_handling",
+      "subject": "Uploaded narration audio",
+      "choice": "use supplied narration.wav as-is at 0.7 volume",
+      "options_considered": [
+        "use supplied file",
+        "replace with local TTS",
+        "drop audio"
+      ],
+      "reason": "The uploaded file is a steady 220 Hz tone, not detectable speech. Local faster-whisper transcription returned zero segments. Replacing it would violate the instruction to use the supplied voice recording; dropping it would fail the brief. It is used as supplied, at reduced volume, and the limitation is reported.",
+      "rejected_because": "No speech to transcribe; no local TTS voice was approved and replacing the user's file would be dishonest."
+    },
+    {
+      "category": "captions",
+      "subject": "Caption source",
+      "choice": "scripted on-screen product copy",
+      "options_considered": [
+        "transcript from narration",
+        "scripted on-screen copy",
+        "no captions"
+      ],
+      "reason": "No speech transcript exists because the uploaded narration is a tone. Captions are scripted marketing copy timed to the storyboard and explicitly labeled as not an audio transcript.",
+      "rejected_because": "Transcript captions are impossible from the supplied non-speech audio; no captions would ignore the user's explicit request."
+    },
+    {
+      "category": "approval_policy",
+      "subject": "Full-run authorization",
+      "choice": "proceed without intermediate human gates",
+      "options_considered": [
+        "pause at each gate",
+        "proceed"
+      ],
+      "reason": "The user explicitly asked for the storyboard, validation, and render in a single request; this is recorded as full-run pre-authorization."
+    }
+  ]
+}

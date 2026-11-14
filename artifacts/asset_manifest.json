@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "assets": [
+    {
+      "id": "avatar_intro",
+      "type": "video",
+      "path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/2c2b47e3_avatar_intro.mp4",
+      "source_tool": "uploaded",
+      "scene_id": "scene_avatar",
+      "duration_seconds": 4.0,
+      "resolution": "640x360",
+      "format": "mp4",
+      "generation_summary": "User-supplied avatar intro clip, used as-is."
+    },
+    {
+      "id": "screen_recording",
+      "type": "video",
+      "path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/c187428e_screen_recording.mp4",
+      "source_tool": "uploaded",
+      "scene_id": "scene_demo",
+      "duration_seconds": 6.0,
+      "resolution": "1280x720",
+      "format": "mp4",
+      "generation_summary": "User-supplied screen recording, used as-is; not fabricated or re-captured."
+    },
+    {
+      "id": "narration",
+      "type": "narration",
+      "path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav",
+      "source_tool": "uploaded",
+      "scene_id": "scene_avatar",
+      "duration_seconds": 12.0,
+      "format": "wav",
+      "generation_summary": "User-supplied voice recording, used as-is. Local transcription detected no speech (steady 220 Hz tone)."
+    },
+    {
+      "id": "logo",
+      "type": "image",
+      "path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/4b3f4dca_logo.png",
+      "source_tool": "uploaded",
+      "scene_id": "scene_title",
+      "resolution": "256x256",
+      "format": "png",
+      "generation_summary": "User-supplied Backlot logo."
+    }
+  ],
+  "total_cost_usd": 0.0,
+  "metadata": {
+    "project_id": "prj_405eabefb9754545",
+    "note": "All media is user-supplied; no paid APIs used."
+  }
+}

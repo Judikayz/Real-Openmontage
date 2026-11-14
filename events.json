@@ -1,0 +1,2864 @@
+[
+ {
+  "seq": 1,
+  "ts": 1794634058.946,
+  "type": "queued",
+  "data": {
+   "attempt": 1
+  }
+ },
+ {
+  "seq": 2,
+  "ts": 1794634058.956,
+  "type": "status",
+  "data": {
+   "status": "starting",
+   "error": null,
+   "stage": "waiting for runner"
+  }
+ },
+ {
+  "seq": 3,
+  "ts": 1794634058.957,
+  "type": "dispatched",
+  "data": {
+   "mode": "webhook (development)",
+   "pid": 3949
+  }
+ },
+ {
+  "seq": 4,
+  "ts": 1794634059.087,
+  "type": "status",
+  "data": {
+   "status": "running",
+   "error": null,
+   "stage": "restoring state"
+  }
+ },
+ {
+  "seq": 5,
+  "ts": 1794634059.095,
+  "type": "runner_started",
+  "data": {
+   "hardware": {
+    "gpu": null,
+    "cpus": 4,
+    "execution_path": "cpu"
+   },
+   "opencode": [
+    "opencode"
+   ]
+  }
+ },
+ {
+  "seq": 6,
+  "ts": 1794634059.103,
+  "type": "run_info",
+  "data": {
+   "run_url": "https://github.com/Judikayz/Real-Openmontage/actions/runs/43561532111"
+  }
+ },
+ {
+  "seq": 7,
+  "ts": 1794634059.321,
+  "type": "restored",
+  "data": {
+   "what": "uploads",
+   "count": 4
+  }
+ },
+ {
+  "seq": 8,
+  "ts": 1794634059.329,
+  "type": "status",
+  "data": {
+   "status": "running",
+   "error": null,
+   "stage": "opencode working"
+  }
+ },
+ {
+  "seq": 9,
+  "ts": 1794634063.69,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634063680, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8869f2c001my7tzahTkWukr3\", \"messageID\": \"msg_1d886935c00109F6cbMPiWUYXv\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 10,
+  "ts": 1794634064.241,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634064231, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_24078256110a47d8b4bc99e1\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat AGENTS.md; echo \\\"---\\\"; ls\"}, \"output\": \"# OpenMontage\\n\\n**MANDATORY: Read `AGENT_GUIDE.md` before responding to ANY user message.**\\n\\nDo not act on the user'"
+  }
+ },
+ {
+  "seq": 11,
+  "ts": 1794634064.303,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634064297, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886a1a30014Fbrny8ansOGNk\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886935c00109F6cbMPiWUYXv\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 20761, \"input\": 18911, \"output\": 47"
+  }
+ },
+ {
+  "seq": 12,
+  "ts": 1794634065.318,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634065314, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886a59f001eM5TEOeAxKHSy8\", \"messageID\": \"msg_1d886a1bc001SCRY1i428Fb0St\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 13,
+  "ts": 1794634065.589,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634065583, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"read\", \"callID\": \"call_7b58173ca83d4a7f8ef7b829\", \"state\": {\"status\": \"completed\", \"input\": {\"filePath\": \"/home/runner/work/Real-Openmontage/Real-Openmontage/AGENT_GUIDE.md\"}, \"output\": \"<path>/home/runner/work/Real-Openmontage/Real-Openmontage/AGENT_GUIDE.md</path>\\n<t"
+  }
+ },
+ {
+  "seq": 14,
+  "ts": 1794634065.617,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634065613, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886a6ca001G5Kxle3ogVsbIB\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886a1bc001SCRY1i428Fb0St\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 21126, \"input\": 456, \"output\": 62, "
+  }
+ },
+ {
+  "seq": 15,
+  "ts": 1794634067.894,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634067888, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886afac001mAe7kStVsGd0jD\", \"messageID\": \"msg_1d886a6da001sm4LMbqrVsVxyV\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 16,
+  "ts": 1794634069.112,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 10
+  }
+ },
+ {
+  "seq": 17,
+  "ts": 1794634069.534,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634069530, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_6329f7b7618940529d73ce0f\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"ls -la projects/prj_405eabefb9754545; echo \\\"---\\\"; find projects/prj_405eabefb9754545 -maxdepth 3 -type f | sort; echo \\\"---DIRECTOR\\\"; ls -la director; echo \\\"---P"
+  }
+ },
+ {
+  "seq": 18,
+  "ts": 1794634069.562,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634069558, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886b633001DLcHqmbC0ae73N\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886a6da001sm4LMbqrVsVxyV\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 34737, \"input\": 13526, \"output\": 10"
+  }
+ },
+ {
+  "seq": 19,
+  "ts": 1794634070.711,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634070706, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886bab0001ZRlaFx2PSIIXDq\", \"messageID\": \"msg_1d886b646001oUusjbFX7ouJKY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 20,
+  "ts": 1794634071.061,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634071056, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_9ee71fe29c47459c8916b66a\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat director/__init__.py; echo \\\"===MAIN===\\\"; cat director/__main__.py; echo \\\"===STORYBOARD===\\\"; cat director/storyboard.py\"}, \"output\": \"\\\"\\\"\\\"AI director suppor"
+  }
+ },
+ {
+  "seq": 21,
+  "ts": 1794634071.136,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634071091, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886bc30001UEUMSAxdJgTt9L\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886b646001oUusjbFX7ouJKY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 35224, \"input\": 715, \"output\": 77, "
+  }
+ },
+ {
+  "seq": 22,
+  "ts": 1794634072.144,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634072139, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886c048001Sc0lC3DRcsCUke\", \"messageID\": \"msg_1d886bc43001Pqi7JpLL1M0HyK\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 23,
+  "ts": 1794634074.028,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634074024, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_00be9d3f29304edbbb78b983\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"for f in projects/prj_405eabefb9754545/inputs/uploads/*; do echo \\\"== $f\\\"; ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,h"
+  }
+ },
+ {
+  "seq": 24,
+  "ts": 1794634074.214,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634074209, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_1bd41f976afd4be1a91e55cb\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat pipeline_defs/hybrid.yaml; echo \\\"=====AVATAR=====\\\"; cat pipeline_defs/avatar-spokesperson.yaml\"}, \"output\": \"name: hybrid\\nversion: \\\"2.0\\\"\\ndescription: >\\n  "
+  }
+ },
+ {
+  "seq": 25,
+  "ts": 1794634074.241,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634074237, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886c87b001UTifmoOFbG4lxG\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886bc43001Pqi7JpLL1M0HyK\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 38530, \"input\": 3179, \"output\": 164"
+  }
+ },
+ {
+  "seq": 26,
+  "ts": 1794634077.501,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634077497, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d886d535001XYXJCwymQn1t52\", \"messageID\": \"msg_1d886c88a001X7HKZgQke1HsK5\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 27,
+  "ts": 1794634079.121,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 20
+  }
+ },
+ {
+  "seq": 28,
+  "ts": 1794634089.13,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 30
+  }
+ },
+ {
+  "seq": 29,
+  "ts": 1794634091.247,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634091241, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_a5544ff1a72742ad80adb665\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -c \\\"\\nfrom tools.tool_registry import registry\\nimport json\\nregistry.discover()\\nprint(json.dumps(registry.provider_menu_summary(), indent=2))\\n\\\" 2>&1 | ta"
+  }
+ },
+ {
+  "seq": 30,
+  "ts": 1794634091.306,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634091302, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5d3aea1064a9495e9e77116c\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -c \\\"\\nfrom tools.tool_registry import registry\\nregistry.discover()\\ninfo = registry._tools['video_compose'].get_info()\\nprint(json.dumps({k:info.get(k) for "
+  }
+ },
+ {
+  "seq": 31,
+  "ts": 1794634091.321,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634091316, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8870b32001P7D15po1kXJdcK\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d886c88a001X7HKZgQke1HsK5\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 42592, \"input\": 4086, \"output\": 228"
+  }
+ },
+ {
+  "seq": 32,
+  "ts": 1794634092.498,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634092494, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8870fcb0011SJ2C172vdOeRT\", \"messageID\": \"msg_1d8870b42001a9ud46kyWMcGrY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 33,
+  "ts": 1794634095.064,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634095058, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_73f94efe98f1423e9e9a6e7c\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -c \\\"\\nfrom tools.tool_registry import registry\\nimport json\\nregistry.discover()\\ns=registry.provider_menu_summary()\\nprint('composition_runtimes', json.dump"
+  }
+ },
+ {
+  "seq": 34,
+  "ts": 1794634095.728,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634095721, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_f9045188063a490ca34dcffe\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -c \\\"\\nfrom tools.tool_registry import registry\\nimport json\\nregistry.discover()\\ninfo = registry._tools['video_compose'].get_info()\\nfor k in ['render_engin"
+  }
+ },
+ {
+  "seq": 35,
+  "ts": 1794634095.743,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634095739, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8871c79001FLfhpTRb2ysHBQ\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8870b42001a9ud46kyWMcGrY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 44030, \"input\": 1621, \"output\": 268"
+  }
+ },
+ {
+  "seq": 36,
+  "ts": 1794634096.64,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634096636, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8871ff90014KiOkeCv0yWS2g\", \"messageID\": \"msg_1d8871c88001aJB4cHJ3fJmu9a\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 37,
+  "ts": 1794634099.139,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 40
+  }
+ },
+ {
+  "seq": 38,
+  "ts": 1794634099.269,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634099265, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_83fb877440ee49408dc67476\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find remotion-composer/src -maxdepth 2 -type f | sort | head -80; echo \\\"---\\\"; cat remotion-composer/package.json\"}, \"output\": \"remotion-composer/src/CinematicRende"
+  }
+ },
+ {
+  "seq": 39,
+  "ts": 1794634099.49,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634099483, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_8eadf49a06de4927b216da9b\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,220p' tools/video/video_compose.py\"}, \"output\": \"\\\"\\\"\\\"Video composition tool \\u2014 FFmpeg + Remotion + HyperFrames (runtime-aware).\\n\\nPipeline-facing or"
+  }
+ },
+ {
+  "seq": 40,
+  "ts": 1794634099.529,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634099524, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8872b42001r73yygETOevW3m\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8871c88001aJB4cHJ3fJmu9a\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 45111, \"input\": 1097, \"output\": 113"
+  }
+ },
+ {
+  "seq": 41,
+  "ts": 1794634100.554,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634100550, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8872f430019YUe74o9GJ3Adi\", \"messageID\": \"msg_1d8872b52001aE3WMvFmxYwZ41\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 42,
+  "ts": 1794634103.061,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634103055, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_2ecad1f621c84824aa89c0fa\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def _remotion_render\\\\|def _render_via_ffmpeg\\\\|def _compose\\\\|def _render\\\\|def execute\\\\|operation ==\\\\|\\\\\\\"render\\\\\\\"\\\\|\\\\\\\"compose\\\\\\\"\\\" tools/video/vi"
+  }
+ },
+ {
+  "seq": 43,
+  "ts": 1794634103.455,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634103450, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_fdd98ea799cd41a2a6662df8\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find projects -maxdepth 3 -name storyboard.json -o -maxdepth 3 -name edit_decisions.json | head -20; echo \\\"---schemas\\\"; ls schemas/artifacts\"}, \"output\": \"---schem"
+  }
+ },
+ {
+  "seq": 44,
+  "ts": 1794634103.479,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634103475, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8873ab2001CXIJgK4lI37y4X\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8872b52001aE3WMvFmxYwZ41\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 48368, \"input\": 3319, \"output\": 166"
+  }
+ },
+ {
+  "seq": 45,
+  "ts": 1794634104.755,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634104749, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8873fab001ZquxiZkKDp7Ylv\", \"messageID\": \"msg_1d8873ac1001fguPhQ1L5tfgY5\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 46,
+  "ts": 1794634105.209,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634105204, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_4b4976ed640a46cfa117e7e3\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1040,1160p' tools/video/video_compose.py; echo \\\"=====RENDER=====\\\"; sed -n '1573,1725p' tools/video/video_compose.py\"}, \"output\": \"            return ToolRe"
+  }
+ },
+ {
+  "seq": 47,
+  "ts": 1794634105.245,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634105241, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8874197001OyeTDt0uvPhA9r\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8873ac1001fguPhQ1L5tfgY5\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 48963, \"input\": 1006, \"output\": 85,"
+  }
+ },
+ {
+  "seq": 48,
+  "ts": 1794634107.262,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634107257, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88749760012VQQWSnlVUq1X8\", \"messageID\": \"msg_1d88741a6001ZGz61tc7BiG9Od\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 49,
+  "ts": 1794634109.148,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 50
+  }
+ },
+ {
+  "seq": 50,
+  "ts": 1794634109.578,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634109574, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_db20349fbd904c85804800df\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat schemas/artifacts/edit_decisions.schema.json; echo \\\"=====ASSET SCHEMA=====\\\"; cat schemas/artifacts/asset_manifest.schema.json\"}, \"output\": \"{\\n  \\\"$schema\\\": \\"
+  }
+ },
+ {
+  "seq": 51,
+  "ts": 1794634109.879,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634109875, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_3ba7c82107a84b4ea9d90430\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1944,2135p' tools/video/video_compose.py\"}, \"output\": \"    def _render_via_ffmpeg(\\n        self,\\n        *,\\n        inputs: dict[str, Any],\\n        edit_"
+  }
+ },
+ {
+  "seq": 52,
+  "ts": 1794634109.916,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634109912, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88753d6001NKMGAOD3FJZcD1\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88741a6001ZGz61tc7BiG9Od\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 52226, \"input\": 3131, \"output\": 122"
+  }
+ },
+ {
+  "seq": 53,
+  "ts": 1794634111.632,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634111628, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8875a89001UFQXshagDo0BYF\", \"messageID\": \"msg_1d88753e60014QMfKQj9jfP2bq\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 54,
+  "ts": 1794634113.132,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634113127, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_7b4bc30105bf4170955469d7\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '340,470p' tools/video/video_compose.py; echo \\\"===compose===\\\"; sed -n '468,760p' tools/video/video_compose.py\"}, \"output\": \"                \\\"for kinetic ty"
+  }
+ },
+ {
+  "seq": 55,
+  "ts": 1794634113.162,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634113157, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88760830014dwSmZpTxf3X7B\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88753e60014QMfKQj9jfP2bq\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 57840, \"input\": 5803, \"output\": 80,"
+  }
+ },
+ {
+  "seq": 56,
+  "ts": 1794634114.823,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634114818, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88767000010P1MsLQu6KW4wN\", \"messageID\": \"msg_1d887609400178PWskN1CCjYsk\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 57,
+  "ts": 1794634119.157,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 60
+  }
+ },
+ {
+  "seq": 58,
+  "ts": 1794634122.555,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634122547, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_e3c535151b234783ba839ef7\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,160p' tools/audio/audio_mixer.py; echo \\\"===SUB===\\\"; sed -n '1,140p' tools/subtitle/subtitle_gen.py\"}, \"output\": \"\\\"\\\"\\\"Audio mixer tool wrapping FFmpeg a"
+  }
+ },
+ {
+  "seq": 59,
+  "ts": 1794634123.522,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634123513, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_0960fb653df845609e70f367\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -c \\\"\\nfrom tools.tool_registry import registry\\nimport json\\nregistry.discover()\\nfor t in ['transcriber','subtitle_gen','audio_mixer','video_stitch','video_"
+  }
+ },
+ {
+  "seq": 60,
+  "ts": 1794634123.537,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634123533, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887890b0013MTpLLnjzU66xA\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887609400178PWskN1CCjYsk\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 62848, \"input\": 4362, \"output\": 232"
+  }
+ },
+ {
+  "seq": 61,
+  "ts": 1794634124.808,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634124803, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8878e01001uf11q15T4XHqR7\", \"messageID\": \"msg_1d887891b001XR5LMW1v9LFdol\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 62,
+  "ts": 1794634127.628,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634127623, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_77a3159e2d1d4f08afd06a28\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nmods=['faster_whisper','whisper','whisperx','vosk','speech_recognition','torch','transformers']\\nfor m in mods:\\n    try:\\n        __import__(m); pr"
+  }
+ },
+ {
+  "seq": 63,
+  "ts": 1794634128.309,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634128303, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_516152a5f0494e41bd7219e6\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"ffprobe -v error -show_format -show_streams -of json projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav | head -80; echo \\\"---strings\\\"; strings pro"
+  }
+ },
+ {
+  "seq": 64,
+  "ts": 1794634128.32,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634128316, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8879bbb0014cW8WmHo7BVamF\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887891b001XR5LMW1v9LFdol\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 66124, \"input\": 3686, \"output\": 272"
+  }
+ },
+ {
+  "seq": 65,
+  "ts": 1794634129.158,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634129153, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8879efe001f5jTyoFrHesvh2\", \"messageID\": \"msg_1d8879bc90015FlO0D1L3DNZkD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 66,
+  "ts": 1794634129.165,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 70
+  }
+ },
+ {
+  "seq": 67,
+  "ts": 1794634133.269,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634133264, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_ed58da731e264ad58977e30d\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"pip download faster-whisper --no-deps -d /tmp/fwtest --timeout 15 2>&1 | tail -20\", \"timeout\": 60000}, \"output\": \"Collecting faster-whisper\\n  Downloading faster_whi"
+  }
+ },
+ {
+  "seq": 68,
+  "ts": 1794634133.282,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634133278, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887af1c001WZ3wk6nhR3iFFX\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8879bc90015FlO0D1L3DNZkD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 67060, \"input\": 1194, \"output\": 86,"
+  }
+ },
+ {
+  "seq": 69,
+  "ts": 1794634134.423,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634134417, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887b38f001alJhbmhFwLDL7v\", \"messageID\": \"msg_1d887af2c001y8vySQpEKES6EF\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 70,
+  "ts": 1794634135.504,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634135499, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_a0bd6187b2c84f7d98d8505f\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,220p' tools/analysis/transcriber.py\"}, \"output\": \"\\\"\\\"\\\"Transcription tool wrapping faster-whisper / WhisperX.\\n\\nProvides speech-to-text with word-level t"
+  }
+ },
+ {
+  "seq": 71,
+  "ts": 1794634135.517,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634135514, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887b7d8001kwja1IrcZ53WMJ\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887af2c001y8vySQpEKES6EF\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 67355, \"input\": 527, \"output\": 54, "
+  }
+ },
+ {
+  "seq": 72,
+  "ts": 1794634136.366,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634136362, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887bb270014wzglEM77AFBEv\", \"messageID\": \"msg_1d887b7e80014Rf7E0XGPO922o\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 73,
+  "ts": 1794634139.173,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 80
+  }
+ },
+ {
+  "seq": 74,
+  "ts": 1794634144.44,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634144435, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_554b84f9c6784872b7f9c359\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"pip install -q faster-whisper 2>&1 | tail -15; python -c \\\"import faster_whisper; print('faster_whisper', faster_whisper.__version__)\\\"\", \"timeout\": 600000}, \"output"
+  }
+ },
+ {
+  "seq": 75,
+  "ts": 1794634144.454,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634144451, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887dac1001XnTCvLQOeft5Bh\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887b7e80014Rf7E0XGPO922o\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 69154, \"input\": 1820, \"output\": 102"
+  }
+ },
+ {
+  "seq": 76,
+  "ts": 1794634145.876,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634145871, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887e04d0015FM9buCHhkNc9F\", \"messageID\": \"msg_1d887dad0001FaXYmTEqmc3Y41\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 77,
+  "ts": 1794634149.186,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 90
+  }
+ },
+ {
+  "seq": 78,
+  "ts": 1794634149.385,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634149379, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_4d89c1c1fddb4d9bade7dbd9\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"mkdir -p projects/prj_405eabefb9754545/artifacts projects/prj_405eabefb9754545/assets/audio projects/prj_405eabefb9754545/assets/subtitles projects/prj_405eabefb9754"
+  }
+ },
+ {
+  "seq": 79,
+  "ts": 1794634149.395,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634149393, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887ee0f001y0fl3BA7QWjqnU\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887dad0001FaXYmTEqmc3Y41\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 69456, \"input\": 186, \"output\": 248,"
+  }
+ },
+ {
+  "seq": 80,
+  "ts": 1794634150.38,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634150375, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887f1e4001US2zZFofsE58Vz\", \"messageID\": \"msg_1d887ee1e001YhKisA6I1GTpn0\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 81,
+  "ts": 1794634151.591,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634151586, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_cb96b4ce1b134a3c94f34afb\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"ffmpeg -hide_banner -i projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav -af volumedetect -f null - 2>&1 | tail -15; echo \\\"---silence\\\"; ffmpeg -h"
+  }
+ },
+ {
+  "seq": 82,
+  "ts": 1794634151.603,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634151600, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887f6ae001fZR5i5Ez3kFjNG\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887ee1e001YhKisA6I1GTpn0\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 69766, \"input\": 449, \"output\": 160,"
+  }
+ },
+ {
+  "seq": 83,
+  "ts": 1794634152.75,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634152746, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d887fb27001p4zQrF0RXyCPcT\", \"messageID\": \"msg_1d887f6be001jBJ82dU7vz0ji8\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 84,
+  "ts": 1794634155.894,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634155889, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_99a8c78df8e041b3a11f72ce\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport wave, numpy as np\\np='projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav'\\nw=wave.open(p)\\nfs=w.getframerate(); n=w.getnfram"
+  }
+ },
+ {
+  "seq": 85,
+  "ts": 1794634155.907,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634155903, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888077d001yKSltzeghH0l9h\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d887f6be001jBJ82dU7vz0ji8\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 70929, \"input\": 980, \"output\": 331,"
+  }
+ },
+ {
+  "seq": 86,
+  "ts": 1794634156.819,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634156814, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8880b0c0018sEGF27J7DqIu6\", \"messageID\": \"msg_1d888078d001CoOVJHO55en5dS\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 87,
+  "ts": 1794634159.196,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 100
+  }
+ },
+ {
+  "seq": 88,
+  "ts": 1794634161.227,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634161222, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_70f073de5e7d42e3bd79eacb\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"mkdir -p /tmp/omframes\\nffmpeg -hide_banner -loglevel error -i projects/prj_405eabefb9754545/inputs/uploads/2c2b47e3_avatar_intro.mp4 -vn -ac 1 -ar 44100 -f wav /tmp"
+  }
+ },
+ {
+  "seq": 89,
+  "ts": 1794634161.238,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634161235, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8881c52001UK7GVL0Eh4wHtr\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888078d001CoOVJHO55en5dS\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 72011, \"input\": 1025, \"output\": 469"
+  }
+ },
+ {
+  "seq": 90,
+  "ts": 1794634162.507,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634162502, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88821430015zymt5cmeWYN3n\", \"messageID\": \"msg_1d8881c61001SiYkN6Uk8h5eBD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 91,
+  "ts": 1794634162.858,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634162853, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"read\", \"callID\": \"call_5196e0559bac4952a4cfad1e\", \"state\": {\"status\": \"completed\", \"input\": {\"filePath\": \"/tmp/omframes/avatar_tile.png\"}, \"output\": \"Image read successfully\", \"metadata\": {\"preview\": \"Image read successfully\", \"truncated\": false, \"loaded\": []}, \"title\":"
+  }
+ },
+ {
+  "seq": 92,
+  "ts": 1794634163.016,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634163011, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"read\", \"callID\": \"call_5f3b251aee4e4b669d262af6\", \"state\": {\"status\": \"completed\", \"input\": {\"filePath\": \"/tmp/omframes/screen_tile.png\"}, \"output\": \"Image read successfully\", \"metadata\": {\"preview\": \"Image read successfully\", \"truncated\": false, \"loaded\": []}, \"title\":"
+  }
+ },
+ {
+  "seq": 93,
+  "ts": 1794634163.422,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634163417, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"read\", \"callID\": \"call_5f413bd8b74f45e789d0a740\", \"state\": {\"status\": \"completed\", \"input\": {\"filePath\": \"/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/4b3f4dca_logo.png\"}, \"output\": \"Image read successfully\", \"metadata"
+  }
+ },
+ {
+  "seq": 94,
+  "ts": 1794634163.448,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634163444, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88824f2001AjR7eit3eJVRm4\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8881c61001SiYkN6Uk8h5eBD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 72415, \"input\": 815, \"output\": 156,"
+  }
+ },
+ {
+  "seq": 95,
+  "ts": 1794634164.47,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634164465, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88828ef001a5YZUzPIH0UKrW\", \"messageID\": \"msg_1d88825010013kPjxxs1nHkyhH\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 96,
+  "ts": 1794634169.205,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 110
+  }
+ },
+ {
+  "seq": 97,
+  "ts": 1794634169.381,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634169377, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_8c8e3d7feb4c4836955c8b9a\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find projects/prj_405eabefb9754545 -type f -maxdepth 4 -printf '%p %s\\\\n' | sort; echo \\\"---\\\"; grep -rIl \\\"Backlot\\\\|narration\\\\|caption\\\" projects/prj_405eabefb975"
+  }
+ },
+ {
+  "seq": 98,
+  "ts": 1794634169.414,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634169409, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8883c3f001WtY8Ez0T5Htmll\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88825010013kPjxxs1nHkyhH\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 73066, \"input\": 320, \"output\": 105,"
+  }
+ },
+ {
+  "seq": 99,
+  "ts": 1794634170.494,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634170490, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8884077001ynE8tZqRC91cuP\", \"messageID\": \"msg_1d8883c50001E8InmYdlxV6nBs\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 100,
+  "ts": 1794634171.06,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634171056, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_05a31f62c24b4abbb2408805\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat projects/prj_405eabefb9754545/events.jsonl; echo; cat projects/prj_405eabefb9754545/artifacts/bb6a4b64_narration_transcript.json\"}, \"output\": \"{\\\"ts\\\": \\\"2026-11"
+  }
+ },
+ {
+  "seq": 101,
+  "ts": 1794634171.093,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634171088, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88842ce0010lr2cnct0DFgci\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8883c50001E8InmYdlxV6nBs\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 73355, \"input\": 804, \"output\": 87, "
+  }
+ },
+ {
+  "seq": 102,
+  "ts": 1794634172.229,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634172223, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888473d001NsXf3YAqnCTT8T\", \"messageID\": \"msg_1d88842de001Yxz5CkY1Nr4OWN\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 103,
+  "ts": 1794634179.214,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 120
+  }
+ },
+ {
+  "seq": 104,
+  "ts": 1794634179.649,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634179643, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_85da66281e654314ba6f042b\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"which tesseract identify convert 2>/dev/null; python - <<'PY'\\nfrom PIL import Image\\nimport numpy as np\\nfor p in ['/tmp/omframes/avatar_tile.png','/tmp/omframes/sc"
+  }
+ },
+ {
+  "seq": 105,
+  "ts": 1794634179.662,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634179659, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8886447001zkoNTeQS6NabPW\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88842de001Yxz5CkY1Nr4OWN\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 74329, \"input\": 371, \"output\": 195,"
+  }
+ },
+ {
+  "seq": 106,
+  "ts": 1794634180.621,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634180616, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8886805001MO3u6A6Tp4JT2S\", \"messageID\": \"msg_1d8886459001yBUjOmMDnkOHZZ\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 107,
+  "ts": 1794634185.893,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634185888, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5efaeea48f764d45a256250d\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat remotion-composer/src/Root.tsx; echo \\\"===TITLED===\\\"; sed -n '1,240p' remotion-composer/src/TitledVideo.tsx; echo \\\"===TALKINGHEAD===\\\"; sed -n '1,200p' remotio"
+  }
+ },
+ {
+  "seq": 108,
+  "ts": 1794634185.922,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634185918, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8887cbc001x2ANUeRNTYxyaH\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8886459001yBUjOmMDnkOHZZ\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 75080, \"input\": 1023, \"output\": 106"
+  }
+ },
+ {
+  "seq": 109,
+  "ts": 1794634187.332,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634187327, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888823d001Uo8UcGWxlLIsaN\", \"messageID\": \"msg_1d8887ccc001rCIgY33Clxk6ns\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 110,
+  "ts": 1794634187.84,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634187834, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_ac8c9e3a33354dfe8a2fde16\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,260p' remotion-composer/src/Explainer.tsx\"}, \"output\": \"import {\\n  AbsoluteFill,\\n  Audio,\\n  Img,\\n  OffthreadVideo,\\n  Sequence,\\n  interpolate,\\n  spri"
+  }
+ },
+ {
+  "seq": 111,
+  "ts": 1794634187.87,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634187867, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88884590010j2T4ZngP5YLnX\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8887ccc001rCIgY33Clxk6ns\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 81371, \"input\": 6914, \"output\": 56,"
+  }
+ },
+ {
+  "seq": 112,
+  "ts": 1794634189.223,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 130
+  }
+ },
+ {
+  "seq": 113,
+  "ts": 1794634189.3,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634189296, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88889ee001j6ofl5xSazgwun\", \"messageID\": \"msg_1d8888469001hI6bOSPLD6a10b\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 114,
+  "ts": 1794634190.379,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634190374, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_d8833867a73343258508e758\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"OffthreadVideo\\\\|cut.type\\\\|type ===\\\\|source_in_seconds\\\\|layer\\\\|Audio\\\\|captions\\\\|CaptionOverlay\\\\|themeConfig\\\\|props.theme\\\\|ScreenshotScene\\\\|render"
+  }
+ },
+ {
+  "seq": 115,
+  "ts": 1794634190.455,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634190449, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8888e6f001KlW1qiXITQrt7n\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8888469001hI6bOSPLD6a10b\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 84257, \"input\": 2846, \"output\": 99,"
+  }
+ },
+ {
+  "seq": 116,
+  "ts": 1794634191.276,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634191271, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88891a6001lwogaPT1mPDBhq\", \"messageID\": \"msg_1d8888e7f001q2S60X594nsuNf\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 117,
+  "ts": 1794634191.515,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634191510, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_2527d0f13a5a4a33b5ae1150\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '740,930p' remotion-composer/src/Explainer.tsx\"}, \"output\": \"    return (\\n      <AnimeScene\\n        images={cut.images}\\n        animation={(cut.animation a"
+  }
+ },
+ {
+  "seq": 118,
+  "ts": 1794634191.555,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634191551, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88892be0010srlMSMkFP7Xy6\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8888e7f001q2S60X594nsuNf\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 85065, \"input\": 913, \"output\": 56, "
+  }
+ },
+ {
+  "seq": 119,
+  "ts": 1794634192.837,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634192832, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88897bd001hPKWLn0cUzSSI8\", \"messageID\": \"msg_1d88892cd001VMV7WLpOSj15bY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 120,
+  "ts": 1794634195.542,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634195537, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_6deaef844bb74c84b298128a\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"_get_composition_id\\\\|RENDERER_FAMILY_MAP\\\\|def _needs_remotion\\\\|_REMOTION_SCENE_TYPES\\\" -A30 tools/video/video_compose.py | head -120\"}, \"output\": \"759: "
+  }
+ },
+ {
+  "seq": 121,
+  "ts": 1794634195.582,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634195578, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888a279001qi3mLvQ3bBQF10\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88892cd001VMV7WLpOSj15bY\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 86967, \"input\": 1673, \"output\": 88,"
+  }
+ },
+ {
+  "seq": 122,
+  "ts": 1794634196.85,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634196845, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888a76a001ITcGzwUvD5VJ71\", \"messageID\": \"msg_1d888a289001aSO230ruxNLKkp\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 123,
+  "ts": 1794634198.295,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634198289, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_dc89b5cd78bb4614b95928b1\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"profile\\\\|scale\\\\|--width\\\\|--height\\\\|concurrency\\\" tools/video/video_compose.py | sed -n '1,120p'\"}, \"output\": \"76:        \\\"encode_profile\\\",\\n94:      "
+  }
+ },
+ {
+  "seq": 124,
+  "ts": 1794634198.327,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634198323, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888ad32001NH0L9EJU8y38R9\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888a289001aSO230ruxNLKkp\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 88724, \"input\": 1873, \"output\": 73,"
+  }
+ },
+ {
+  "seq": 125,
+  "ts": 1794634199.231,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 140
+  }
+ },
+ {
+  "seq": 126,
+  "ts": 1794634199.536,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634199531, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888b1e80016f23L14efnd23B\", \"messageID\": \"msg_1d888ad41001ij4ugUqPHSnaO1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 127,
+  "ts": 1794634200.169,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634200164, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_d5ba88369a3548afa49c37c5\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"1280\\\\|720\\\\|youtube_landscape\\\\|landscape\\\" lib/media_profiles.py | head -40; sed -n '1,120p' lib/media_profiles.py\"}, \"output\": \"43:    name=\\\"youtube_la"
+  }
+ },
+ {
+  "seq": 128,
+  "ts": 1794634200.194,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634200190, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888b47d001hTfojRDuMFRnLA\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888ad41001ij4ugUqPHSnaO1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 90017, \"input\": 1462, \"output\": 80,"
+  }
+ },
+ {
+  "seq": 129,
+  "ts": 1794634201.038,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634201033, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888b7c6001X8csAjYsHICtNW\", \"messageID\": \"msg_1d888b48f0012kL5bIduDCKg87\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 130,
+  "ts": 1794634206.137,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634206132, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_95950af1733f4348925b7fc2\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def _pre_compose_validation\\\" -A120 tools/video/video_compose.py\"}, \"output\": \"1471:    def _pre_compose_validation(\\n1472-        self,\\n1473-        edit"
+  }
+ },
+ {
+  "seq": 131,
+  "ts": 1794634206.166,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634206161, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888cbcf001Q7TQWeZVr5rdL9\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888b48f0012kL5bIduDCKg87\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 91705, \"input\": 1246, \"output\": 61,"
+  }
+ },
+ {
+  "seq": 132,
+  "ts": 1794634207.552,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634207547, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888d139001lRWUGZuHDnqtP6\", \"messageID\": \"msg_1d888cbe0001kb00OZSoMmRsYy\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 133,
+  "ts": 1794634208.784,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634208779, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_83aeff71af23404fae006010\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,180p' remotion-composer/src/components/CaptionOverlay.tsx; echo \\\"===HERO===\\\"; sed -n '1,100p' remotion-composer/src/components/HeroTitle.tsx; echo \\\"===T"
+  }
+ },
+ {
+  "seq": 134,
+  "ts": 1794634208.81,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634208806, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888d624001yLUxsTKdNs027Y\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888cbe0001kb00OZSoMmRsYy\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 93428, \"input\": 2224, \"output\": 145"
+  }
+ },
+ {
+  "seq": 135,
+  "ts": 1794634209.241,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 150
+  }
+ },
+ {
+  "seq": 136,
+  "ts": 1794634210.138,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634210133, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888db53001jAmlRfnM1ppVRo\", \"messageID\": \"msg_1d888d634001hISSTvuY0y4JiA\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 137,
+  "ts": 1794634211.154,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634211150, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5cda23df21b54e96adf8dff4\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat remotion-composer/src/lib/resolveAsset.ts; echo \\\"---stage media---\\\"; grep -n \\\"def _stage_remotion_media\\\" -A120 tools/video/video_compose.py\"}, \"output\": \"imp"
+  }
+ },
+ {
+  "seq": 138,
+  "ts": 1794634211.184,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634211178, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888df69001LV065Dk3P9MRCP\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888d634001hISSTvuY0y4JiA\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 96928, \"input\": 3591, \"output\": 80,"
+  }
+ },
+ {
+  "seq": 139,
+  "ts": 1794634212.904,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634212897, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888e61f001ZSE6JN7hH7vwj3\", \"messageID\": \"msg_1d888df790017yc5EnSIl4ok69\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 140,
+  "ts": 1794634214.73,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634214726, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5ac637537f5f4917951c7df4\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1431,1470p' tools/video/video_compose.py\"}, \"output\": \"    def _needs_remotion(self, cuts: list[dict]) -> bool:\\n        \\\"\\\"\\\"Determine whether Remotion sho"
+  }
+ },
+ {
+  "seq": 141,
+  "ts": 1794634214.759,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634214755, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888ed61001jsyelBj1pfs3lo\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888df790017yc5EnSIl4ok69\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 98884, \"input\": 1893, \"output\": 56,"
+  }
+ },
+ {
+  "seq": 142,
+  "ts": 1794634216.374,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634216369, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d888f3af001uLhU5qyGdAJ84K\", \"messageID\": \"msg_1d888ed70001imeydvfkdmq1Fb\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 143,
+  "ts": 1794634219.25,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 160
+  }
+ },
+ {
+  "seq": 144,
+  "ts": 1794634220.066,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634220060, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_d0e95dc45d6640ceac422585\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '2898,2960p' tools/video/video_compose.py; grep -n 'width\\\\|height' tools/video/video_compose.py | sed -n '1,80p'\"}, \"output\": \"            artifacts=[str(out"
+  }
+ },
+ {
+  "seq": 145,
+  "ts": 1794634220.093,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634220089, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8890238001CZgRCueGJd9QJI\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d888ed70001imeydvfkdmq1Fb\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 99767, \"input\": 740, \"output\": 83, "
+  }
+ },
+ {
+  "seq": 146,
+  "ts": 1794634221.932,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634221927, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8890966001hypeZh0Phgn1MI\", \"messageID\": \"msg_1d8890248001Um85fP8o7J2xXp\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 147,
+  "ts": 1794634229.259,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 170
+  }
+ },
+ {
+  "seq": 148,
+  "ts": 1794634238.766,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634238761, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_298d1b79d67d47c0b58aaa8f\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat schemas/artifacts/scene_plan.schema.json\"}, \"output\": \"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"$id\\\": \\\"openmontage/artifacts/sc"
+  }
+ },
+ {
+  "seq": 149,
+  "ts": 1794634238.829,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634238823, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8894b65001LODad4DLhZJcQF\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8890248001Um85fP8o7J2xXp\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 102619, \"input\": 1550, \"output\": 51"
+  }
+ },
+ {
+  "seq": 150,
+  "ts": 1794634239.268,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 180
+  }
+ },
+ {
+  "seq": 151,
+  "ts": 1794634240.176,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634240172, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88950a9001GO40ry0nG7UDmL\", \"messageID\": \"msg_1d8894b76001fdln3ssN4Vzp06\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 152,
+  "ts": 1794634247.303,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634247298, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_9706a685d070456aa96d5899\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def _run_final_review\\\" -A220 tools/video/video_compose.py | sed -n '1,240p'\"}, \"output\": \"2370:    def _run_final_review(\\n2371-        self,\\n2372-      "
+  }
+ },
+ {
+  "seq": 153,
+  "ts": 1794634247.339,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634247334, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8896ca1001I8iRwYrgX1q04w\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8894b76001fdln3ssN4Vzp06\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 104709, \"input\": 3215, \"output\": 71"
+  }
+ },
+ {
+  "seq": 154,
+  "ts": 1794634248.58,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634248575, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889717c001hhnIFr2wjKx6LT\", \"messageID\": \"msg_1d8896cb6001m01zFJunGjkjrh\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 155,
+  "ts": 1794634249.277,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 190
+  }
+ },
+ {
+  "seq": 156,
+  "ts": 1794634253.822,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634253817, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_9dd2b5ed5fbb4b69a48bf5ce\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '430,485p' remotion-composer/src/Explainer.tsx; grep -n \\\"VideoScene\\\" -A60 remotion-composer/src/Explainer.tsx | head -80\"}, \"output\": \"  transitionDuration?"
+  }
+ },
+ {
+  "seq": 157,
+  "ts": 1794634253.853,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634253849, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8898616001g9m5dNixajYUeH\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8896cb6001m01zFJunGjkjrh\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 108043, \"input\": 3613, \"output\": 81"
+  }
+ },
+ {
+  "seq": 158,
+  "ts": 1794634255.345,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634255339, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8898be9001r67cNpXSUPRbUd\", \"messageID\": \"msg_1d8898628001iowgnKHvPwEp1t\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 159,
+  "ts": 1794634259.288,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 200
+  }
+ },
+ {
+  "seq": 160,
+  "ts": 1794634261.029,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634261023, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_1927896434a84c58a9163aef\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '590,670p' remotion-composer/src/Explainer.tsx\"}, \"output\": \"  // Resolve the scene element based on cut type, then wrap with backgroundImage if set\\n  // Use"
+  }
+ },
+ {
+  "seq": 161,
+  "ts": 1794634261.042,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634261038, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889a22c001ch6DYARMX1NT0U\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d8898628001iowgnKHvPwEp1t\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 109833, \"input\": 1690, \"output\": 56"
+  }
+ },
+ {
+  "seq": 162,
+  "ts": 1794634262.087,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634262082, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889a640001SSSXEBoK1RE5Px\", \"messageID\": \"msg_1d889a23e001AalfJOQHhnYum3\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 163,
+  "ts": 1794634265.993,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634265988, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_bb4582dc763941108c18e8cf\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '1,240p' lib/slideshow_risk.py\"}, \"output\": \"\\\"\\\"\\\"Slideshow risk scorer.\\n\\nScores a video plan across 6 dimensions that reliably predict whether\\nthe output"
+  }
+ },
+ {
+  "seq": 164,
+  "ts": 1794634266.042,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634266038, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889b5b40014GQRzuWC7miPYr\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d889a23e001AalfJOQHhnYum3\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 111113, \"input\": 1495, \"output\": 54"
+  }
+ },
+ {
+  "seq": 165,
+  "ts": 1794634267.496,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634267491, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889bb60001yPGw3aUuekNdWv\", \"messageID\": \"msg_1d889b5c5001UoyWMxMBZJG10x\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 166,
+  "ts": 1794634269.296,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 210
+  }
+ },
+ {
+  "seq": 167,
+  "ts": 1794634272.113,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634272107, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_ed2bd9502f194135bec12672\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"project_dir\\\\|Path(.*asset\\\\|resolve()\\\\|asset\\\\[\\\\\\\"path\\\\\\\"\\\\]\\\" tools/video/video_compose.py | sed -n '1,80p'\"}, \"output\": \"270:        composer_dir = P"
+  }
+ },
+ {
+  "seq": 168,
+  "ts": 1794634272.153,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634272148, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889cd92001mtrtC9v7UFZRUu\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d889b5c5001UoyWMxMBZJG10x\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 113889, \"input\": 2775, \"output\": 78"
+  }
+ },
+ {
+  "seq": 169,
+  "ts": 1794634273.217,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634273212, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d889d1b9001PIreJ0knEpiu1t\", \"messageID\": \"msg_1d889cda4001lXqX50L2uTA2Fg\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 170,
+  "ts": 1794634279.306,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 220
+  }
+ },
+ {
+  "seq": 171,
+  "ts": 1794634289.315,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 230
+  }
+ },
+ {
+  "seq": 172,
+  "ts": 1794634299.324,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 240
+  }
+ },
+ {
+  "seq": 173,
+  "ts": 1794634303.196,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634303192, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"write\", \"callID\": \"call_c7a08e10f89542329d40a07e\", \"state\": {\"status\": \"completed\", \"input\": {\"filePath\": \"/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/artifacts/storyboard.json\", \"content\": \"{\\n  \\\"version\\\": \\\"1.0\\\",\\n  \\\"title\\\": "
+  }
+ },
+ {
+  "seq": 174,
+  "ts": 1794634303.252,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634303248, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a470e001gwLeVlNAFccR7O\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d889cda4001lXqX50L2uTA2Fg\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 118172, \"input\": 1090, \"output\": 17"
+  }
+ },
+ {
+  "seq": 175,
+  "ts": 1794634304.55,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634304545, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a4c1f00114ELyY6jph3r86\", \"messageID\": \"msg_1d88a4720001N7D0UxrM63Jk8S\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 176,
+  "ts": 1794634304.93,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634304925, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_6074eb0e370e4515a7e31cc9\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -m director validate projects/prj_405eabefb9754545\"}, \"output\": \"{\\n  \\\"ok\\\": true,\\n  \\\"errors\\\": [],\\n  \\\"warnings\\\": [],\\n  \\\"scenes\\\": 4,\\n  \\\"duration\\\":"
+  }
+ },
+ {
+  "seq": 177,
+  "ts": 1794634304.942,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634304939, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a4da90017vf446zUPWIZIy\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88a4720001N7D0UxrM63Jk8S\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 118241, \"input\": 3883, \"output\": 54"
+  }
+ },
+ {
+  "seq": 178,
+  "ts": 1794634306.108,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634306103, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a5234001Ch73ULBkqPrj7G\", \"messageID\": \"msg_1d88a4dba00191jvN28cdWPiI4\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 179,
+  "ts": 1794634308.106,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634308101, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_7ac850c014ec4939af547ef8\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python -m director scene-plan projects/prj_405eabefb9754545; echo \\\"---\\\"; cat projects/prj_405eabefb9754545/artifacts/scene_plan.json\"}, \"output\": \"wrote projects/p"
+  }
+ },
+ {
+  "seq": 180,
+  "ts": 1794634308.117,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634308114, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a5a10001OJjPGtLRDLwwKC\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88a4dba00191jvN28cdWPiI4\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 118553, \"input\": 144, \"output\": 82,"
+  }
+ },
+ {
+  "seq": 181,
+  "ts": 1794634309.333,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 250
+  }
+ },
+ {
+  "seq": 182,
+  "ts": 1794634312.084,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634312080, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88a698d0017GuaAyeNmzZ1VV\", \"messageID\": \"msg_1d88a5a210017MGecL1kBhOspj\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 183,
+  "ts": 1794634319.341,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 260
+  }
+ },
+ {
+  "seq": 184,
+  "ts": 1794634329.351,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 270
+  }
+ },
+ {
+  "seq": 185,
+  "ts": 1794634339.359,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 280
+  }
+ },
+ {
+  "seq": 186,
+  "ts": 1794634349.368,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 290
+  }
+ },
+ {
+  "seq": 187,
+  "ts": 1794634352.294,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634352289, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5e4c5a36280b40e29b5a4275\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\n\\nroot = Path('.').resolve()\\nproj = root / 'projects/prj_405eabefb9754545'\\nart = proj / 'artifacts'\\nart.mk"
+  }
+ },
+ {
+  "seq": 188,
+  "ts": 1794634352.313,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634352308, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b06b3001tfiqleaTeV3Y41\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88a5a210017MGecL1kBhOspj\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 124626, \"input\": 1216, \"output\": 30"
+  }
+ },
+ {
+  "seq": 189,
+  "ts": 1794634354.027,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634354022, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b0d630013W6NN07J0IN0x3\", \"messageID\": \"msg_1d88b06c6001H6KGjKqd7Wm37v\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 190,
+  "ts": 1794634359.377,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 300
+  }
+ },
+ {
+  "seq": 191,
+  "ts": 1794634369.386,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 310
+  }
+ },
+ {
+  "seq": 192,
+  "ts": 1794634370.427,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634370422, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_cbd5ade663ba4f0fb31e2911\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json, time\\nfrom pathlib import Path\\nfrom tools.video.video_compose import VideoCompose\\n\\nproj = Path('projects/prj_405eabefb9754545').reso"
+  }
+ },
+ {
+  "seq": 193,
+  "ts": 1794634370.439,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634370436, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b4d82001cllwh44ulTU544\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88b06c6001H6KGjKqd7Wm37v\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 125800, \"input\": 5401, \"output\": 30"
+  }
+ },
+ {
+  "seq": 194,
+  "ts": 1794634371.281,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634371276, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b50ca001oNUQyDq0jfnsNq\", \"messageID\": \"msg_1d88b4d940016brpd2lLhAGZCn\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 195,
+  "ts": 1794634373.341,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634373336, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_afd928cc2744450ea14a5b53\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nproj=Path('projects/prj_405eabefb9754545').resolve()\\np=proj/'artifacts/edit_decisions.json'\\ned=json.loads(p"
+  }
+ },
+ {
+  "seq": 196,
+  "ts": 1794634373.356,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634373351, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b58e5001nKuGm0YeYpvDnQ\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88b4d940016brpd2lLhAGZCn\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 126530, \"input\": 1453, \"output\": 14"
+  }
+ },
+ {
+  "seq": 197,
+  "ts": 1794634375.094,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634375090, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88b5fb0001nxbCY2ylVptrri\", \"messageID\": \"msg_1d88b58f60019MhO7hCHhvYIo7\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 198,
+  "ts": 1794634379.395,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 320
+  }
+ },
+ {
+  "seq": 199,
+  "ts": 1794634389.418,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 330
+  }
+ },
+ {
+  "seq": 200,
+  "ts": 1794634399.438,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 340
+  }
+ },
+ {
+  "seq": 201,
+  "ts": 1794634409.461,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 350
+  }
+ },
+ {
+  "seq": 202,
+  "ts": 1794634419.474,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 360
+  }
+ },
+ {
+  "seq": 203,
+  "ts": 1794634429.492,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 370
+  }
+ },
+ {
+  "seq": 204,
+  "ts": 1794634439.51,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 380
+  }
+ },
+ {
+  "seq": 205,
+  "ts": 1794634449.52,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 390
+  }
+ },
+ {
+  "seq": 206,
+  "ts": 1794634452.316,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634452310, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_dae406d2384d4ea491d96d3f\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json, time\\nfrom pathlib import Path\\nfrom tools.video.video_compose import VideoCompose\\n\\nproj = Path('projects/prj_405eabefb9754545').reso"
+  }
+ },
+ {
+  "seq": 207,
+  "ts": 1794634452.329,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634452325, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88c8d6300180YJ61bD3f9vgC\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88b58f60019MhO7hCHhvYIo7\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 126903, \"input\": 394, \"output\": 301"
+  }
+ },
+ {
+  "seq": 208,
+  "ts": 1794634453.691,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634453687, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88c92b5001EZQpRphPj8fkZI\", \"messageID\": \"msg_1d88c8d75001wm1tYNCLoZ6A8F\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 209,
+  "ts": 1794634458.074,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634458069, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_c3350048f18847f6a97b558e\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def _build_cues\\\" -A80 tools/subtitle/subtitle_gen.py\"}, \"output\": \"169:    def _build_cues(\\n170-        self, segments: list[dict], max_words: int, max_c"
+  }
+ },
+ {
+  "seq": 210,
+  "ts": 1794634458.11,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634458106, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88ca3f8001wQe0gtJdcrn7ie\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88c8d75001wm1tYNCLoZ6A8F\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 128326, \"input\": 1249, \"output\": 58"
+  }
+ },
+ {
+  "seq": 211,
+  "ts": 1794634459.024,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634459020, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88ca78a001cJFY4AS8NQ7o7q\", \"messageID\": \"msg_1d88ca40b0016416mtdOVaGJPa\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 212,
+  "ts": 1794634459.528,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 400
+  }
+ },
+ {
+  "seq": 213,
+  "ts": 1794634462.302,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634462298, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_f0bcde06c6b747c08a7da4dc\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"subtitle_check\\\\|subtitles_expected\\\\|subtitles_present\\\\|subtitle\\\" tools/video/video_compose.py | sed -n '1,80p'; sed -n '2590,2700p' tools/video/video_c"
+  }
+ },
+ {
+  "seq": 214,
+  "ts": 1794634462.342,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634462338, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cb4810013PMeINA95Wn8Ma\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88ca40b0016416mtdOVaGJPa\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 129525, \"input\": 1395, \"output\": 96"
+  }
+ },
+ {
+  "seq": 215,
+  "ts": 1794634463.511,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634463507, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cb912001tFWnlVEune7Ee2\", \"messageID\": \"msg_1d88cb491001qLHZy32kPsp5sX\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 216,
+  "ts": 1794634463.805,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634463799, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_aced94dbcb9546a4b63d8c3c\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '2700,2730p' tools/video/video_compose.py\"}, \"output\": \"                    if proc.returncode == 0:\\n                        sub_data = json.loads(proc.stdou"
+  }
+ },
+ {
+  "seq": 217,
+  "ts": 1794634463.83,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634463826, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cba51001gzAJWaIWBEFpLs\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88cb491001qLHZy32kPsp5sX\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 132029, \"input\": 2949, \"output\": 56"
+  }
+ },
+ {
+  "seq": 218,
+  "ts": 1794634465.504,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634465499, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cc0d9001I9DewsqfzoTZQ7\", \"messageID\": \"msg_1d88cba61001HRNkssUtGDvg6l\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 219,
+  "ts": 1794634469.538,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 410
+  }
+ },
+ {
+  "seq": 220,
+  "ts": 1794634470.915,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634470910, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_b7b6b5d974a04f69893f31f4\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nfrom tools.subtitle.subtitle_gen import SubtitleGen\\n\\nproj=Path('projects/prj_405eabefb9754545').resolve()\\n"
+  }
+ },
+ {
+  "seq": 221,
+  "ts": 1794634470.929,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634470925, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cd6090018f5dU8IhAcEuwo\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88cba61001HRNkssUtGDvg6l\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 133110, \"input\": 422, \"output\": 433"
+  }
+ },
+ {
+  "seq": 222,
+  "ts": 1794634471.814,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634471809, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88cd980001GyrT3IPCsogdVt\", \"messageID\": \"msg_1d88cd61d001tzD4sQEmLxPIMm\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 223,
+  "ts": 1794634479.547,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 420
+  }
+ },
+ {
+  "seq": 224,
+  "ts": 1794634483.231,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634483227, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_5b56141c88cd4eafa8a68192\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nproj=Path('projects/prj_405eabefb9754545').resolve()\\ned=json.loads((proj/'artifacts/edit_decisions.json').re"
+  }
+ },
+ {
+  "seq": 225,
+  "ts": 1794634483.246,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634483242, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88d0628001EZKq631txm3CHY\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88cd61d001tzD4sQEmLxPIMm\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 134847, \"input\": 1066, \"output\": 65"
+  }
+ },
+ {
+  "seq": 226,
+  "ts": 1794634484.431,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634484426, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88d0ac7001QgFDWFG3XkknzP\", \"messageID\": \"msg_1d88d063b0012Im4ncf4khj66v\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 227,
+  "ts": 1794634489.556,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 430
+  }
+ },
+ {
+  "seq": 228,
+  "ts": 1794634499.569,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 440
+  }
+ },
+ {
+  "seq": 229,
+  "ts": 1794634509.589,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 450
+  }
+ },
+ {
+  "seq": 230,
+  "ts": 1794634519.621,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 460
+  }
+ },
+ {
+  "seq": 231,
+  "ts": 1794634529.635,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 470
+  }
+ },
+ {
+  "seq": 232,
+  "ts": 1794634539.652,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 480
+  }
+ },
+ {
+  "seq": 233,
+  "ts": 1794634549.67,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 490
+  }
+ },
+ {
+  "seq": 234,
+  "ts": 1794634559.682,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 500
+  }
+ },
+ {
+  "seq": 235,
+  "ts": 1794634561.46,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634561455, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_e8ed6d372ccb4347b2dbf5f5\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json, time\\nfrom pathlib import Path\\nfrom tools.video.video_compose import VideoCompose\\n\\nproj = Path('projects/prj_405eabefb9754545').reso"
+  }
+ },
+ {
+  "seq": 236,
+  "ts": 1794634561.473,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634561469, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e37bb001Ob0CYBpP6K4Uhm\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88d063b0012Im4ncf4khj66v\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 135448, \"input\": 1673, \"output\": 31"
+  }
+ },
+ {
+  "seq": 237,
+  "ts": 1794634562.93,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634562926, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e3d6b001FqatS0lZZ5ljvZ\", \"messageID\": \"msg_1d88e37ce0019sh7hx30IX9Mqq\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 238,
+  "ts": 1794634569.691,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 510
+  }
+ },
+ {
+  "seq": 239,
+  "ts": 1794634570.904,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634570898, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_604fc82f10744610ba83de49\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"ffmpeg -hide_banner -loglevel error -y -i projects/prj_405eabefb9754545/renders/backlot_promo_1080p.mp4 -t 15.0 -vf \\\"scale=1280:720:flags=lanczos,setsar=1,fps=30\\\" "
+  }
+ },
+ {
+  "seq": 240,
+  "ts": 1794634570.916,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634570912, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e5c9e001UFlmvSM9SEBbL1\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88e37ce0019sh7hx30IX9Mqq\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 136835, \"input\": 1216, \"output\": 27"
+  }
+ },
+ {
+  "seq": 241,
+  "ts": 1794634572.141,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634572137, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e6167001v60u5Z7kBdaaHV\", \"messageID\": \"msg_1d88e5caf001n2GcitCsVrXwOv\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 242,
+  "ts": 1794634576.075,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634576069, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_f7e19d1d5afc477bb1e35a47\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"mkdir -p /tmp/omcheck\\nfor t in 1 4 9 13.5; do ffmpeg -hide_banner -loglevel error -y -ss $t -i projects/prj_405eabefb9754545/renders/backlot_promo.mp4 -frames:v 1 /"
+  }
+ },
+ {
+  "seq": 243,
+  "ts": 1794634576.087,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634576083, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e70d1001YodgC8RG5KlfB1\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88e5caf001n2GcitCsVrXwOv\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 137452, \"input\": 825, \"output\": 311"
+  }
+ },
+ {
+  "seq": 244,
+  "ts": 1794634577.324,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634577319, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e75a5001LQAgSun6pKBL2L\", \"messageID\": \"msg_1d88e70e3001Jik63Qope5Swxt\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 245,
+  "ts": 1794634579.7,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 520
+  }
+ },
+ {
+  "seq": 246,
+  "ts": 1794634580.947,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634580942, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_fa51ae631aea4f56b41338f9\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"cat schemas/artifacts/render_report.schema.json | head -120; echo \\\"===FINAL===\\\"; cat schemas/artifacts/final_review.schema.json | head -160\"}, \"output\": \"{\\n  \\\"$s"
+  }
+ },
+ {
+  "seq": 247,
+  "ts": 1794634580.983,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634580979, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e83f2001EFnf1Rt2XHS8c9\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88e70e3001Jik63Qope5Swxt\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 138219, \"input\": 831, \"output\": 81,"
+  }
+ },
+ {
+  "seq": 248,
+  "ts": 1794634583.814,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634583810, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88e8eff001j0umqO35U7oFHZ\", \"messageID\": \"msg_1d88e8403001a69G6M8uKnSUb1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 249,
+  "ts": 1794634589.056,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634589050, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_64255c4d97e848feaab57d5d\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nfrom tools.video.video_compose import VideoCompose\\n\\nproj=Path('projects/prj_405eabefb9754545').resolve()\\na"
+  }
+ },
+ {
+  "seq": 250,
+  "ts": 1794634589.067,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634589063, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88ea386001vDZBCIK2esSGyA\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88e8403001a69G6M8uKnSUb1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 141024, \"input\": 2747, \"output\": 21"
+  }
+ },
+ {
+  "seq": 251,
+  "ts": 1794634589.708,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 530
+  }
+ },
+ {
+  "seq": 252,
+  "ts": 1794634599.717,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 540
+  }
+ },
+ {
+  "seq": 253,
+  "ts": 1794634600.923,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634600917, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88ed1d2001t69gHcN5JqMGDE\", \"messageID\": \"msg_1d88ea3c7001wE2LF9DMGFaP2J\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 254,
+  "ts": 1794634609.726,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 550
+  }
+ },
+ {
+  "seq": 255,
+  "ts": 1794634619.734,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 560
+  }
+ },
+ {
+  "seq": 256,
+  "ts": 1794634624.418,
+  "type": "assistant_text",
+  "data": {
+   "text": "## Objective\n- Produce a 15-second 1280x720 16:9 30fps promo for \"Backlot\" using the user's uploaded avatar clip, screen recording, voice file, and logo; write/validate `projects/prj_405eabefb9754545/artifacts/storyboard.json` with `python -m director validate`, then render under `projects/prj_405eabefb9754545/renders/`.\n- Report honestly what was produced and what failed; never fabricate a screen recording or claim an uncaptured demo.\n\n## Important Details\n- Repo: OpenMontage at `/home/runner/work/Real-Openmontage/Real-Openmontage`; `AGENTS.md` mandates reading `AGENT_GUIDE.md`.\n- Project id: `prj_405eabefb9754545`; project dir `projects/prj_405eabefb9754545`.\n- Uploads:\n  - `inputs/uploads/2c2b47e3_avatar_intro.mp4`: 4.0s, 640x360, h264, has audio; audio is a steady ~300 Hz tone.\n  - `inputs/uploads/4b3f4dca_logo.png`: 256x256 PNG, solid blue RGB `(50,99,254)`.\n  - `inputs/uploads/bb6a4b64_narration.wav`: 12.0s mono 44.1kHz; verified constant ~220 Hz tone, **not speech**.\n  - `inputs/uploads/c187428e_screen_recording.mp4`: 6.0s, 1280x720, h264, no audio; used as-is.\n- Installed `faster-whisper` (1.2.1) via pip; `Transcriber` with `model_size=base` returned `segments: []`, `word_timestamps: []`, language `en`, duration 12.0.\n- Storyboard validation succeeded: `{\"ok\": true, \"errors\": [], \"warnings\": [], \"scenes\": 4, \"duration\": 15.0}`.\n- Timeline: 0.0\u20132.5 title card; 2.5\u20136.5 avatar intro; 6.5\u201312.5 screen recording demo; 12.5\u201315.0 end card.\n- Render decisions: `pipeline=hybrid`, `render_runtime=remotion`, `renderer_family=screen-demo` \u2192 Remotion `Explainer`, `composition_mode=templated`, `profile=youtube_landscape` (1920x1080).\n- Narration decisively used as supplied at volume 0.7; captions are scripted on-screen marketing copy explicitly labeled **not an audio transcript**.\n- `video_compose` mutates/uses cut `in_seconds`/`out_seconds` as timeline bounds for Remotion, and `source_in_seconds` as source trim.\n- Remotion staging rewrites media keys (`source`, `src`, `ba"
+  }
+ },
+ {
+  "seq": 257,
+  "ts": 1794634624.431,
+  "type": "opencode",
+  "data": {
+   "kind": "text",
+   "summary": "{\"type\": \"text\", \"timestamp\": 1794634624413, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88ef1f4001ztppnUbwh34mHE\", \"messageID\": \"msg_1d88ea3c7001wE2LF9DMGFaP2J\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"text\", \"text\": \"## Objective\\n- Produce a 15-second 1280x720 16:9 30fps promo for \\\"Backlot\\\" using the user's uploaded avatar clip, screen recording, voice"
+  }
+ },
+ {
+  "seq": 258,
+  "ts": 1794634624.438,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634624427, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f2da90013sbp5dKFdGilJ5\", \"reason\": \"stop\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88ea3c7001wE2LF9DMGFaP2J\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 53121, \"input\": 50091, \"output\": 2091, \"r"
+  }
+ },
+ {
+  "seq": 259,
+  "ts": 1794634624.457,
+  "type": "assistant_text",
+  "data": {
+   "text": "Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed."
+  }
+ },
+ {
+  "seq": 260,
+  "ts": 1794634624.464,
+  "type": "opencode",
+  "data": {
+   "kind": "text",
+   "summary": "{\"type\": \"text\", \"timestamp\": 1794634624454, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f2db80010RV4IyTHyZfPRI\", \"messageID\": \"msg_1d88f2db7001NyP1ZkAcgDE3tN\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"text\", \"metadata\": {\"compaction_continue\": true}, \"synthetic\": true, \"text\": \"Continue if you have next steps, or stop and ask for clarification if you are "
+  }
+ },
+ {
+  "seq": 261,
+  "ts": 1794634629.742,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 570
+  }
+ },
+ {
+  "seq": 262,
+  "ts": 1794634634.048,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634634044, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f5339001P5OM14XDwSd33O\", \"messageID\": \"msg_1d88f2dc0001IAQRbSOQGc5qJ1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 263,
+  "ts": 1794634638.09,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634638084, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_9cd09e922b6242fa9919733a\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find projects -maxdepth 3 -name 'checkpoint*' -o -name 'render_report.json' | head -20; ls projects/prj_405eabefb9754545; find projects/prj_405eabefb9754545 -maxdept"
+  }
+ },
+ {
+  "seq": 264,
+  "ts": 1794634638.101,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634638097, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f630f001p8wUSMkaeJCtVU\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f2dc0001IAQRbSOQGc5qJ1\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 37743, \"input\": 17142, \"output\": 10"
+  }
+ },
+ {
+  "seq": 265,
+  "ts": 1794634639.524,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634639519, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f689d001wOaGYOIeFm2m50\", \"messageID\": \"msg_1d88f6321001yhK8GUL1nj203x\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 266,
+  "ts": 1794634639.751,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 580
+  }
+ },
+ {
+  "seq": 267,
+  "ts": 1794634640.316,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634640312, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_b2c3637051fc4d36969310ed\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"checkpoint\\\\|render_report\\\\|final_review\\\" pipeline_defs/hybrid.yaml | head -60; grep -n \\\"checkpoint_compose\\\\|render_report.json\\\" -r AGENT_GUIDE.md .op"
+  }
+ },
+ {
+  "seq": 268,
+  "ts": 1794634640.351,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634640348, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f6bda001mZEte06ndkRMMS\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f6321001yhK8GUL1nj203x\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 38135, \"input\": 897, \"output\": 97, "
+  }
+ },
+ {
+  "seq": 269,
+  "ts": 1794634641.303,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634641299, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f6f91001KY7L7A2Cl8wodK\", \"messageID\": \"msg_1d88f6beb0015cZGPKKIboeyGt\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 270,
+  "ts": 1794634642.082,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634642077, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_a44df08e45d04cbf8a437067\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\np=Path('projects/prj_405eabefb9754545/artifacts/storyboard.json')\\nd=json.loads(p.read_text())\\nprint(json.du"
+  }
+ },
+ {
+  "seq": 271,
+  "ts": 1794634642.094,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634642091, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f72a9001W8nLU6h2mG9O0t\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f6beb0015cZGPKKIboeyGt\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 38400, \"input\": 255, \"output\": 102,"
+  }
+ },
+ {
+  "seq": 272,
+  "ts": 1794634642.949,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634642944, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f75fe001sw7G3ma6GSztUk\", \"messageID\": \"msg_1d88f72ba001cUqLC5yDD5nptD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 273,
+  "ts": 1794634643.873,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634643868, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_31dae1e78078417d915b63dc\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n '\\\"status\\\"' -A12 schemas/artifacts/storyboard.schema.json | head -30; grep -n 'additionalProperties' schemas/artifacts/storyboard.schema.json\"}, \"output\": \""
+  }
+ },
+ {
+  "seq": 274,
+  "ts": 1794634643.906,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634643903, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f79bd001kHm20e6OCzSzr5\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f72ba001cUqLC5yDD5nptD\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 39545, \"input\": 1266, \"output\": 83,"
+  }
+ },
+ {
+  "seq": 275,
+  "ts": 1794634645.152,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634645147, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f7e9a001lH606HIgpf5Cm7\", \"messageID\": \"msg_1d88f79ce001f6EUJivARF295r\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 276,
+  "ts": 1794634645.502,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634645497, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_55cc69d99316491ea49a7acb\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find . -path '*storyboard*schema*' -o -name '*storyboard*.json' | head -20\"}, \"output\": \"./projects/prj_405eabefb9754545/artifacts/storyboard.json\\n\", \"metadata\": {\""
+  }
+ },
+ {
+  "seq": 277,
+  "ts": 1794634645.514,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634645510, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f8005001EsqboCwmv7LH0B\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f79ce001f6EUJivARF295r\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 39662, \"input\": 304, \"output\": 62, "
+  }
+ },
+ {
+  "seq": 278,
+  "ts": 1794634646.411,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634646407, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f8385001NZVl0V1CB09ULC\", \"messageID\": \"msg_1d88f8015001NYRcUV9HK9OgYx\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 279,
+  "ts": 1794634648.198,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634648194, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_134d1347fdbd4aa1b39dca61\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"find .opencode -path '*checkpoint*' -o -name '*checkpoint*' | head -20; grep -n \\\"checkpoint_compose\\\\|checkpoint\\\" AGENT_GUIDE.md | head -30\"}, \"output\": \"find: \\u2"
+  }
+ },
+ {
+  "seq": 280,
+  "ts": 1794634648.234,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634648229, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f8aa4001JPorbq1tsD2Dyz\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f8015001NYRcUV9HK9OgYx\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 39929, \"input\": 143, \"output\": 84, "
+  }
+ },
+ {
+  "seq": 281,
+  "ts": 1794634649.132,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634649127, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f8e25001pY4j37nTSxAra3\", \"messageID\": \"msg_1d88f8ab50015GIXncD4uuKoLx\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 282,
+  "ts": 1794634649.759,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 590
+  }
+ },
+ {
+  "seq": 283,
+  "ts": 1794634650.066,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634650061, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_647112adb78b4a3ea8c70cca\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"ls -a projects/prj_405eabefb9754545; cat projects/prj_405eabefb9754545/project.json 2>/dev/null | head -40; sed -n '1,120p' pipeline_defs/hybrid.yaml\"}, \"output\": \"."
+  }
+ },
+ {
+  "seq": 284,
+  "ts": 1794634650.078,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634650074, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f91d9001r815Yt1T14opSV\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f8ab50015GIXncD4uuKoLx\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 40811, \"input\": 991, \"output\": 95, "
+  }
+ },
+ {
+  "seq": 285,
+  "ts": 1794634651.018,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634651014, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f95830011O7xu1zR0TjF4z\", \"messageID\": \"msg_1d88f91ea001xu6MUGrZxDy0Sg\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 286,
+  "ts": 1794634651.662,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634651658, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_d8adc24b6b91465ca1cdccee\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def init_project\\\" -A80 lib/checkpoint.py\"}, \"output\": \"212:def init_project(\\n213-    project_id: str,\\n214-    *,\\n215-    title: str,\\n216-    pipeline_"
+  }
+ },
+ {
+  "seq": 287,
+  "ts": 1794634651.689,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634651686, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f98240014ps6aXRX3LHEgU\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f91ea001xu6MUGrZxDy0Sg\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 41806, \"input\": 1123, \"output\": 54,"
+  }
+ },
+ {
+  "seq": 288,
+  "ts": 1794634652.685,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634652681, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88f9c06001Q7O4yTi4uifipC\", \"messageID\": \"msg_1d88f9836001tMhdvKM94LLpQb\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 289,
+  "ts": 1794634655.53,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634655525, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_25c68de349164314907a98a4\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"sed -n '120,235p' pipeline_defs/hybrid.yaml\"}, \"output\": \"    produces:\\n      - asset_manifest\\n    optional_tools:\\n      - subtitle_gen\\n      - tts_selector\\n   "
+  }
+ },
+ {
+  "seq": 290,
+  "ts": 1794634655.542,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634655538, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fa731001rDF16GqsSsiZO8\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88f9836001tMhdvKM94LLpQb\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 43017, \"input\": 1111, \"output\": 53,"
+  }
+ },
+ {
+  "seq": 291,
+  "ts": 1794634656.476,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634656471, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88faad4001PzmCAePVOBqZCL\", \"messageID\": \"msg_1d88fa743001QhALdCmdIq4w3B\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 292,
+  "ts": 1794634657.04,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634657034, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_b539b432e0374198bf9b8904\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"grep -n \\\"def write_checkpoint\\\" -A120 lib/checkpoint.py\"}, \"output\": \"442:def write_checkpoint(\\n443-    pipeline_dir: Path,\\n444-    project_id: str,\\n445-    stag"
+  }
+ },
+ {
+  "seq": 293,
+  "ts": 1794634657.097,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634657092, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fad420010YOfUplk3l88SW\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88fa743001QhALdCmdIq4w3B\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 43900, \"input\": 1183, \"output\": 55,"
+  }
+ },
+ {
+  "seq": 294,
+  "ts": 1794634658.004,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634657999, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fb0cc001Qk716Ovkum9JjN\", \"messageID\": \"msg_1d88fad55001sxjVXqvmLCCw9R\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 295,
+  "ts": 1794634659.768,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 600
+  }
+ },
+ {
+  "seq": 296,
+  "ts": 1794634669.777,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 610
+  }
+ },
+ {
+  "seq": 297,
+  "ts": 1794634671.229,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634671224, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_acb251b0b0b44e759ece39a0\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\nfrom lib.checkpoint import init_project\\n\\nproj=Path('projects/prj_405eabefb9754545').resolve()\\ninit_project"
+  }
+ },
+ {
+  "seq": 298,
+  "ts": 1794634671.241,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634671238, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fe484001iQ3Iy2PRmz8F0C\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88fad55001sxjVXqvmLCCw9R\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 46961, \"input\": 1584, \"output\": 100"
+  }
+ },
+ {
+  "seq": 299,
+  "ts": 1794634672.383,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634672378, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fe8f7001bn5VMfyzgo7mUc\", \"messageID\": \"msg_1d88fe496001W9diMczb6jzHQ3\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 300,
+  "ts": 1794634678.177,
+  "type": "opencode",
+  "data": {
+   "kind": "tool_use",
+   "summary": "{\"type\": \"tool_use\", \"timestamp\": 1794634678171, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"type\": \"tool\", \"tool\": \"bash\", \"callID\": \"call_4c772b0503d14ff3ae8ed7d2\", \"state\": {\"status\": \"completed\", \"input\": {\"command\": \"python - <<'PY'\\nimport json\\nfrom pathlib import Path\\np=Path('projects/prj_405eabefb9754545/artifacts/render_report.json')\\nd=json.loads(p.read_text())\\nd['warning"
+  }
+ },
+ {
+  "seq": 301,
+  "ts": 1794634678.191,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634678188, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d88fffaa001gyqn9q4y2w2AW5\", \"reason\": \"tool-calls\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88fe496001W9diMczb6jzHQ3\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 48632, \"input\": 2592, \"output\": 219"
+  }
+ },
+ {
+  "seq": 302,
+  "ts": 1794634679.083,
+  "type": "opencode",
+  "data": {
+   "kind": "step_start",
+   "summary": "{\"type\": \"step_start\", \"timestamp\": 1794634679079, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8900325001CWY2hXjAFYmdvU\", \"messageID\": \"msg_1d88fffbc001o23f80hOx5tg83\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"type\": \"step-start\"}}"
+  }
+ },
+ {
+  "seq": 303,
+  "ts": 1794634679.786,
+  "type": "heartbeat",
+  "data": {
+   "elapsed": 620
+  }
+ },
+ {
+  "seq": 304,
+  "ts": 1794634681.876,
+  "type": "assistant_text",
+  "data": {
+   "text": "Produced:\n\n- `projects/prj_405eabefb9754545/renders/backlot_promo.mp4` \u2014 15.00s, 1280x720, 30fps, H.264/AAC, 1.5 MB\n- `renders/backlot_promo_1080p.mp4` \u2014 retained 1080p intermediate\n- `assets/subtitles/backlot_promo.srt` \u2014 7 scripted caption cues\n- `artifacts/storyboard.json` \u2014 validated: 4 scenes, 15.0s, no errors\n- `artifacts/render_report.json` and `artifacts/final_review.json` \u2014 final review status `pass`\n\nHonest caveats: the uploaded narration is a steady ~220 Hz tone with no speech, so captions are scripted marketing copy rather than a transcript; the screen recording was used as supplied; the 640x360 avatar was upscaled to the 16:9 frame and its own audio was muted."
+  }
+ },
+ {
+  "seq": 305,
+  "ts": 1794634681.884,
+  "type": "opencode",
+  "data": {
+   "kind": "text",
+   "summary": "{\"type\": \"text\", \"timestamp\": 1794634681870, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d89008c6001fWe6mFldzmblcU\", \"messageID\": \"msg_1d88fffbc001o23f80hOx5tg83\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"text\", \"text\": \"Produced:\\n\\n- `projects/prj_405eabefb9754545/renders/backlot_promo.mp4` \\u2014 15.00s, 1280x720, 30fps, H.264/AAC, 1.5 MB\\n- `renders/backl"
+  }
+ },
+ {
+  "seq": 306,
+  "ts": 1794634681.892,
+  "type": "opencode",
+  "data": {
+   "kind": "step_finish",
+   "summary": "{\"type\": \"step_finish\", \"timestamp\": 1794634681886, \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"part\": {\"id\": \"prt_1d8900e1c001OkCDZzD1YMpypb\", \"reason\": \"stop\", \"snapshot\": \"9a7b54c5192053c32896d7340444e6ed4b515817\", \"messageID\": \"msg_1d88fffbc001o23f80hOx5tg83\", \"sessionID\": \"ses_e27796e73ffeLFmDUudX5glh9L\", \"type\": \"step-finish\", \"tokens\": {\"total\": 49282, \"input\": 1040, \"output\": 224, \"rea"
+  }
+ },
+ {
+  "seq": 307,
+  "ts": 1794634681.955,
+  "type": "status",
+  "data": {
+   "status": "running",
+   "error": null,
+   "stage": "checking storyboard"
+  }
+ },
+ {
+  "seq": 308,
+  "ts": 1794634681.973,
+  "type": "storyboard",
+  "data": {
+   "ok": true,
+   "errors": [],
+   "warnings": [],
+   "scenes": 4,
+   "duration": 15
+  }
+ },
+ {
+  "seq": 309,
+  "ts": 1794634682.009,
+  "type": "output_ready",
+  "data": {
+   "asset_id": "ast_a287884b330542bf",
+   "name": "storyboard.json",
+   "kind": "plan",
+   "size": 5867,
+   "meta": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "scenes": 4,
+    "duration": 15
+   }
+  }
+ },
+ {
+  "seq": 310,
+  "ts": 1794634682.016,
+  "type": "status",
+  "data": {
+   "status": "running",
+   "error": null,
+   "stage": "quality control"
+  }
+ },
+ {
+  "seq": 311,
+  "ts": 1794634682.761,
+  "type": "qc",
+  "data": {
+   "file": "backlot_promo.mp4",
+   "ok": true,
+   "errors": [],
+   "warnings": []
+  }
+ },
+ {
+  "seq": 312,
+  "ts": 1794634682.808,
+  "type": "output_ready",
+  "data": {
+   "asset_id": "ast_153300a96c7742fe",
+   "name": "backlot_promo.mp4",
+   "kind": "video",
+   "size": 1554349,
+   "meta": {
+    "duration": 15,
+    "size": 1554349,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "has_video": true,
+    "has_audio": true,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_duration": 15,
+    "video_duration": 15,
+    "qc_ok": true,
+    "qc_warnings": [],
+    "qc_errors": [],
+    "aspect_ratio": "16:9"
+   }
+  }
+ },
+ {
+  "seq": 313,
+  "ts": 1794634684.106,
+  "type": "qc",
+  "data": {
+   "file": "backlot_promo_1080p.mp4",
+   "ok": true,
+   "errors": [],
+   "warnings": [
+    "resolution 1920x1080 differs from configured 1280x720"
+   ]
+  }
+ },
+ {
+  "seq": 314,
+  "ts": 1794634684.178,
+  "type": "output_ready",
+  "data": {
+   "asset_id": "ast_e795fa3d6dba4823",
+   "name": "backlot_promo_1080p.mp4",
+   "kind": "video",
+   "size": 4201875,
+   "meta": {
+    "duration": 15.061333,
+    "size": 4201875,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "has_video": true,
+    "has_audio": true,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_duration": 15.061333,
+    "video_duration": 15,
+    "qc_ok": true,
+    "qc_warnings": [
+     "resolution 1920x1080 differs from configured 1280x720"
+    ],
+    "qc_errors": [],
+    "aspect_ratio": "16:9"
+   }
+  }
+ },
+ {
+  "seq": 315,
+  "ts": 1794634684.185,
+  "type": "assistant_message",
+  "data": {
+   "message_id": "msg_8f7ea0a4e33f4554"
+  }
+ },
+ {
+  "seq": 316,
+  "ts": 1794634684.441,
+  "type": "checkpoint",
+  "data": {
+   "kind": "project_state"
+  }
+ },
+ {
+  "seq": 317,
+  "ts": 1794634685.117,
+  "type": "checkpoint",
+  "data": {
+   "kind": "opencode_session"
+  }
+ },
+ {
+  "seq": 318,
+  "ts": 1794634685.124,
+  "type": "status",
+  "data": {
+   "status": "completed",
+   "error": null,
+   "stage": "done"
+  }
+ }
+]

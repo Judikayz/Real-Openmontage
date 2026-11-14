@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "outputs": [
+    {
+      "path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/backlot_promo.mp4",
+      "format": "mp4",
+      "codec": "h264",
+      "audio_codec": "aac",
+      "resolution": "1280x720",
+      "fps": 30,
+      "duration_seconds": 15.0,
+      "file_size_bytes": 1554349,
+      "platform_target": "youtube_landscape"
+    }
+  ],
+  "render_time_seconds": 74.6,
+  "warnings": [
+    "Uploaded narration is a steady ~220 Hz tone with no detectable speech; captions are scripted on-screen marketing copy, not a transcript of the supplied audio.",
+    "The uploaded 6s screen recording was used as supplied; no new demo footage was captured.",
+    "The avatar source is 640x360 and was upscaled to the 16:9 frame; its own audio was muted and replaced by the uploaded narration track.",
+    "Final review skipped transcript-vs-script comparison because no usable narration transcript exists.",
+    "Automated audio spotcheck flags music_present=true from energy threshold, but no music track was used; narration_present=true refers to the supplied tone, not speech."
+  ],
+  "verification_notes": [
+    "Storyboard validated before rendering: ok=true, errors=[], warnings=[], scenes=4, duration=15.0.",
+    "Remotion rendered a 1920x1080 15.06s intermediate; retained at renders/backlot_promo_1080p.mp4.",
+    "Deliverable was transcoded to exactly 15.000s, 1280x720, 30fps h264/aac with faststart.",
+    "Final review on the 1280x720 deliverable: status=pass; container valid, audio present, no black frames, no missing assets, captions expected/present.",
+    "Captions burned into the video and also exported as assets/subtitles/backlot_promo.srt.",
+    "All processing used local/free tools; no paid API calls were made."
+  ],
+  "render_grammar": "screen-demo",
+  "decision_log_ref": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/artifacts/decision_log.json",
+  "final_review_ref": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/artifacts/final_review.json",
+  "metadata": {
+    "pipeline": "hybrid",
+    "render_runtime": "remotion",
+    "composition_mode": "templated",
+    "composition": "Explainer",
+    "intermediate_1080p_path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/backlot_promo_1080p.mp4",
+    "subtitle_source": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/assets/subtitles/backlot_promo.srt",
+    "narration_source": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/inputs/uploads/bb6a4b64_narration.wav",
+    "narration_note": "Constant ~220 Hz tone; zero speech segments from faster-whisper. Used as supplied at volume 0.7.",
+    "captions_note": "Scripted marketing copy generated from the storyboard, not transcribed from the audio.",
+    "source_media_note": "Avatar and screen recording used as-is; logo used as title/end-card background."
+  }
+}

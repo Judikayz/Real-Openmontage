@@ -1,0 +1,17 @@
+job=completed in 630s model=opencode/big-pickle
+error=None
+events={'queued': 1, 'status': 6, 'dispatched': 1, 'runner_started': 1, 'run_info': 1, 'restored': 1, 'opencode': 233, 'heartbeat': 62, 'assistant_text': 3, 'storyboard': 1, 'output_ready': 3, 'qc': 2, 'assistant_message': 1, 'checkpoint': 2}
+storyboard={'ok': True, 'errors': [], 'warnings': [], 'scenes': 4, 'duration': 15}
+outputs=[('backlot_promo_1080p.mp4', True, 15.061333), ('backlot_promo.mp4', True, 15), ('storyboard.json', None, 15)]
+downloaded={'bytes': 4201875, 'decodes_cleanly': True}
+reply=## Objective
+- Produce a 15-second 1280x720 16:9 30fps promo for "Backlot" using the user's uploaded avatar clip, screen recording, voice file, and logo; write/validate `projects/prj_405eabefb9754545/artifacts/storyboard.json` with `python -m director validate`, then render under `projects/prj_405eabefb9754545/renders/`.
+- Report honestly what was produced and what failed; never fabricate a screen recording or claim an uncaptured demo.
+
+## Important Details
+- Repo: OpenMontage at `/home/runner/work/Real-Openmontage/Real-Openmontage`; `AGENTS.md` mandates reading `AGENT_GUIDE.md`.
+- Project id: `prj_405eabefb9754545`; project dir `projects/prj_405eabefb9754545`.
+- Uploads:
+  - `inputs/uploads/2c2b47e3_avatar_intro.mp4`: 4.0s, 640x360, h264, has audio; audio is a steady ~300 Hz tone.
+  - `inputs/uploads/4b3f4dca_logo.png`: 256x256 PNG, solid blue RGB `(50,99,254)`.
+  - `inputs/uploads/bb6a

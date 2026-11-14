@@ -1,0 +1,183 @@
+{
+  "version": "1.0",
+  "title": "Backlot \u2014 Your AI Video Studio, In Your Pocket",
+  "format": {
+    "resolution": "1280x720",
+    "aspect_ratio": "16:9",
+    "fps": 30
+  },
+  "structure": {
+    "runtime_seconds": 15,
+    "beats": [
+      "title_card",
+      "avatar_intro",
+      "screen_demo",
+      "end_card"
+    ]
+  },
+  "pipeline": "hybrid",
+  "avatar_asset": "inputs/uploads/2c2b47e3_avatar_intro.mp4",
+  "voice_asset": "inputs/uploads/bb6a4b64_narration.wav",
+  "music": {
+    "enabled": false,
+    "note": "No music supplied. Free local tools only, so no music generation API was used."
+  },
+  "scenes": [
+    {
+      "id": "scene_title",
+      "title": "Title card",
+      "start_seconds": 0.0,
+      "end_seconds": 2.5,
+      "type": "text_card",
+      "layout": "text_only",
+      "narrative_role": "establish_context",
+      "narration": "Supplied voice track begins at 0:00. The audio file is a steady 220 Hz tone, not detectable speech; it is used as supplied instead of fabricating a voiceover or transcript.",
+      "visual_description": "Branded title card: the supplied Backlot logo fills the background under a dark scrim, with the product name 'Backlot' and the line 'Your AI video studio, in your pocket' springing in.",
+      "asset_refs": [
+        {
+          "role": "logo",
+          "source": "uploaded",
+          "path": "inputs/uploads/4b3f4dca_logo.png"
+        },
+        {
+          "role": "voice",
+          "source": "uploaded",
+          "path": "inputs/uploads/bb6a4b64_narration.wav",
+          "in_seconds": 0.0,
+          "out_seconds": 2.5
+        }
+      ],
+      "captions": "Backlot \u2014 your AI video studio.",
+      "overlays": [
+        "Title: Backlot",
+        "Subtitle: Your AI video studio, in your pocket"
+      ],
+      "transition_out": "fade",
+      "audio": "Uploaded narration track from 0:00, volume 0.7",
+      "tools": [
+        "video_compose",
+        "remotion"
+      ],
+      "status": "rendered"
+    },
+    {
+      "id": "scene_avatar",
+      "title": "Avatar intro",
+      "start_seconds": 2.5,
+      "end_seconds": 6.5,
+      "type": "talking_head",
+      "layout": "fullscreen",
+      "narrative_role": "introduce_subject",
+      "narration": "Supplied voice track continues. No lip-sync or synthetic voice was generated; the uploaded avatar clip is used as-is.",
+      "visual_description": "The uploaded avatar intro clip plays full-frame, upscaled from 640x360 to the 16:9 frame, introducing the presenter.",
+      "asset_refs": [
+        {
+          "role": "avatar_video",
+          "source": "uploaded",
+          "path": "inputs/uploads/2c2b47e3_avatar_intro.mp4",
+          "in_seconds": 0.0,
+          "out_seconds": 4.0
+        },
+        {
+          "role": "voice",
+          "source": "uploaded",
+          "path": "inputs/uploads/bb6a4b64_narration.wav",
+          "in_seconds": 2.5,
+          "out_seconds": 6.5
+        }
+      ],
+      "captions": "Direct your studio from your phone.",
+      "overlays": [
+        "Presenter framing: full frame",
+        "No generated avatar or lip-sync"
+      ],
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "audio": "Uploaded narration track continues; avatar clip audio is muted by the renderer",
+      "tools": [
+        "video_compose",
+        "remotion"
+      ],
+      "depends_on": [
+        "scene_title"
+      ],
+      "status": "rendered"
+    },
+    {
+      "id": "scene_demo",
+      "title": "Screen recording demo",
+      "start_seconds": 6.5,
+      "end_seconds": 12.5,
+      "type": "screen_recording",
+      "layout": "fullscreen",
+      "narrative_role": "evidence",
+      "narration": "Supplied voice track continues to its 12-second end. The demo footage is the user's uploaded screen recording, not a fabricated capture.",
+      "visual_description": "The uploaded 1280x720 screen recording plays full-frame as the product demo, showing the user's own captured footage.",
+      "asset_refs": [
+        {
+          "role": "screen_recording",
+          "source": "uploaded",
+          "path": "inputs/uploads/c187428e_screen_recording.mp4",
+          "in_seconds": 0.0,
+          "out_seconds": 6.0
+        },
+        {
+          "role": "voice",
+          "source": "uploaded",
+          "path": "inputs/uploads/bb6a4b64_narration.wav",
+          "in_seconds": 6.5,
+          "out_seconds": 12.0
+        }
+      ],
+      "captions": "Shoot, edit, and publish anywhere.",
+      "overlays": [
+        "Demo source: uploaded screen recording",
+        "No screen recording was fabricated or re-captured"
+      ],
+      "transition_in": "fade",
+      "transition_out": "fade",
+      "audio": "Uploaded narration track continues; screen recording has no audio",
+      "tools": [
+        "video_compose",
+        "remotion"
+      ],
+      "depends_on": [
+        "scene_avatar"
+      ],
+      "status": "rendered"
+    },
+    {
+      "id": "scene_end",
+      "title": "End card",
+      "start_seconds": 12.5,
+      "end_seconds": 15.0,
+      "type": "text_card",
+      "layout": "text_only",
+      "narrative_role": "call_to_action",
+      "narration": "No narration. The uploaded voice track ends at 12.0s.",
+      "visual_description": "Closing brand card: supplied logo background under a dark scrim with 'Backlot' and the call to action 'Create anywhere.'",
+      "asset_refs": [
+        {
+          "role": "logo",
+          "source": "uploaded",
+          "path": "inputs/uploads/4b3f4dca_logo.png"
+        }
+      ],
+      "captions": "Backlot. Create anywhere.",
+      "overlays": [
+        "Title: Backlot",
+        "CTA: Create anywhere."
+      ],
+      "transition_in": "fade",
+      "audio": "Silent \u2014 narration has ended",
+      "tools": [
+        "video_compose",
+        "remotion"
+      ],
+      "depends_on": [
+        "scene_demo"
+      ],
+      "status": "rendered"
+    }
+  ]
+}

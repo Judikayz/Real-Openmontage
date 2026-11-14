@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "project_id": "prj_405eabefb9754545",
+  "title": "Backlot \u2014 Your AI Video Studio, In Your Pocket",
+  "production_plan": {
+    "pipeline": "hybrid",
+    "render_runtime": "remotion",
+    "composition_mode": "templated",
+    "renderer_family": "screen-demo",
+    "resolution": "1280x720",
+    "aspect_ratio": "16:9",
+    "fps": 30,
+    "duration_seconds": 15.0
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "user_request",
+    "note": "User explicitly requested storyboard validation and rendering in one run."
+  }
+}

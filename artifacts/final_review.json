@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "output_path": "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/backlot_promo.mp4",
+  "status": "pass",
+  "checks": {
+    "technical_probe": {
+      "valid_container": true,
+      "duration_seconds": 15.0,
+      "resolution": "1280x720",
+      "fps": 30.0,
+      "has_audio": true,
+      "codec": "h264",
+      "file_size_bytes": 1554349,
+      "issues": [],
+      "target_duration": 15.0,
+      "duration_drift_pct": 0.0
+    },
+    "visual_spotcheck": {
+      "frames_sampled": 4,
+      "frame_paths": [
+        "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/.final_review_frames/review_frame_0.png",
+        "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/.final_review_frames/review_frame_1.png",
+        "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/.final_review_frames/review_frame_2.png",
+        "/home/runner/work/Real-Openmontage/Real-Openmontage/projects/prj_405eabefb9754545/renders/.final_review_frames/review_frame_3.png"
+      ],
+      "black_frames_detected": false,
+      "broken_overlays": false,
+      "missing_assets": false,
+      "unreadable_text": false,
+      "issues": []
+    },
+    "audio_spotcheck": {
+      "narration_present": true,
+      "music_present": true,
+      "unexpected_silence": false,
+      "clipping_detected": false,
+      "mix_intelligible": true,
+      "issues": []
+    },
+    "promise_preservation": {
+      "delivery_promise_honored": true,
+      "silent_downgrade_detected": false,
+      "runtime_swap_detected": false,
+      "issues": [],
+      "renderer_family_used": "screen-demo",
+      "render_runtime_used": "remotion",
+      "runtime_swap_check": "ok \u2014 proposal and edit agree (proposal_packet.production_plan.render_runtime)"
+    },
+    "subtitle_check": {
+      "subtitles_expected": true,
+      "subtitles_present": true,
+      "issues": [],
+      "coverage_ratio": 1.0
+    },
+    "transcript_comparison": {
+      "transcript_matches_script": false,
+      "word_accuracy": null,
+      "script_word_count": 0,
+      "transcript_word_count": 0,
+      "spurious_punctuation_words": [],
+      "issues": [
+        "transcript_comparison skipped: narration_transcript not provided"
+      ]
+    }
+  },
+  "issues_found": [
+    "transcript_comparison skipped: narration_transcript not provided"
+  ],
+  "recommended_action": "present_to_user"
+}
