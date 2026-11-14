@@ -35,6 +35,10 @@ jobs:
       - run: cd remotion-composer && npm ci --no-audit --no-fund
       - name: Run full-system test
         run: python scripts/ci/full_system_test.py
+      - name: Upload report and video as a downloadable artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: full-system-report, path: /tmp/report, retention-days: 14 }
       - name: Publish report
         if: always()
         run: |

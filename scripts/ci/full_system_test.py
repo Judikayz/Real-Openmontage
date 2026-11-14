@@ -79,10 +79,12 @@ def main():
         except Exception as e: result["storyboard_validation"] = f"none ({e})"
         vids = [x for x in assets if x["kind"] == "video"]
         if vids:
-            url = c.get(f"/api/v1/assets/{vids[0]['id']}/url").json()["url"]; data = httpx.get(url, timeout=300).content; (tmp / "out.mp4").write_bytes(data)
+            url = c.get(f"/api/v1/assets/{vids[0]['id']}/url").json()["url"]; data = httpx.get(url, timeout=300).content; (tmp / "out.mp4").write_bytes(data); (REPORT / "final.mp4").write_bytes(data)  # keep the produced video with the report
             d = subprocess.run(["ffmpeg", "-v", "error", "-i", str(tmp / "out.mp4"), "-f", "null", "-"], capture_output=True, text=True)
             result["downloaded_video"] = {"bytes": len(data), "decodes_cleanly": d.returncode == 0 and not d.stderr.strip()}
         tree = subprocess.run(f"find projects/{pid} -type f | head -80", shell=True, cwd=ROOT, capture_output=True, text=True).stdout; (REPORT / "project_tree.txt").write_text(tree)
+        cs = ROOT / f"projects/{pid}/renders/final-contact-sheet.png"
+        if cs.is_file(): (REPORT / "contact_sheet.png").write_bytes(cs.read_bytes())
         result["project_files"] = tree.count("\n")
     except Exception as e:
         result["harness_error"] = repr(e); say("HARNESS ERROR", repr(e))
