@@ -86,6 +86,18 @@ def main():
         cs = ROOT / f"projects/{pid}/renders/final-contact-sheet.png"
         if cs.is_file(): (REPORT / "contact_sheet.png").write_bytes(cs.read_bytes())
         result["project_files"] = tree.count("\n")
+        # what the AI actually produced/changed, so editing bugs can be diagnosed from evidence
+        art = ROOT / f"projects/{pid}/artifacts"
+        if art.is_dir():
+            (REPORT / "artifacts").mkdir(exist_ok=True)
+            for f in art.glob("*.json"):
+                if f.stat().st_size < 400_000: (REPORT / "artifacts" / f.name).write_bytes(f.read_bytes())
+        diff = subprocess.run("git diff -- . ':(exclude)projects' ':(exclude)worker' | head -c 400000", shell=True, cwd=ROOT, capture_output=True, text=True).stdout
+        (REPORT / "ai_repo_changes.diff").write_text(diff)
+        (REPORT / "ai_repo_status.txt").write_text(subprocess.run("git status --porcelain | grep -v '^?? projects/' | grep -v 'worker/' | head -60", shell=True, cwd=ROOT, capture_output=True, text=True).stdout)
+        for f in sorted((ROOT / f"projects/{pid}").rglob("*")):
+            if f.is_file() and f.suffix in (".tsx", ".jsx", ".css", ".html") and f.stat().st_size < 200_000:
+                d = REPORT / "project_code" / f.relative_to(ROOT / f"projects/{pid}"); d.parent.mkdir(parents=True, exist_ok=True); d.write_bytes(f.read_bytes())
     except Exception as e:
         result["harness_error"] = repr(e); say("HARNESS ERROR", repr(e))
     finally:
