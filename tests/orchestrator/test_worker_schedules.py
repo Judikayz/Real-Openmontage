@@ -5,6 +5,8 @@ from pathlib import Path
 import httpx, pytest
 
 ROOT = Path(__file__).resolve().parents[2]; WDIR = ROOT / "worker"
+pytestmark = pytest.mark.skipif(not (WDIR / "node_modules" / ".bin" / "wrangler").exists(),
+                                reason="worker dependencies not installed (cd worker && npm ci); these run in the 'Orchestrator Tests / worker-e2e' workflow")
 H = {"Authorization": "Bearer sched-admin"}
 MIN_CRON = "*+*+*+*+*"
 
