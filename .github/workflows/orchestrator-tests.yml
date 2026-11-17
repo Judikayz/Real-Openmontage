@@ -33,6 +33,8 @@ jobs:
       - run: cd worker && npm ci --no-audit --no-fund && scripts/prepare-assets.sh
       - run: cd worker && node --test test/schedule.test.mjs
       - run: E2E_BACKEND=worker python -m pytest tests/orchestrator/test_e2e.py -q
+      - name: Worker without file storage
+        run: python -m pytest tests/orchestrator/test_worker_nostorage.py -q
       - name: Scheduling tests (Worker + cron)
         run: |
           set -o pipefail

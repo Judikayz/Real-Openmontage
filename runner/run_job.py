@@ -116,6 +116,7 @@ class Run:
         self.stop_hb = threading.Event()
         self.started = time.time()
         self.oc_deadline: float | None = None
+        self.unsaved: list[str] = []
         self.timed_out = False
 
     def heartbeat(self):
@@ -199,9 +200,13 @@ class Run:
             self.be.event("qc", {"file": f.name, **{k: qc[k] for k in ("ok", "errors", "warnings")}})
             meta = {**qc["meta"], "qc_ok": qc["ok"], "qc_warnings": qc["warnings"], "qc_errors": qc["errors"], "aspect_ratio": general.get("aspect_ratio")}
             mime = {"mp4": "video/mp4", "mov": "video/quicktime", "webm": "video/webm"}[f.suffix[1:].lower()]
-            r = self.be.post("/outputs", {"name": f.name, "mime": mime, "kind": "video", "meta": meta})
-            self.be.upload(r["put_url"], f, mime)
-            self.be.c.post(self.be._p(f"/outputs/{r['asset_id']}/complete")).raise_for_status()
+            try:
+                r = self.be.post("/outputs", {"name": f.name, "mime": mime, "kind": "video", "meta": meta})
+                self.be.upload(r["put_url"], f, mime)
+                self.be.c.post(self.be._p(f"/outputs/{r['asset_id']}/complete")).raise_for_status()
+            except httpx.HTTPError as e:
+                self.be.event("warning", {"msg": f"could not save {f.name} to storage (it is lost when this runner ends): {e}"})
+                self.unsaved.append(f.name)
             results.append({"file": f, "qc": qc})
         return results
 
@@ -291,6 +296,8 @@ class Run:
             ask = self.needs_input(pid)
             if ask:
                 final += f"\n\nI need your input: {ask}"; be.event("needs_input", {"question": ask})
+            if self.unsaved:
+                final += "\n\nWARNING: " + ", ".join(self.unsaved) + " could not be saved because file storage is not configured; the file was lost when this runner ended."
             if outs:
                 final += "\n\nRendered: " + ", ".join(o["file"].name + ("" if o["qc"]["ok"] else " (QC FAILED)") for o in outs)
             be.post("/messages", {"content": final})

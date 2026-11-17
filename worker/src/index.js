@@ -79,7 +79,9 @@ async function presign(env, req, op, key, mime = "application/octet-stream", ttl
   const exp = Math.floor(now()) + ttl; const sig = await hmac(sessSecret(env), `${op}:${key}:${exp}`);
   return `${new URL(req.url).origin}/api/v1/storage/${op}?key=${encodeURIComponent(key)}&exp=${exp}&sig=${sig}`;
 }
-const head = async (env, key) => { const o = await env.BUCKET.head(key); return o ? { size: o.size } : null; };
+const NO_STORAGE = "File storage is not configured yet, so uploads, rendered videos and checkpoints can't be saved. Chat, jobs and schedules still work.";
+const bucket = env => { if (!env.BUCKET) throw new HttpError(503, NO_STORAGE); return env.BUCKET; };  // single place that touches the storage binding
+const head = async (env, key) => { const o = await bucket(env).head(key); return o ? { size: o.size } : null; };
 
 // ---------- GitHub dispatch ----------
 const ghHeaders = env => ({ Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "backlot-worker" });
@@ -270,7 +272,7 @@ on("GET", "/api/v1/jobs/:jid/events", async ({ req, env, p, url }) => {
 
 // uploads / assets
 on("POST", "/api/v1/projects/:pid/uploads", async ({ req, env, p }) => {
-  need(await one(env, "SELECT 1 x FROM projects WHERE id=?", p.pid), "project not found"); const b = await body(req);
+  need(await one(env, "SELECT 1 x FROM projects WHERE id=?", p.pid), "project not found"); bucket(env); const b = await body(req);
   const name = (b.name || "").toString(), size = +b.size, mime = (b.mime || "application/octet-stream").toString();
   if (!name || !(size > 0)) throw new HttpError(422, "name and positive size required");
   const kind = classify(name); if (!kind) throw new HttpError(415, `unsupported file type: ${ext(name) || name}`);
@@ -297,7 +299,7 @@ on("GET", "/api/v1/assets/:aid/url", async ({ req, env, p }) => {
 on("GET", "/api/v1/projects/:pid/storyboard", async ({ env, p }) => {
   const a = await one(env, "SELECT * FROM assets WHERE project_id=? AND kind='plan' AND status='uploaded' ORDER BY created_at DESC LIMIT 1", p.pid);
   if (!a) throw new HttpError(404, "no storyboard yet; ask the AI to plan the video");
-  const obj = await env.BUCKET.get(a.storage_key); return json({ asset_id: a.id, created_at: a.created_at, validation: parseJson(a.meta), storyboard: JSON.parse(await obj.text()) });
+  const obj = await bucket(env).get(a.storage_key); return json({ asset_id: a.id, created_at: a.created_at, validation: parseJson(a.meta), storyboard: JSON.parse(await obj.text()) });
 });
 
 // signed proxy storage (used only when R2 S3 keys are not configured, e.g. local dev)
@@ -308,12 +310,12 @@ async function checkSigned(env, op, url) {
 }
 on("PUT", "/api/v1/storage/put", async ({ req, env, url }) => {
   const key = await checkSigned(env, "put", url);
-  const o = await env.BUCKET.put(key, req.body, { httpMetadata: { contentType: req.headers.get("content-type") || "application/octet-stream" } });
+  const o = await bucket(env).put(key, req.body, { httpMetadata: { contentType: req.headers.get("content-type") || "application/octet-stream" } });
   return json({ size: o.size });
 }, "none");
 on("GET", "/api/v1/storage/get", async ({ req, env, url }) => {
   const key = await checkSigned(env, "get", url); const range = req.headers.get("range");
-  const o = await env.BUCKET.get(key, range ? { range: req.headers } : undefined); if (!o) throw new HttpError(404, "object not found");
+  const o = await bucket(env).get(key, range ? { range: req.headers } : undefined); if (!o) throw new HttpError(404, "object not found");
   const h = new Headers({ "content-type": o.httpMetadata?.contentType || "application/octet-stream", "accept-ranges": "bytes", etag: o.httpEtag });
   if (range && o.range) { const off = o.range.offset ?? 0, len = o.range.length ?? o.size - off; h.set("content-range", `bytes ${off}-${off + len - 1}/${o.size}`); h.set("content-length", String(len)); return new Response(o.body, { status: 206, headers: h }); }
   h.set("content-length", String(o.size)); return new Response(o.body, { headers: h });
@@ -322,7 +324,7 @@ on("GET", "/api/v1/storage/get", async ({ req, env, url }) => {
 // settings
 on("GET", "/api/v1/settings/status", async ({ req, env }) => {
   const health = await one(env, "SELECT value FROM settings WHERE key='runner_health'"); let st;
-  try { await env.BUCKET.head("__ping__"); st = { backend: "r2", ok: true, bucket: env.R2_BUCKET_NAME || "backlot-storage", presigned_urls: !!s3(env) }; } catch (e) { st = { backend: "r2", ok: false, error: String(e).slice(0, 200) }; }
+  try { if (!env.BUCKET) throw new Error(NO_STORAGE); await env.BUCKET.head("__ping__"); st = { backend: "r2", ok: true, bucket: env.R2_BUCKET_NAME || "backlot-storage", presigned_urls: !!s3(env) }; } catch (e) { st = { backend: env.BUCKET ? "r2" : "none", ok: false, error: String(e.message || e).slice(0, 240) }; }
   return json({
     github: { configured: !!(env.GITHUB_REPO && env.GITHUB_DISPATCH_TOKEN), repo: env.GITHUB_REPO || "", ref: env.GITHUB_REF || "main", workflow: env.GITHUB_WORKFLOW || "opencode-run.yml", dispatch_mode: env.DISPATCH_MODE || "github", token_present: !!env.GITHUB_DISPATCH_TOKEN },
     storage: st, database: { ok: !!await one(env, "SELECT 1 AS ok"), engine: "cloudflare-d1" },

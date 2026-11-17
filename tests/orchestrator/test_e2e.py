@@ -29,7 +29,7 @@ def _start_python(tmp, port):
     return p, db_exec
 
 
-def _start_worker(tmp, port):
+def _start_worker(tmp, port, config=None):
     """Real Cloudflare runtime (workerd) with local D1 + R2. GitHub dispatch is replaced by a webhook that launches real runner subprocesses."""
     import http.server, threading
     wdir = ROOT / "worker"; persist = str(tmp / "wstate")
@@ -45,8 +45,9 @@ def _start_worker(tmp, port):
             self.send_response(200); self.send_header("content-type", "application/json"); self.send_header("content-length", str(len(body))); self.end_headers(); self.wfile.write(body)
     hs = http.server.ThreadingHTTPServer(("127.0.0.1", 0), H); threading.Thread(target=hs.serve_forever, daemon=True).start()
     (wdir / ".dev.vars").write_text(f"ORCH_ADMIN_TOKEN={TOKEN}\nORCH_RUNNER_SECRET=e2e-runner\nSESSION_SECRET=e2e-session\nDISPATCH_MODE=webhook\nDISPATCH_WEBHOOK_URL=http://127.0.0.1:{hs.server_address[1]}/launch\n")
-    subprocess.run(["npx", "wrangler", "d1", "migrations", "apply", "DB", "--local", "--persist-to", persist], cwd=wdir, check=True, capture_output=True)
-    p = subprocess.Popen(["npx", "wrangler", "dev", "--local", "--port", str(port), "--persist-to", persist, "--var", "MAX_CONCURRENT_JOBS:2"], cwd=wdir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)  # test uses a small limit to exercise queueing
+    cfg = ["-c", config] if config else []
+    subprocess.run(["npx", "wrangler", "d1", "migrations", "apply", "DB", "--local", "--persist-to", persist, *cfg], cwd=wdir, check=True, capture_output=True)
+    p = subprocess.Popen(["npx", "wrangler", "dev", "--local", "--port", str(port), "--persist-to", persist, "--var", "MAX_CONCURRENT_JOBS:2", *cfg], cwd=wdir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)  # test uses a small limit to exercise queueing
     def db_exec(sql):
         subprocess.run(["npx", "wrangler", "d1", "execute", "DB", "--local", "--persist-to", persist, "--command", sql], cwd=wdir, check=True, capture_output=True)
     return p, db_exec

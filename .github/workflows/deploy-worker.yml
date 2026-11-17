@@ -1,14 +1,20 @@
 name: Deploy Backlot Worker
-# Deploys the control plane (Cloudflare Worker + D1 + R2) from GitHub. You never need a terminal or wrangler.
-# One-time setup (GitHub -> Settings -> Secrets and variables -> Actions):
-#   CLOUDFLARE_API_TOKEN   token with: Workers Scripts:Edit, D1:Edit, Workers R2 Storage:Edit, Account Settings:Read
+# Deploys the control plane (Cloudflare Worker + D1) from GitHub. File storage (R2) is OPTIONAL and off by default,
+# so this works on a free Cloudflare account with no payment method. Without storage, chat/jobs/schedules/settings work;
+# uploads, rendered videos and checkpoints need a storage backend.
+#
+# One-time setup (repo Settings -> Secrets and variables -> Actions -> Secrets):
+#   CLOUDFLARE_API_TOKEN   Workers Scripts:Edit + D1:Edit (account-scoped)
 #   CLOUDFLARE_ACCOUNT_ID
-#   ORCH_ADMIN_TOKEN       your Backlot login token (long random string)
-#   ORCH_RUNNER_SECRET     shared with runners (long random string)  <- must also be a repo secret under this exact name (it is)
-#   GH_DISPATCH_TOKEN      fine-grained PAT, this repo only, Actions: read+write  (+ Secrets: read+write for the Settings page)
-#   R2_S3_ACCESS_KEY_ID / R2_S3_SECRET_ACCESS_KEY   optional but needed for videos over 100 MB (R2 API token, S3 credentials)
+#   ORCH_ADMIN_TOKEN       your Backlot login (long random string)
+#   ORCH_RUNNER_SECRET     shared with runners (long random string)
+#   GH_DISPATCH_TOKEN      fine-grained PAT, this repo only, Actions: read+write (+ Secrets: read+write for the Settings page)
+# Optional (only with use_r2): R2_S3_ACCESS_KEY_ID / R2_S3_SECRET_ACCESS_KEY
 on:
   workflow_dispatch:
+    inputs:
+      use_r2:     { description: "Use Cloudflare R2 for file storage (needs R2 enabled on your account)", required: false, default: false, type: boolean }
+      smoke_test: { description: "After deploying, sign in and run a real chat job through GitHub to verify everything", required: false, default: true, type: boolean }
 permissions:
   contents: read
 concurrency:
@@ -17,7 +23,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 50
     defaults: { run: { working-directory: worker } }
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -34,22 +40,35 @@ jobs:
           D: ${{ secrets.ORCH_RUNNER_SECRET }}
           E: ${{ secrets.GH_DISPATCH_TOKEN }}
         run: |
+          missing=""
           for pair in "CLOUDFLARE_API_TOKEN:$A" "CLOUDFLARE_ACCOUNT_ID:$B" "ORCH_ADMIN_TOKEN:$C" "ORCH_RUNNER_SECRET:$D" "GH_DISPATCH_TOKEN:$E"; do
-            [ -n "${pair#*:}" ] || { echo "::error::Missing repository secret ${pair%%:*}"; exit 1; }
+            [ -n "${pair#*:}" ] || missing="$missing ${pair%%:*}"
           done
+          if [ -n "$missing" ]; then echo "::error::Missing repository secret(s):$missing"; echo "Missing repository secret(s):$missing" > /tmp/steps.log; exit 1; fi
       - run: npm ci --no-audit --no-fund
       - run: scripts/prepare-assets.sh
-      - name: Ensure R2 bucket exists
-        run: npx wrangler r2 bucket create backlot-storage 2>&1 | tee /tmp/r2.out || grep -qi "already exists" /tmp/r2.out
+      - name: Ensure R2 bucket exists (only with use_r2)
+        if: ${{ inputs.use_r2 }}
+        run: |
+          set -o pipefail
+          npx wrangler r2 bucket create backlot-storage 2>&1 | tee -a /tmp/steps.log || grep -qi "already exists" /tmp/steps.log
+      - name: Run without R2 (default)
+        if: ${{ !inputs.use_r2 }}
+        run: jq 'del(.r2_buckets)' wrangler.jsonc > /tmp/w.json && mv /tmp/w.json wrangler.jsonc && echo "R2 binding removed; deploying without file storage"
       - name: Ensure D1 database exists and wire its id into the config
         run: |
+          set -o pipefail
           id() { npx wrangler d1 list --json | jq -r '.[] | select(.name=="backlot") | .uuid' | head -1; }
-          ID=$(id)
-          if [ -z "$ID" ]; then npx wrangler d1 create backlot; ID=$(id); fi
-          [ -n "$ID" ] || { echo "::error::could not determine D1 database id"; exit 1; }
+          ID=$(id 2>>/tmp/steps.log)
+          if [ -z "$ID" ]; then npx wrangler d1 create backlot 2>&1 | tee -a /tmp/steps.log; ID=$(id 2>>/tmp/steps.log); fi
+          [ -n "$ID" ] || { echo "::error::could not determine D1 database id"; echo "could not determine D1 database id" >> /tmp/steps.log; exit 1; }
           jq --arg id "$ID" '.d1_databases[0].database_id = $id' wrangler.jsonc > /tmp/w.json && mv /tmp/w.json wrangler.jsonc
-      - run: npx wrangler d1 migrations apply DB --remote
+      - name: Apply database migrations
+        run: |
+          set -o pipefail
+          npx wrangler d1 migrations apply DB --remote 2>&1 | tee -a /tmp/steps.log
       - name: Deploy Worker with secrets
+        id: deploy
         env:
           ORCH_ADMIN_TOKEN: ${{ secrets.ORCH_ADMIN_TOKEN }}
           ORCH_RUNNER_SECRET: ${{ secrets.ORCH_RUNNER_SECRET }}
@@ -57,13 +76,31 @@ jobs:
           S3_KEY: ${{ secrets.R2_S3_ACCESS_KEY_ID }}
           S3_SECRET: ${{ secrets.R2_S3_SECRET_ACCESS_KEY }}
         run: |
+          set -o pipefail
           jq -n --arg a "$ORCH_ADMIN_TOKEN" --arg r "$ORCH_RUNNER_SECRET" --arg g "$GH_DISPATCH_TOKEN" --arg k "$S3_KEY" --arg s "$S3_SECRET" --arg acct "$CLOUDFLARE_ACCOUNT_ID" \
             '{ORCH_ADMIN_TOKEN:$a, ORCH_RUNNER_SECRET:$r, GITHUB_DISPATCH_TOKEN:$g, SESSION_SECRET:($a+":session"), R2_ACCOUNT_ID:$acct}
              + (if $k != "" and $s != "" then {S3_ACCESS_KEY_ID:$k, S3_SECRET_ACCESS_KEY:$s} else {} end)' > /tmp/secrets.json
-          npx wrangler deploy --secrets-file /tmp/secrets.json | tee /tmp/deploy.out
+          npx wrangler deploy --secrets-file /tmp/secrets.json 2>&1 | tee /tmp/deploy.out | tee -a /tmp/steps.log
           rm -f /tmp/secrets.json
           URL=$(grep -oE 'https://[a-zA-Z0-9.-]+\.workers\.dev' /tmp/deploy.out | head -1)
-          echo "### Backlot is live: ${URL:-see deploy log}" >> "$GITHUB_STEP_SUMMARY"
+          [ -n "$URL" ] || { echo "::error::deployed, but no workers.dev URL found (is a workers.dev subdomain registered?)"; echo "no workers.dev URL found in deploy output" >> /tmp/steps.log; exit 1; }
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "### Backlot is live: $URL" >> "$GITHUB_STEP_SUMMARY"
           echo "Open ${URL}/app and sign in with ORCH_ADMIN_TOKEN. Set repo variable ORCH_BACKEND_URL to ${URL}." >> "$GITHUB_STEP_SUMMARY"
-      - name: Allow browser uploads to R2 (CORS)
+      - name: Allow browser uploads to R2 (CORS, only with use_r2)
+        if: ${{ inputs.use_r2 }}
         run: npx wrangler r2 bucket cors set backlot-storage --file r2-cors.json --force || npx wrangler r2 bucket cors set backlot-storage --file r2-cors.json
+      - name: Post-deploy smoke test (sign in, chat, real GitHub runner round trip)
+        if: ${{ inputs.smoke_test }}
+        env:
+          BASE_URL: ${{ steps.deploy.outputs.url }}
+          ORCH_ADMIN_TOKEN: ${{ secrets.ORCH_ADMIN_TOKEN }}
+        run: python3 ../scripts/ci/smoke_deployed.py --timeout 1800
+      - name: Publish smoke-test result
+        if: ${{ always() && inputs.smoke_test }}
+        run: |
+          if [ -f /tmp/smoke.txt ]; then ../scripts/ci/annotate.sh "deploy-smoke" /tmp/smoke.txt; else echo "smoke test did not run"; fi
+      - name: Publish failure details
+        if: failure()
+        run: |
+          [ -f /tmp/steps.log ] && tail -c 5500 /tmp/steps.log > /tmp/steps.tail && ../scripts/ci/annotate.sh "deploy-failure-log" /tmp/steps.tail || echo "no log captured"
