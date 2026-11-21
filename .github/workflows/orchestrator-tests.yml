@@ -31,7 +31,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install -r requirements-orchestrator.txt
       - run: cd worker && npm ci --no-audit --no-fund && scripts/prepare-assets.sh
-      - run: cd worker && node --test test/schedule.test.mjs
+      - run: cd worker && node --test test/schedule.test.mjs && node --import ./test/register-json.mjs --test test/routing.test.mjs
       - run: E2E_BACKEND=worker python -m pytest tests/orchestrator/test_e2e.py -q
       - name: Worker without file storage
         run: python -m pytest tests/orchestrator/test_worker_nostorage.py -q

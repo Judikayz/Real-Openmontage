@@ -22,6 +22,25 @@ def check(name, ok, detail=""):
     say(f"{'PASS' if ok else 'FAIL'}  {name}" + (f"  -- {detail}" if detail else ""))
     if not ok: failed.append(name)
 
+def probe(path):
+    req = urllib.request.Request(BASE + path, headers={"user-agent": "backlot-smoke"})
+    try:
+        with urllib.request.build_opener(urllib.request.HTTPRedirectHandler()).open(req, timeout=30) as r: return r.status, dict(r.headers), r.read(300)
+    except urllib.error.HTTPError as e: return e.code, dict(e.headers), e.read(300)
+    except Exception as e: return 0, {}, str(e).encode()
+t0 = time.time(); ready = False
+while time.time() - t0 < 150:
+    st, hd, body = probe("/app")
+    say(f"READY? [{int(time.time()-t0):3d}s] GET /app -> HTTP {st} server={hd.get('server') or hd.get('Server')} cf-ray={hd.get('cf-ray') or hd.get('CF-RAY')} body={body[:120]!r}")
+    if st == 200: ready = True; break
+    time.sleep(10)
+if not ready:
+    for pth in ("/", "/app.html", "/ui/app.js", "/api/v1/me"):
+        st, hd, body = probe(pth); say(f"DIAG  GET {pth} -> HTTP {st} body={body[:120]!r}")
+    say("FAIL  Worker never served /app within 150s"); open("/tmp/smoke.txt", "w").write("\n".join(lines)); sys.exit(1)
+for pth in ("/", "/ui/app.js"):
+    st, hd, body = probe(pth); check(f"GET {pth} is served", st == 200, f"HTTP {st}")
+
 st, raw = call("GET", "/app", auth=False); check("GET /app serves the frontend", st == 200 and b"Backlot" in raw, f"HTTP {st}")
 st, raw = call("GET", "/api/v1/me", auth=False); check("API is protected when signed out", st == 401, f"HTTP {st}")
 st, raw = call("POST", "/api/v1/auth/login", {"token": "definitely-wrong"}, auth=False); check("wrong token is rejected", st == 401, f"HTTP {st}")

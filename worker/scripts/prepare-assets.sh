@@ -6,3 +6,5 @@ rm -rf public && mkdir -p public/ui
 cp ../backlot/ui/app.html public/app.html
 for f in app.js app.css board.css; do cp ../backlot/ui/$f public/ui/$f; done
 echo "assets ready: $(find public -type f | wc -l) files"
+
+[ -s public/app.html ] && [ -s public/ui/app.js ] || { echo "ERROR: UI assets missing after copy" >&2; exit 1; }

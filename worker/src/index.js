@@ -476,6 +476,7 @@ on("GET", "/api/v1/schedules/:sid/runs", async ({ env, p }) => { await needSched
 export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
+    if (url.pathname === "/") return Response.redirect(url.origin + "/app", 302);
     if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(req);
     try {
       for (const r of routes) {
