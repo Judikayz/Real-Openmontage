@@ -1,0 +1,176 @@
+{
+  "version": "1.0",
+  "project_id": "prj_486357e001164d72",
+  "decisions": [
+    {
+      "decision_id": "d-001",
+      "stage": "idea",
+      "category": "pipeline_selection",
+      "subject": "Pipeline selection for mixed source footage plus support graphics",
+      "options_considered": [
+        {
+          "option_id": "hybrid",
+          "label": "hybrid",
+          "score": 0.95,
+          "reason": "Matches avatar footage, uploaded screen recording, title cards, and captions."
+        },
+        {
+          "option_id": "screen-demo",
+          "label": "screen-demo",
+          "score": 0.65,
+          "reason": "Would under-serve the avatar intro and end card.",
+          "rejected_because": "Too narrow for the full asset mix."
+        },
+        {
+          "option_id": "talking-head",
+          "label": "talking-head",
+          "score": 0.55,
+          "reason": "Would under-serve the screen recording and title cards.",
+          "rejected_because": "Too narrow for the full asset mix."
+        }
+      ],
+      "selected": "hybrid",
+      "reason": "The brief combines source-led media with designed support layers.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.95
+    },
+    {
+      "decision_id": "d-002",
+      "stage": "idea",
+      "category": "render_runtime_selection",
+      "subject": "Render runtime under the user's free-local-tools constraint",
+      "options_considered": [
+        {
+          "option_id": "remotion_plus_ffmpeg",
+          "label": "Remotion composition + FFmpeg downscale",
+          "score": 0.95,
+          "reason": "Remotion supports text cards and captions; FFmpeg finishes at 1280x720."
+        },
+        {
+          "option_id": "hyperframes",
+          "label": "HyperFrames",
+          "score": 0.4,
+          "reason": "Available in registry but excluded by the user's FFmpeg/Remotion constraint.",
+          "rejected_because": "Out of scope under explicit constraint."
+        },
+        {
+          "option_id": "ffmpeg_only",
+          "label": "FFmpeg only",
+          "score": 0.6,
+          "reason": "Cannot create the planned Remotion-style title cards and word captions as cleanly.",
+          "rejected_because": "Weaker support-layer quality."
+        }
+      ],
+      "selected": "remotion_plus_ffmpeg",
+      "reason": "Best fit for the requested runtime constraint and the support-layer plan.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.9
+    },
+    {
+      "decision_id": "d-003",
+      "stage": "idea",
+      "category": "renderer_family_selection",
+      "subject": "Renderer family",
+      "options_considered": [
+        {
+          "option_id": "explainer-data",
+          "label": "explainer-data",
+          "score": 0.9,
+          "reason": "Explainer composition supports mixed cuts, text cards, captions, and audio."
+        },
+        {
+          "option_id": "screen-demo",
+          "label": "screen-demo",
+          "score": 0.65,
+          "reason": "Would constrain the title and end-card treatment.",
+          "rejected_because": "Less suitable for mixed scene types."
+        }
+      ],
+      "selected": "explainer-data",
+      "reason": "Chosen for reliable cut-based composition with caption support.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.9
+    },
+    {
+      "decision_id": "d-004",
+      "stage": "idea",
+      "category": "approval_policy",
+      "subject": "Human approval policy for this run",
+      "options_considered": [
+        {
+          "option_id": "full_run_preauthorized",
+          "label": "Full run pre-authorized",
+          "score": 0.95,
+          "reason": "User explicitly asked to write, validate, render, and report produced files in one run."
+        },
+        {
+          "option_id": "gate_by_gate",
+          "label": "Gate-by-gate approval",
+          "score": 0.5,
+          "reason": "Would interrupt the explicitly requested end-to-end run.",
+          "rejected_because": "User already requested the full run."
+        }
+      ],
+      "selected": "full_run_preauthorized",
+      "reason": "Explicit full-run instruction recorded at the moment it was given.",
+      "user_visible": true,
+      "user_approved": true,
+      "confidence": 0.95
+    },
+    {
+      "decision_id": "d-005",
+      "stage": "idea",
+      "category": "voice_selection",
+      "subject": "Narration source",
+      "options_considered": [
+        {
+          "option_id": "uploaded_wav",
+          "label": "Uploaded narration WAV",
+          "score": 0.95,
+          "reason": "User supplied it and required supplied files to be used as-is."
+        },
+        {
+          "option_id": "local_tts",
+          "label": "Regenerate with local TTS",
+          "score": 0.2,
+          "reason": "Would replace a supplied asset.",
+          "rejected_because": "Forbidden by user constraint."
+        }
+      ],
+      "selected": "uploaded_wav",
+      "reason": "Honors the supplied asset and avoids unapproved regeneration.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.98
+    },
+    {
+      "decision_id": "d-006",
+      "stage": "idea",
+      "category": "music_source",
+      "subject": "Music bed",
+      "options_considered": [
+        {
+          "option_id": "none",
+          "label": "No music",
+          "score": 0.9,
+          "reason": "No music requested and no local track supplied."
+        },
+        {
+          "option_id": "generated",
+          "label": "Generated music",
+          "score": 0.2,
+          "reason": "Would require an unrequested generator or paid API.",
+          "rejected_because": "Out of scope."
+        }
+      ],
+      "selected": "none",
+      "reason": "Narration-only mix is the faithful interpretation of the brief.",
+      "user_visible": true,
+      "user_approved": false,
+      "confidence": 0.95
+    }
+  ]
+}

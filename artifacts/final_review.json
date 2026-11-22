@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "output_path": "projects/prj_486357e001164d72/renders/backlot_15s_1280x720.mp4",
+  "status": "pass",
+  "checks": {
+    "technical_probe": {
+      "valid_container": true,
+      "duration_seconds": 15.02,
+      "resolution": "1280x720",
+      "fps": 30.0,
+      "has_audio": true,
+      "codec": "h264",
+      "file_size_bytes": 1386358,
+      "issues": [],
+      "target_duration": 15,
+      "duration_drift_pct": 0.1
+    },
+    "visual_spotcheck": {
+      "frames_sampled": 4,
+      "frame_paths": [
+        "projects/prj_486357e001164d72/renders/.final_review_frames/review_frame_0.png",
+        "projects/prj_486357e001164d72/renders/.final_review_frames/review_frame_1.png",
+        "projects/prj_486357e001164d72/renders/.final_review_frames/review_frame_2.png",
+        "projects/prj_486357e001164d72/renders/.final_review_frames/review_frame_3.png"
+      ],
+      "black_frames_detected": false,
+      "broken_overlays": false,
+      "missing_assets": false,
+      "unreadable_text": false,
+      "issues": []
+    },
+    "audio_spotcheck": {
+      "narration_present": true,
+      "music_present": true,
+      "unexpected_silence": false,
+      "clipping_detected": false,
+      "mix_intelligible": true,
+      "issues": []
+    },
+    "promise_preservation": {
+      "delivery_promise_honored": true,
+      "silent_downgrade_detected": false,
+      "runtime_swap_detected": false,
+      "issues": [],
+      "renderer_family_used": "explainer-data",
+      "render_runtime_used": "remotion",
+      "runtime_swap_check": "ok — proposal and edit agree (edit_decisions.metadata.proposal_render_runtime)"
+    },
+    "subtitle_check": {
+      "subtitles_expected": true,
+      "subtitles_present": false,
+      "issues": [
+        "Subtitles expected but not found in output and no subtitle source file exists for burn-in"
+      ]
+    },
+    "transcript_comparison": {
+      "transcript_matches_script": false,
+      "word_accuracy": null,
+      "script_word_count": 0,
+      "transcript_word_count": 0,
+      "spurious_punctuation_words": [],
+      "issues": [
+        "transcript_comparison skipped: narration_transcript not provided"
+      ]
+    }
+  },
+  "issues_found": [
+    "Subtitles expected but not found in output and no subtitle source file exists for burn-in",
+    "transcript_comparison skipped: narration_transcript not provided"
+  ],
+  "recommended_action": "present_to_user"
+}

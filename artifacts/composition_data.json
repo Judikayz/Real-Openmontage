@@ -1,0 +1,107 @@
+{
+  "renderer_family": "explainer-data",
+  "themeConfig": {
+    "primaryColor": "#7C3AED",
+    "accentColor": "#22D3EE",
+    "backgroundColor": "#05070B",
+    "surfaceColor": "#111827",
+    "textColor": "#F8FAFC",
+    "mutedTextColor": "#A5B4FC",
+    "chartColors": ["#7C3AED", "#22D3EE", "#F59E0B", "#10B981", "#EC4899"],
+    "captionHighlightColor": "#22D3EE",
+    "captionBackgroundColor": "rgba(5, 7, 11, 0.78)",
+    "transitionDuration": 0.3
+  },
+  "tailPaddingSeconds": 0,
+  "cuts": [
+    {
+      "id": "s1_intro",
+      "source": "projects/prj_486357e001164d72/inputs/uploads/293d45ee_avatar_intro.mp4",
+      "in_seconds": 0,
+      "out_seconds": 4,
+      "source_in_seconds": 0,
+      "transition_out": "cut",
+      "backgroundColor": "#05070B"
+    },
+    {
+      "id": "s2_title",
+      "type": "hero_title",
+      "source": "projects/prj_486357e001164d72/inputs/uploads/0dc14963_logo.png",
+      "text": "BACKLOT",
+      "heroSubtitle": "AI VIDEO STUDIO",
+      "backgroundImage": "projects/prj_486357e001164d72/inputs/uploads/0dc14963_logo.png",
+      "backgroundOverlay": 0.72,
+      "in_seconds": 4,
+      "out_seconds": 6,
+      "transition_in": "fade",
+      "transition_out": "cut",
+      "backgroundColor": "#05070B"
+    },
+    {
+      "id": "s3_demo",
+      "source": "projects/prj_486357e001164d72/inputs/uploads/339448a0_screen_recording.mp4",
+      "in_seconds": 6,
+      "out_seconds": 12,
+      "source_in_seconds": 0,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "backgroundColor": "#05070B"
+    },
+    {
+      "id": "s4_cta",
+      "type": "hero_title",
+      "source": "projects/prj_486357e001164d72/inputs/uploads/0dc14963_logo.png",
+      "text": "BACKLOT",
+      "heroSubtitle": "YOUR STUDIO. IN YOUR POCKET. MAKE IT WITH BACKLOT.",
+      "backgroundImage": "projects/prj_486357e001164d72/inputs/uploads/0dc14963_logo.png",
+      "backgroundOverlay": 0.72,
+      "in_seconds": 12,
+      "out_seconds": 15,
+      "transition_in": "fade",
+      "backgroundColor": "#05070B"
+    }
+  ],
+  "captions": [
+    {"word": "MEET", "startMs": 400, "endMs": 900},
+    {"word": "BACKLOT", "startMs": 900, "endMs": 2000, "pageBreakAfter": true},
+    {"word": "AI", "startMs": 4100, "endMs": 4500},
+    {"word": "VIDEO", "startMs": 4500, "endMs": 5100},
+    {"word": "STUDIO", "startMs": 5100, "endMs": 5800, "pageBreakAfter": true},
+    {"word": "CONTROL", "startMs": 6200, "endMs": 6900},
+    {"word": "FROM", "startMs": 6900, "endMs": 7300},
+    {"word": "YOUR", "startMs": 7300, "endMs": 7700},
+    {"word": "PHONE", "startMs": 7700, "endMs": 9000, "pageBreakAfter": true},
+    {"word": "YOUR", "startMs": 12100, "endMs": 12500},
+    {"word": "STUDIO", "startMs": 12500, "endMs": 13000},
+    {"word": "IN", "startMs": 13000, "endMs": 13200},
+    {"word": "YOUR", "startMs": 13200, "endMs": 13600},
+    {"word": "POCKET", "startMs": 13600, "endMs": 14600, "pageBreakAfter": true}
+  ],
+  "captionStyle": {
+    "wordsPerPage": 6,
+    "fontSize": 42,
+    "bottomOffset": 80
+  },
+  "captionProps": {
+    "wordsPerPage": 6,
+    "fontSize": 42,
+    "bottomOffset": 80,
+    "backgroundColor": "rgba(5, 7, 11, 0.78)"
+  },
+  "audio": {
+    "narration": {
+      "src": "projects/prj_486357e001164d72/inputs/uploads/dd2f4b34_narration.wav",
+      "volume": 1
+    }
+  },
+  "subtitles": {
+    "enabled": true,
+    "style": "word-by-word",
+    "caption_props": {
+      "wordsPerPage": 6,
+      "fontSize": 42,
+      "bottomOffset": 80,
+      "backgroundColor": "rgba(5, 7, 11, 0.78)"
+    }
+  }
+}

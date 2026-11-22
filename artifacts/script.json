@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "title": "Backlot — 15 second promo script",
+  "total_duration_seconds": 15,
+  "voice_performance": {
+    "performance_intent": "Use the uploaded narration WAV as-is; do not regenerate or reinterpret it.",
+    "pacing_profile": "conversational",
+    "energy_curve": "steady",
+    "pause_policy": "Preserve uploaded audio timing.",
+    "sample_section_id": "sec_intro"
+  },
+  "sections": [
+    {
+      "id": "sec_intro",
+      "label": "Avatar intro",
+      "text": "MEET BACKLOT",
+      "start_seconds": 0,
+      "end_seconds": 4,
+      "speaker_directions": "Uploaded narration WAV plays as-is. Its exact spoken wording is not transcribed locally.",
+      "delivery_cues": {
+        "pace": "conversational",
+        "energy": "confident",
+        "emphasis_words": [
+          "BACKLOT"
+        ],
+        "delivery_note": "Do not regenerate voice."
+      },
+      "enhancement_cues": [
+        {
+          "type": "overlay",
+          "description": "Brand label over uploaded avatar intro.",
+          "timestamp_seconds": 0.5
+        }
+      ]
+    },
+    {
+      "id": "sec_title",
+      "label": "Title card",
+      "text": "BACKLOT — AI VIDEO STUDIO",
+      "start_seconds": 4,
+      "end_seconds": 6,
+      "speaker_directions": "Narration continues from the uploaded WAV.",
+      "enhancement_cues": [
+        {
+          "type": "overlay",
+          "description": "Logo and hero title card.",
+          "timestamp_seconds": 4
+        }
+      ]
+    },
+    {
+      "id": "sec_demo",
+      "label": "Uploaded screen recording",
+      "text": "CONTROL FROM YOUR PHONE",
+      "start_seconds": 6,
+      "end_seconds": 12,
+      "speaker_directions": "Narration continues from the uploaded WAV.",
+      "enhancement_cues": [
+        {
+          "type": "overlay",
+          "description": "Demo label over the user-provided screen recording; no fabricated UI actions.",
+          "timestamp_seconds": 6
+        }
+      ]
+    },
+    {
+      "id": "sec_cta",
+      "label": "End card",
+      "text": "YOUR STUDIO. IN YOUR POCKET. MAKE IT WITH BACKLOT.",
+      "start_seconds": 12,
+      "end_seconds": 15,
+      "speaker_directions": "Narration tail plays from the uploaded WAV if present.",
+      "enhancement_cues": [
+        {
+          "type": "overlay",
+          "description": "Logo-led call to action.",
+          "timestamp_seconds": 12
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "captions_are_scripted_on_screen_copy": true,
+    "verified_transcript_available": false
+  }
+}

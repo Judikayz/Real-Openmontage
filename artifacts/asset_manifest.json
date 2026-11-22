@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "assets": [
+    {
+      "id": "avatar_intro",
+      "type": "video",
+      "path": "inputs/uploads/293d45ee_avatar_intro.mp4",
+      "source_tool": "user_upload",
+      "scene_id": "s1_intro",
+      "duration_seconds": 4,
+      "resolution": "640x360",
+      "quality_score": 1,
+      "subtype": "uploaded",
+      "generation_summary": "Uploaded avatar clip reused as-is.",
+      "provider": "user"
+    },
+    {
+      "id": "logo",
+      "type": "image",
+      "path": "inputs/uploads/0dc14963_logo.png",
+      "source_tool": "user_upload",
+      "scene_id": "s2_title",
+      "resolution": "256x256",
+      "quality_score": 1,
+      "subtype": "uploaded",
+      "generation_summary": "Uploaded logo reused as-is on title and end cards.",
+      "provider": "user"
+    },
+    {
+      "id": "narration",
+      "type": "narration",
+      "path": "inputs/uploads/dd2f4b34_narration.wav",
+      "source_tool": "user_upload",
+      "scene_id": "s1_intro",
+      "duration_seconds": 12,
+      "quality_score": 1,
+      "subtype": "uploaded",
+      "generation_summary": "Uploaded narration WAV reused as-is; no regenerated voice.",
+      "provider": "user"
+    },
+    {
+      "id": "screen_recording",
+      "type": "video",
+      "path": "inputs/uploads/339448a0_screen_recording.mp4",
+      "source_tool": "user_upload",
+      "scene_id": "s3_demo",
+      "duration_seconds": 6,
+      "resolution": "1280x720",
+      "quality_score": 1,
+      "subtype": "uploaded",
+      "generation_summary": "Uploaded screen recording reused as-is; no fabricated demo.",
+      "provider": "user"
+    }
+  ],
+  "total_cost_usd": 0,
+  "metadata": {
+    "reuse_supplied_assets_only": true,
+    "no_paid_api_calls": true
+  }
+}

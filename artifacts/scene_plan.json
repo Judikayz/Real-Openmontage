@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "scenes": [
+    {
+      "id": "s1_intro",
+      "type": "talking_head",
+      "description": "Uploaded avatar clip presented full frame as the opening hook.",
+      "start_seconds": 0,
+      "end_seconds": 4,
+      "narrative_role": "introduce_subject",
+      "overlay_notes": "MEET BACKLOT; Brand label: BACKLOT",
+      "required_assets": [
+        {
+          "type": "avatar_video",
+          "description": "inputs/uploads/293d45ee_avatar_intro.mp4",
+          "source": "provided"
+        },
+        {
+          "type": "voice",
+          "description": "inputs/uploads/dd2f4b34_narration.wav",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "s2_title",
+      "type": "text_card",
+      "description": "Large BACKLOT title with the subtitle AI VIDEO STUDIO and the supplied logo.",
+      "start_seconds": 4,
+      "end_seconds": 6,
+      "narrative_role": "establish_context",
+      "transition_in": "fade",
+      "transition_out": "cut",
+      "overlay_notes": "AI VIDEO STUDIO; Hero title: BACKLOT; Subtitle: AI VIDEO STUDIO; Logo: uploaded PNG",
+      "required_assets": [
+        {
+          "type": "image",
+          "description": "inputs/uploads/0dc14963_logo.png",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "s3_demo",
+      "type": "screen_recording",
+      "description": "The user-provided screen recording is played full frame for its full six seconds. No synthetic or fabricated demo is used.",
+      "start_seconds": 6,
+      "end_seconds": 12,
+      "narrative_role": "evidence",
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "overlay_notes": "CONTROL FROM YOUR PHONE; Section label: DEMO",
+      "required_assets": [
+        {
+          "type": "screen_recording",
+          "description": "inputs/uploads/339448a0_screen_recording.mp4",
+          "source": "provided"
+        }
+      ]
+    },
+    {
+      "id": "s4_cta",
+      "type": "text_card",
+      "description": "Closing BACKLOT card with the supplied logo and a short mobile-studio call to action.",
+      "start_seconds": 12,
+      "end_seconds": 15,
+      "narrative_role": "call_to_action",
+      "transition_in": "fade",
+      "overlay_notes": "YOUR STUDIO. IN YOUR POCKET.; Logo: uploaded PNG; CTA: MAKE IT WITH BACKLOT",
+      "required_assets": [
+        {
+          "type": "image",
+          "description": "inputs/uploads/0dc14963_logo.png",
+          "source": "provided"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "title": "Backlot \u2014 AI video studio you control from your phone",
+    "derived_from": "storyboard.json"
+  }
+}

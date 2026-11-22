@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "cuts": [
+    {
+      "id": "s1_intro",
+      "source": "avatar_intro",
+      "in_seconds": 0,
+      "out_seconds": 4,
+      "transition_out": "cut",
+      "reason": "Avatar-led opening using the uploaded intro clip as-is."
+    },
+    {
+      "id": "s2_title",
+      "source": "logo",
+      "in_seconds": 4,
+      "out_seconds": 6,
+      "transition_in": "fade",
+      "transition_out": "cut",
+      "reason": "Logo-led title card establishing the Backlot brand."
+    },
+    {
+      "id": "s3_demo",
+      "source": "screen_recording",
+      "in_seconds": 6,
+      "out_seconds": 12,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "reason": "Uploaded screen recording shown for its full six seconds."
+    },
+    {
+      "id": "s4_cta",
+      "source": "logo",
+      "in_seconds": 12,
+      "out_seconds": 15,
+      "transition_in": "fade",
+      "reason": "End card with logo and mobile-studio call to action."
+    }
+  ],
+  "audio": {
+    "narration": {
+      "segments": [
+        {
+          "asset_id": "narration",
+          "start_seconds": 0,
+          "end_seconds": 12
+        }
+      ]
+    }
+  },
+  "subtitles": {
+    "enabled": true,
+    "style": "word-by-word",
+    "position": "bottom-center",
+    "max_words_per_line": 6,
+    "caption_props": {
+      "fontSize": 42,
+      "bottomOffset": 80,
+      "wordsPerPage": 6
+    }
+  },
+  "renderer_family": "explainer-data",
+  "render_runtime": "remotion",
+  "composition_mode": "templated",
+  "slideshow_risk_score": {
+    "average": 0.3,
+    "verdict": "acceptable"
+  },
+  "metadata": {
+    "target_duration_seconds": 15,
+    "proposal_render_runtime": "remotion",
+    "captions_are_scripted_on_screen_copy": true,
+    "verified_transcript_available": false,
+    "render_tool_plan": [
+      "video_compose.remotion_render",
+      "video_compose.compose_downscale"
+    ]
+  }
+}

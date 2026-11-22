@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "title": "Backlot — AI video studio you control from your phone",
+  "hook": "Avatar-led brand intro over supplied narration.",
+  "key_points": [
+    "Introduce Backlot with the uploaded avatar clip.",
+    "Present the uploaded screen recording as the supplied demo without fabricating capture details.",
+    "Close on a logo-led end card with a mobile-studio call to action."
+  ],
+  "core_message": "Backlot is an AI video studio positioned for mobile-first control.",
+  "cta": "Make it with Backlot.",
+  "tone": "confident, direct, product-led",
+  "style": "clean-professional",
+  "target_audience": "Mobile-first creators evaluating an AI video studio",
+  "target_platform": "generic",
+  "target_duration_seconds": 15,
+  "reference_material": [
+    "projects/prj_486357e001164d72/inputs/uploads/293d45ee_avatar_intro.mp4",
+    "projects/prj_486357e001164d72/inputs/uploads/0dc14963_logo.png",
+    "projects/prj_486357e001164d72/inputs/uploads/dd2f4b34_narration.wav",
+    "projects/prj_486357e001164d72/inputs/uploads/339448a0_screen_recording.mp4"
+  ],
+  "metadata": {
+    "aspect_ratio": "16:9",
+    "resolution": "1280x720",
+    "fps": 30,
+    "music": "none"
+  }
+}
